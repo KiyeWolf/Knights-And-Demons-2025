@@ -1,0 +1,14 @@
+CRÉDITOS
+[TEMA]
+NombreAutor1 RolAutor1
+NombreAutor2 RolAutor2
+NombreAutor3 RolAutor3
+[TEMA]
+NombreAutor1 RolAutor1
+NombreAutor2 RolAutor2
+NombreAutor3 RolAutor3
+[TEMA]
+NombreAutor1 RolAutor1
+NombreAutor2 RolAutor2
+NombreAutor3 RolAutor3
+GRACIAS
