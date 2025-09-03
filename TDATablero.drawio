@@ -1,0 +1,479 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
+  <diagram name="Página-1" id="kfd38gGpXaSbrslvdGKy">
+    <mxGraphModel dx="1982" dy="1885" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="flttA15IZnz0iReCGyzn-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-1" target="flttA15IZnz0iReCGyzn-8" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="-270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-1" target="flttA15IZnz0iReCGyzn-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="-360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-1" target="flttA15IZnz0iReCGyzn-16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-1" value="Inicializar Tablero" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="210" y="-610" width="550" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-3" target="flttA15IZnz0iReCGyzn-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-3" value="Se recibe:&lt;br&gt;-Orden de una matriz Cuadrada&lt;br&gt;-El puntero a la primera dirección de la primer casilla de la matriz" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="-80" y="-605" width="160" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-5" value="Randomizar las posiciones de una matriz.&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="420" y="-500" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.009;entryY=0.557;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-1" target="flttA15IZnz0iReCGyzn-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="-467" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-7" value="&lt;div&gt;Por cada Posicion ( i , j )&amp;nbsp; colocar una &quot; K &quot; o una &quot; D &quot;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="420" y="-390" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-8" value="randomico() resto 2&amp;nbsp; &amp;nbsp;+ 1 (para descartar el 0)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="420" y="-300" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-9" value="En caso de un 1 colocar &quot; K &quot;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="420" y="-210" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-10" value="En caso de un 2 colcoar &quot; D &quot;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="420" y="-120" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.055;exitY=0.988;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-1" target="flttA15IZnz0iReCGyzn-10" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="-450" as="sourcePoint" />
+            <mxPoint x="477" y="-377" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="240" y="-90" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-1" target="flttA15IZnz0iReCGyzn-9" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="-530" as="sourcePoint" />
+            <mxPoint x="420" y="-129" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="240" y="-180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-16" value="¿VOID?" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="840" y="-530" width="113" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-21" target="flttA15IZnz0iReCGyzn-27" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="250" y="1310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-21" target="flttA15IZnz0iReCGyzn-26" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="250" y="1220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-21" target="flttA15IZnz0iReCGyzn-32" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-21" value="Mostrar Tablero" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="220" y="970" width="550" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-23" target="flttA15IZnz0iReCGyzn-21" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-23" value="Se recibe:&lt;br&gt;-Orden de una matriz Cuadrada&lt;br&gt;-El puntero a la primera dirección de la primer casilla de la matriz" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="-70" y="975" width="160" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-24" value="&lt;div&gt;Mostrar una matriz de char , casilla a casilla y con forma de matriz&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="430" y="1080" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.009;entryY=0.557;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-21" target="flttA15IZnz0iReCGyzn-24" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="250" y="1113" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-26" value="&lt;div&gt;Por cada Posicion ( i , j )&amp;nbsp; imprimir una &quot; K &quot; o una &quot; D &quot;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="430" y="1190" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-27" value="Recordar los saltos de linea al finalizar una fila" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="430" y="1280" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-28" value="Al maniobrar con punteros en la matriz, La fila termina cuando se recorre el total igual a un multiplo de orden de la matriz" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="430" y="1370" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-29" value="2 * ORDEN&amp;nbsp; == Comenzó la tercer Fila" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="430" y="1460" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.055;exitY=0.988;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-21" target="flttA15IZnz0iReCGyzn-29" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="310" y="1130" as="sourcePoint" />
+            <mxPoint x="487" y="1203" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="250" y="1490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-21" target="flttA15IZnz0iReCGyzn-28" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="250" y="1050" as="sourcePoint" />
+            <mxPoint x="430" y="1451" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="250" y="1400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-32" value="¿VOID?" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="850" y="1050" width="113" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-36" target="flttA15IZnz0iReCGyzn-42" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="330" y="2190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-36" target="flttA15IZnz0iReCGyzn-41" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="330" y="2100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-36" target="flttA15IZnz0iReCGyzn-47" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-36" value="Verificar Victoria" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="300" y="1850" width="550" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-38" target="flttA15IZnz0iReCGyzn-36" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-38" value="Se recibe:&lt;br&gt;-Orden de una matriz Cuadrada&lt;br&gt;-El puntero a la primera dirección de la primer casilla de la matriz" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="10" y="1855" width="160" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-39" value="Recorrer una matriz y verificar que todos los elementos sean iguales.&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="1960" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.009;entryY=0.557;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-36" target="flttA15IZnz0iReCGyzn-39" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="330" y="1993" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-41" value="&lt;div&gt;Por cada Posicion ( i , j ) verificar si es igual a la (i - 1 , j- 1)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="2070" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-42" value="Si no se cumple se retorna un 0 (que representa Incorrecto)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="2160" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-43" value="Si se cumple se retorna un 1 (que representa correcto)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="2250" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-36" target="flttA15IZnz0iReCGyzn-43" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="1930" as="sourcePoint" />
+            <mxPoint x="510" y="2331" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="330" y="2280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-47" value="INTEGER:&lt;br&gt;1 o 0" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="930" y="1930" width="113" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-51" target="flttA15IZnz0iReCGyzn-57" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="330" y="2900" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-51" target="flttA15IZnz0iReCGyzn-56" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="330" y="2810" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-51" target="flttA15IZnz0iReCGyzn-62" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-51" value="Ejecutar Jugada" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="300" y="2560" width="550" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-53" target="flttA15IZnz0iReCGyzn-51" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-53" value="Se recibe:&lt;br&gt;-Orden de una matriz Cuadrada&lt;br&gt;-El puntero a la primera dirección de la primer casilla de la matriz&lt;br&gt;- Una puntero a una estructura Jugada&lt;br&gt;Adentro del mismo:&lt;br&gt;+Un int que representa fila&lt;br&gt;+Un int que representa columna&lt;br&gt;+Un Int que representa 0 si no se usó una pika o un 1 si se usó.&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="-30" y="2565" width="200" height="405" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-54" value="Para una casilla de una matriz representada por dos enteros, se debe acceder a la misma y cambiarle el valor." style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="2670" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.009;entryY=0.557;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-51" target="flttA15IZnz0iReCGyzn-54" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="330" y="2703" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-56" value="Dependiendo del parametro, también se deben cambiar el valor a todas las casillas adyacentes de la matriz" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="2780" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-57" value="Se recomiendo utilizar una subfunción que sea intercambiarEstadoCasilla() y llamarla las veces que sea necesario" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="2870" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-58" value="Si se recibió un 0, solo se cambia a la casilla actual.&lt;br&gt;Si se recibió un 1, se deben cambiar las casillas adyacentes" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="2960" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-59" value="Recordar que para navegar adyacentemente por las matrices se utiliza aritmetica de los índices" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="3050" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.055;exitY=0.988;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-51" target="flttA15IZnz0iReCGyzn-59" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="390" y="2720" as="sourcePoint" />
+            <mxPoint x="567" y="2793" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="330" y="3080" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-51" target="flttA15IZnz0iReCGyzn-58" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="2640" as="sourcePoint" />
+            <mxPoint x="510" y="3041" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="330" y="2990" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-62" value="INTEGER:&lt;div&gt;0 o 1&amp;nbsp;&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="930" y="2640" width="113" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-63" value="Dado ( i, j ) sus adyacentes son: ( i + 1 , j ) , ( i - 1 , j ) , ( i, j + 1) , (i , j - 1 )." style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="3140" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.057;exitY=0.951;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-51" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="2720" as="sourcePoint" />
+            <mxPoint x="510" y="3171" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="330" y="2627" />
+              <mxPoint x="330" y="3171" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-68" value="Luego se debe retornar un valor dependiendo de si la matriz tiene todos los elementos iguales o&amp;nbsp; no." style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="3250" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-51" edge="1" target="flttA15IZnz0iReCGyzn-68">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="2700" as="sourcePoint" />
+            <mxPoint x="510" y="3341.9700000000003" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="330" y="3280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-70" value="" style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="-20" y="2995" width="260" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-71" value="struct: Jugada" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="2995" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-72" value="fila ;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="20" y="3040" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-73" value="columna ;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="20" y="3065" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-74" target="flttA15IZnz0iReCGyzn-56" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-74" value="usoPika ;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="20" y="3090" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-4" target="nv_zI9ED7wEO5nQXKHPL-10" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-4" target="nv_zI9ED7wEO5nQXKHPL-9" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-4" target="nv_zI9ED7wEO5nQXKHPL-15" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-4" value="Crear Tablero" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="230" y="140" width="550" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-6" target="nv_zI9ED7wEO5nQXKHPL-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-6" value="Se recibe:&lt;br&gt;-Orden de una matriz Cuadrada&lt;br&gt;-Un puntero char*&amp;nbsp; (donde debería estar la primer casilla)&amp;nbsp;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="-60" y="145" width="160" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-7" value="&lt;div&gt;Iniciar una matriz dinámica de char&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="250" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.009;entryY=0.557;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-4" target="nv_zI9ED7wEO5nQXKHPL-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="283" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-9" value="Rellenar el puntero a void con malloc" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="360" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-10" value="Los parámetros son el tamaño de un char multiplicado el tamaño del tablero (representando las columnas)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="450" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-11" value="Luego un for&amp;nbsp; para i &amp;lt; orden (es decir recorre por fila)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="540" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-12" value="El mismo malloc para cada fila, con los mismos parámetros." style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="630" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.055;exitY=0.988;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-4" target="nv_zI9ED7wEO5nQXKHPL-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="300" as="sourcePoint" />
+            <mxPoint x="497" y="373" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="260" y="660" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-4" target="nv_zI9ED7wEO5nQXKHPL-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="260" y="220" as="sourcePoint" />
+            <mxPoint x="440" y="621" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="260" y="570" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-15" value="INTEGER:&lt;br&gt;1 o 0" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="860" y="220" width="113" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-31" value="Recordar que si alguna casilla no se pudo reservar, se deben elliminar todas incluyendo las ya creadas" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="710" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-4" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="260" y="290" as="sourcePoint" />
+            <mxPoint x="440" y="741" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="260" y="741" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-37" target="nv_zI9ED7wEO5nQXKHPL-43" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1363" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-37" target="nv_zI9ED7wEO5nQXKHPL-42" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1363" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-37" target="nv_zI9ED7wEO5nQXKHPL-48" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-37" value="Liberar Memoria Tablero" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1333" y="160" width="550" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-39" target="nv_zI9ED7wEO5nQXKHPL-37" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-39" value="Se recibe:&lt;br&gt;-Orden de una matriz Cuadrada&lt;br&gt;-Un puntero char*&amp;nbsp; donde está la primer casilla de la matriz" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="1043" y="165" width="160" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-40" value="&lt;div&gt;Eliminar la matriz dinámica de char* recibida&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1543" y="270" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.009;entryY=0.557;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-37" target="nv_zI9ED7wEO5nQXKHPL-40" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1363" y="303" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-42" value="Por cada casilla de la matriz se debe usar la sentencia free() con la misma casilla de parámetro" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1543" y="380" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-43" value="RECORDATORIO:&amp;nbsp; se puede eliminar de a filas si sencillamente accedo al primer puntero (y no al segundo)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1543" y="470" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-44" value="Luego un for&amp;nbsp; para i &amp;lt; orden (es decir recorre por fila)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1543" y="560" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-45" value="El mismo free para cada fila, con la casilla de parámetros." style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1543" y="650" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.055;exitY=0.988;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-37" target="nv_zI9ED7wEO5nQXKHPL-45" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1423" y="320" as="sourcePoint" />
+            <mxPoint x="1600" y="393" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1363" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-37" target="nv_zI9ED7wEO5nQXKHPL-44" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1363" y="240" as="sourcePoint" />
+            <mxPoint x="1543" y="641" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1363" y="590" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-48" value="VOID" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="1963" y="240" width="113" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-49" value="Recordar que si alguna casilla no se pudo reservar, se deben elliminar todas incluyendo las ya creadas" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1543" y="730" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nv_zI9ED7wEO5nQXKHPL-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="nv_zI9ED7wEO5nQXKHPL-37" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1363" y="310" as="sourcePoint" />
+            <mxPoint x="1543" y="761" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1363" y="761" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

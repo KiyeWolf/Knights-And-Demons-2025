@@ -1,0 +1,346 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
+  <diagram name="Página-1" id="kfd38gGpXaSbrslvdGKy">
+    <mxGraphModel dx="2064" dy="767" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="flttA15IZnz0iReCGyzn-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-1" target="flttA15IZnz0iReCGyzn-8" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="190" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-1" target="flttA15IZnz0iReCGyzn-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="190" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-1" target="flttA15IZnz0iReCGyzn-16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-1" value="Ciclar Partida" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="160" y="140" width="550" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-3" target="flttA15IZnz0iReCGyzn-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-3" value="Se recibe:&lt;br&gt;-La estructura entera del admin" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="-130" y="145" width="160" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-5" value="&lt;div&gt;Es un bucle infinito hasta que el jugador vuelva al menú&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="370" y="250" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.009;entryY=0.557;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-1" target="flttA15IZnz0iReCGyzn-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="190" y="283" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-7" value="&lt;div&gt;La opción del menú se debe validar entre las posibles,&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="370" y="360" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-8" value="Dentro de esta función se llamará a iniciarPartida() y retornará si el jugador ganó o perdió (el parámetro para el menú post-nivel)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="370" y="450" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-9" value="En caso de haber ganado, se incrementa el nivel actual, se debe llamar a guardarPartida() y de parametro el admin actual" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="370" y="540" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-10" value="En caso de haber perdido Mostrar un sencillo mensaje de &quot;Lo siento&quot;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="370" y="630" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.055;exitY=0.988;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-1" target="flttA15IZnz0iReCGyzn-10" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="250" y="300" as="sourcePoint" />
+            <mxPoint x="427" y="373" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="190" y="660" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-1" target="flttA15IZnz0iReCGyzn-9" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="190" y="220" as="sourcePoint" />
+            <mxPoint x="370" y="621" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="190" y="570" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-16" value="VOID" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="790" y="220" width="113" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-21" target="flttA15IZnz0iReCGyzn-27" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="250" y="1310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-21" target="flttA15IZnz0iReCGyzn-26" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="250" y="1220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-21" target="flttA15IZnz0iReCGyzn-32" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-21" value="Mostrar Nivel Actual y Pikas Restantes" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="220" y="970" width="550" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-23" target="flttA15IZnz0iReCGyzn-21" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-23" value="Se recibe:&lt;br&gt;-Un integer El nivel actual en Integer&lt;div&gt;-Un Integer las pikas restantes&lt;/div&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="-70" y="975" width="160" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-24" value="Crear un mensaje bonito al usuario mostrandole las pikas que le quedan y el nivel actual en que se encuentra" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="430" y="1080" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.009;entryY=0.557;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-21" target="flttA15IZnz0iReCGyzn-24" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="250" y="1113" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-26" value="&lt;div&gt;En el juego original se mostraba el texto &quot;A new Battle begins&quot; pero acá podría&amp;nbsp; estar en español y mostrar los datos&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="430" y="1190" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-27" value="Una vez terminado limpiar la pantalla. (Borrar todo lo escrito)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="430" y="1280" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-32" value="VOID" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="850" y="1050" width="113" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-36" target="flttA15IZnz0iReCGyzn-42" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="1770" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="flttA15IZnz0iReCGyzn-36" target="flttA15IZnz0iReCGyzn-41" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="1680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-36" target="flttA15IZnz0iReCGyzn-47" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="flttA15IZnz0iReCGyzn-36" target="jwxfIBffU67tgV32ke0h-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="1840" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="flttA15IZnz0iReCGyzn-36" target="jwxfIBffU67tgV32ke0h-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="1928" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-36" value="PostNivel()" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="230" y="1430" width="550" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="flttA15IZnz0iReCGyzn-38" target="flttA15IZnz0iReCGyzn-36" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-38" value="Se recibe:&lt;br&gt;- Un entero que representa el resultado del último nivel&lt;br&gt;-La estructura del Admin" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="-60" y="1435" width="160" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-39" value="Pregunta al usuario si desea continuar o volver al menú" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="1540" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.009;entryY=0.557;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-36" target="flttA15IZnz0iReCGyzn-39" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="1573" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-41" value="&lt;div&gt;Es importante mostrar un mensaje al usuario con opciones para presionar entre ellas &quot;Continuar&quot; &quot;volver al menú&quot;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="1650" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-42" value="Si resulta que perdió &quot;Continuar&quot; va a ser reemplazado por &quot;Volver a intentar&quot;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="1740" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="flttA15IZnz0iReCGyzn-47" value="INTEGER:&lt;br&gt;0 o 1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="860" y="1510" width="113" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-1" value="Luego de esto, se llama a la función post-nivel y el retorno de ella es la condición del bucle&amp;nbsp; infinito." style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="370" y="720" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.06;exitY=0.955;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="190" y="300" as="sourcePoint" />
+            <mxPoint x="370" y="751" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="190" y="207" />
+              <mxPoint x="190" y="751" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="POrZdSvoN0B3ByejeIRJ-6" target="POrZdSvoN0B3ByejeIRJ-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="270" y="2610" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="POrZdSvoN0B3ByejeIRJ-6" target="POrZdSvoN0B3ByejeIRJ-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="270" y="2520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="POrZdSvoN0B3ByejeIRJ-6" target="POrZdSvoN0B3ByejeIRJ-13" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-6" value="Iniciar Partida" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="240" y="2270" width="550" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="POrZdSvoN0B3ByejeIRJ-8" target="POrZdSvoN0B3ByejeIRJ-6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-8" value="Se recibe:&lt;br&gt;- La estructura del Admin" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
+          <mxGeometry x="-50" y="2275" width="160" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-9" value="Es un bucle por nivel, por lo tanto la condicion depende del tiempo del nivel y de si gano" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="450" y="2380" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.009;entryY=0.557;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="POrZdSvoN0B3ByejeIRJ-6" target="POrZdSvoN0B3ByejeIRJ-9" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="270" y="2413" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-11" value="Se debe calcular el tiempo exacto en el momento en que se inicia la función." style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="450" y="2490" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="POrZdSvoN0B3ByejeIRJ-12" target="jwxfIBffU67tgV32ke0h-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-12" value="Por cada iteración se vuelve a calcular el tiempo y se le resta el tiempo inicial del nivel" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="450" y="2610" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-13" value="INTEGER:&lt;br&gt;0 o 1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="870" y="2350" width="113" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="POrZdSvoN0B3ByejeIRJ-25" target="jwxfIBffU67tgV32ke0h-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-25" value="La condicion del while entonces tendría que ese lapso de tiempo restado, sea menor que el tiempo del nivel" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="2680" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.053;exitY=1.013;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="POrZdSvoN0B3ByejeIRJ-6" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="269" y="2698" />
+            </Array>
+            <mxPoint x="270" y="2428" as="sourcePoint" />
+            <mxPoint x="450" y="2698" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="POrZdSvoN0B3ByejeIRJ-27" target="jwxfIBffU67tgV32ke0h-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-27" value="Además de esto, la variable gano debe seguir indicando qeu no haya ganado (con un 0 )" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="2750" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.053;exitY=0.997;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="POrZdSvoN0B3ByejeIRJ-6" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="269" y="2767" />
+            </Array>
+            <mxPoint x="269" y="2410" as="sourcePoint" />
+            <mxPoint x="450" y="2767" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-30" value="Se debe llamar a mostarTablero()" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="450" y="2820" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="POrZdSvoN0B3ByejeIRJ-31" target="jwxfIBffU67tgV32ke0h-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="940" y="2890" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="940" y="2930" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-31" value="Se muestra el tiempo reestante y se solicita la usuario la fila y columna a cambiar. (se llama a pedirJugada() )" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="450" y="2900" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-32" value="Se realiza la verificacion de pikas restantes para que sea mayor a 0. SI NO SE CUMPLE NO SE HACE NADA" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="450" y="2980" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-33" value="En caso de serlo, Se llama a ejecutarJugada() y el resultado se guarda en la variable que indique si gano o no." style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="467" y="3060" width="303" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.068;exitY=0.993;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="269" y="2270" />
+              <mxPoint x="269" y="2938" />
+            </Array>
+            <mxPoint x="277" y="2270.95" as="sourcePoint" />
+            <mxPoint x="450" y="2937.95" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-42" value="Se llama a crear matriz" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="490" y="2540" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-43" value="Se llama a Iniciar Tablero" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="730" y="2540" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-44" value="Se llama a liberar la memoria de la matriz" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="490" y="3130" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-1" value="tiempo(actual) - tiempo(inicialNivel)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="860" y="2698" width="333" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-6" value="tiempo(totalDelNivel) - tiempo(transcurrido)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="870" y="2810" width="333" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-7" value="&amp;nbsp;actualiza el estado de completado de la partida a el valor de gano" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="1810" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-8" value="&amp;nbsp;se actualiza el estado de tiempo y se suma el tiempo acumulado en este nivel." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="1883" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="jwxfIBffU67tgV32ke0h-11" target="POrZdSvoN0B3ByejeIRJ-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="jwxfIBffU67tgV32ke0h-11" target="POrZdSvoN0B3ByejeIRJ-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-11" value="" style="triangle;whiteSpace=wrap;html=1;rotation=-180;" vertex="1" parent="1">
+          <mxGeometry x="320" y="3020" width="40" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.058;entryY=0.98;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="jwxfIBffU67tgV32ke0h-11" target="POrZdSvoN0B3ByejeIRJ-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="3060" />
+              <mxPoint x="260" y="2680" />
+              <mxPoint x="272" y="2680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="jwxfIBffU67tgV32ke0h-15" value="Estos ultimos dos, los hace independientemente del resultado" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="265" y="1870" width="150" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
