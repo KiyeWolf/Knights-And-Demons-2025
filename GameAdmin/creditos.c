@@ -15,14 +15,14 @@
 #define TAM_LINEA 2001
 FILE* abrirArchivoTxt(char* arch);
 void mostrarStringPorPantalla(char* str);
-void leerLineasDeArchivo(FILE* arch);
+void leerStringDeArchivo(FILE* arch);
 void mostrarCreditos();
 
 void mostrarCreditos()
 {
     //system("chcp 65001<nul");
     FILE* archivoDeTxt = abrirArchivoTxt("textoDeLosCreditos.txt");
-    leerLineasDeArchivo(archivoDeTxt);
+    leerStringDeArchivo(archivoDeTxt);
     fclose(archivoDeTxt);
 }
 FILE* abrirArchivoTxt(char* arch)
@@ -41,7 +41,7 @@ void mostrarStringPorPantalla(char* str)
 {
     printf("%s\n",str);
 }
-void leerLineasDeArchivo(FILE* arch)
+void leerStringDeArchivo(FILE* arch)
 {
     char linea[TAM_LINEA];
     while(fscanf(arch,"%s", linea)==1)

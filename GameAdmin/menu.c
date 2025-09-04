@@ -27,6 +27,7 @@ int main() {
             fflush(stdin);
             gets(guardado);
             cargarPartida(&elAdmin, guardado);
+            jugar(&elAdmin);
             //break;
         }
         if(opcion=='2')
@@ -40,6 +41,7 @@ int main() {
             //printf("%d", d);
             iniciarJuegoNuevo(&elAdmin, &d, guardado);
             jugar(&elAdmin);
+            colocarJugadorEnTablaDePuntajes(&(elAdmin.jugador));
         }
         if(opcion=='3')
         {

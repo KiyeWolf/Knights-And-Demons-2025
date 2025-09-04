@@ -39,6 +39,7 @@ typedef struct
     /* data */
 }Admin;
 
+
 void inicializarJugador(Player* jugador, char* nombre, const  int* dificultad);
 int iniciarJuegoNuevo(Admin* manager, int* d, char*  nomNuevo);
 int jugar(Admin* manager);
@@ -59,7 +60,7 @@ int iniciarJuegoNuevo(Admin* manager, int* d, char*  nomNuevo)
 }
 int jugar(Admin* manager)
 {
-    
+
 }
 void inicializarPartidas(Partidas* partidas,const  int* dificultad)
 {
@@ -132,7 +133,7 @@ void mostrarJugador(Player* jugador)
     printf("%f\n", jugador->tiempoDeJuego);
     printf("%d\n", jugador->nivelActual);
     printf("%d\n", jugador->pikasRestantes);
-    
+
 }
 int guardarPartida(Admin* manager)
 {
