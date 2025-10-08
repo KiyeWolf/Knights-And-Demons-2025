@@ -1,24 +1,11 @@
 #include <stdio.h>
-
-#include <stdlib.h>
-#include <stdbool.h>
-#include "creditos.c"
-#include "TDAJuego.c"
-#include "scores.c"
-
-
-
-int solicitarDificultad();
-char menu(char* msj, char* opciones);
+#include "menu.h"
 int main() {
     Admin elAdmin;
-    // TODO: Implement menu logic here
-    // Example menu loop
-    char mensajeMenu[1000]={"------------------------------------------------\n\tBienvenido a Knights && Demons (2025)\n------------------------------------------------\n\t1. CARGAR PARTIDA \n\t2. NUEVO JUEGO\n\t3. CREDITOS\n\t4. TABLA DE PUNTAJES\n\t5. SALIR"};
-    char opcion = menu(mensajeMenu, "12345");
-    while(opcion!='5')
+    char opcionElegida = mostarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, "12345");
+    while(opcionElegida!=OPCIONES_VALIDAS)
     {
-        if(opcion=='1')
+        if(opcionElegida==CARGAR_PARTIDA)
         {
             char guardado[4];
             //empieza el juego
@@ -30,7 +17,7 @@ int main() {
             jugar(&elAdmin);
             //break;
         }
-        if(opcion=='2')
+        if(opcionElegida==INICIAR_NUEVA_PARTIDA)
         {
             char guardado[4];
             puts("INICIO");
@@ -43,18 +30,16 @@ int main() {
             jugar(&elAdmin);
             colocarJugadorEnTablaDePuntajes(&(elAdmin.jugador));
         }
-        if(opcion=='3')
+        if(opcionElegida==CREDITOS)
         {
             mostrarCreditos();
         }
-        if(opcion=='4')
+        if(opcionElegida==TABLA_DE_PUNTAJES)
         {
             mostrarTablaDePuntajes();
-            fflush(stdin);
-            getchar();
-            system("cls");
+            pausaYLimpiadoDePantalla();
         }
-        opcion = menu(mensajeMenu, "12345");
+        opcionElegida = mostarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, "12345");
         
     }
     puts("Gracias por jugar");
@@ -62,7 +47,7 @@ int main() {
     getchar();
     return 0;
 }
-char menu(char* msj, char* opciones)
+char mostarMenuPrincipalConMensaje(char* msj, char* opciones)
 {
     char opc;
     puts(msj);
@@ -84,6 +69,12 @@ char menu(char* msj, char* opciones)
 }
 int solicitarDificultad()
 {
-    char d = menu("Ingrese la dificultad para jugar:\n1. FACIL\n2. MEDIO\n3. DIFICIL","123");
-    return atoi(&d);
+    char dificultadElegidaPorElUsuario = mostarMenuPrincipalConMensaje("Ingrese la dificultad para jugar:\n1. FACIL\n2. MEDIO\n3. DIFICIL","123");
+    return atoi(&dificultadElegidaPorElUsuario);
+}
+void pausaYLimpiadoDePantalla()
+{
+    fflush(stdin);
+    getchar();
+    system("cls");
 }
