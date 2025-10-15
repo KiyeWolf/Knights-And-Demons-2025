@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
   <diagram name="Página-1" id="kfd38gGpXaSbrslvdGKy">
-    <mxGraphModel dx="2134" dy="662" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2527" dy="826" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -180,7 +180,7 @@
         <mxCell id="POrZdSvoN0B3ByejeIRJ-1" value="Luego de esto, se llama a la función post-nivel y el retorno de ella es la condición del bucle&amp;nbsp; infinito." style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="370" y="700" width="340" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="POrZdSvoN0B3ByejeIRJ-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.06;exitY=0.955;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-1" edge="1" target="POrZdSvoN0B3ByejeIRJ-1">
+        <mxCell id="POrZdSvoN0B3ByejeIRJ-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.06;exitY=0.955;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="flttA15IZnz0iReCGyzn-1" target="POrZdSvoN0B3ByejeIRJ-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="190" y="300" as="sourcePoint" />
             <mxPoint x="370" y="751" as="targetPoint" />
@@ -339,6 +339,79 @@
         </mxCell>
         <mxCell id="jwxfIBffU67tgV32ke0h-15" value="Estos ultimos dos, los hace independientemente del resultado" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="265" y="1870" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="XXCmN-a-z3Te2Am2olju-1" target="XXCmN-a-z3Te2Am2olju-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="XXCmN-a-z3Te2Am2olju-1" target="XXCmN-a-z3Te2Am2olju-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="XXCmN-a-z3Te2Am2olju-1" target="XXCmN-a-z3Te2Am2olju-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="3490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="XXCmN-a-z3Te2Am2olju-1" target="XXCmN-a-z3Te2Am2olju-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="3690" />
+              <mxPoint x="370" y="3690" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-1" value="pedirJugada" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="3340" width="540" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-2" value="void" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="920" y="3430" width="113" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-3" value="Se recibe:&lt;br&gt;- La estructura de Jugada" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="3460" width="160" height="255" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="XXCmN-a-z3Te2Am2olju-6" target="XXCmN-a-z3Te2Am2olju-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-6" value="Debe pedir al usuario el ingreso por consola de las teclas predefinidas" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="3447" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-11" value="WASDEF" style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="475" y="3560" width="290" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="XXCmN-a-z3Te2Am2olju-12" target="XXCmN-a-z3Te2Am2olju-21">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="880" y="3880" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="870" y="3685" />
+              <mxPoint x="870" y="3788" />
+              <mxPoint x="860" y="3788" />
+              <mxPoint x="860" y="3890" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-12" value="Debe modificar la pos en x o y correspondiente a lo ingresado por el usuario" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="3655" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-14" value="O debe activar las flags para ejecutarJugada" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="481.5" y="3770" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="XXCmN-a-z3Te2Am2olju-17" target="XXCmN-a-z3Te2Am2olju-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="3720" />
+              <mxPoint x="440" y="3700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=-0.024;exitY=-0.002;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="XXCmN-a-z3Te2Am2olju-17" target="XXCmN-a-z3Te2Am2olju-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-17" value="" style="triangle;whiteSpace=wrap;html=1;rotation=-180;" vertex="1" parent="1">
+          <mxGeometry x="370" y="3720" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="XXCmN-a-z3Te2Am2olju-21" value="Debe validar el movimiento, llamando a otra función (Hasta ahora con el nombre de: ...validarMovimiento...)&lt;br&gt;Si el movimiento es inválido, no se modifica la posición del cursor." style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="3860" width="340" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
