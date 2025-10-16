@@ -9,7 +9,8 @@
 #include <time.h>
 #include <conio.h> /// para kbhit() y getch()
 #include <unistd.h> /// para sleep() (no me funciono con windows.h)
-
+#include "../Juego/TDAJuego.h"
+#include "../Tablero/TDATablero.h"
 /*Defines*/
 #define FACIL 1
 #define MEDIO 2
@@ -44,49 +45,13 @@
 #define TODO_OK 0
 
 /*Archivos Externos*/
-#include "../Tablero/TDATablero.c"
+#define RUTA_PARTIDAS_GUARDADAS "./Juego/Saved/"
 
-typedef struct Partidas
-{
-    int tiempo;
-    int dificultadDePartida;
-    bool estadoCompletado;
-}Partidas;
 
-typedef struct Usuario
-{
-    char nombre[TAM_NOMBRE];
-    int dificultadSeleccionada;
-    int TotalestadoUno;
-    int TotalestadoDos;
-    float tiempoDeJuego;
-    int nivelActual;
-    int pikasRestantes;
-}Player;
-
-/// PARA MANEJAR EL MOVIMIENTO EN EL TABLERO (CON LO DE AGUS NO ES NECESARIO)
-/*
-typedef struct
-{
-    int fila;
-    int columna;
-    bool usoPika; /// Si no convence, quizas podria cambiarse por char teclaIngresada; (para desps comparar si es "P")
-}Cursor;
-*/
-///
-
-typedef struct
-{
-    Partidas niveles[TAM_PARTIDAS];
-    Player jugador;
-    // Cursor cursor;
-    tJugada cursor;
-    /* data */
-}Admin;
 
 /* FUNCIONES */
 // Principales
-bool iniciarPartida(Admin*);
+bool iniciarPartida(Admin* admin);
 void ciclarPartida(Admin*);
 int postNivel(Admin*, int);
 

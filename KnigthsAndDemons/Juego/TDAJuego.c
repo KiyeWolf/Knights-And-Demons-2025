@@ -1,24 +1,16 @@
 #include "TDAJuego.h"
+#include "../Partida/TDAPartida.h"
 int iniciarJuegoNuevo(Admin* manager, int* d, char*  nomNuevo)
 {
-
     inicializarPartidas(manager->niveles, d);
     inicializarJugador(&(manager->jugador), nomNuevo,d);
-    /*EL GUARDADO DE PARTIDA DE MÁS ABAJO ESTA SIMULADO, SE DEBE BORRAR LO MAS PRONTO POSIBLE*/
-    //guardarPartida(manager);
     return 0;
 }
 int jugar(Admin* manager)
 {
-    //TODO ESTO ESTÁ SIMULADO NOMÁS
-    char** tablero = crearTablero(ORDEN_TEMPORAL);
-    inicializarTablero(ORDEN_TEMPORAL,tablero);
-    mostrarTablero(ORDEN_TEMPORAL, tablero);
-
-    //parte de la partida en sí simulo con un get char
-    fflush(stdin);
-    getchar();
-    liberarMemoriaTablero(tablero,ORDEN_TEMPORAL);
+    ciclarPartida(manager);
+    //ARREGLA ESTA FUNCIÓN
+    return 0;
 }
 void inicializarPartidas(Partidas* partidas,const  int* dificultad)
 {
@@ -43,7 +35,6 @@ void inicializarPartidas(Partidas* partidas,const  int* dificultad)
             (partidas+i)->estadoCompletado=false;
             break;
         }
-
     }
 }
 void inicializarJugador(Player* jugador, char* nombre, const  int* dificultad)
@@ -93,29 +84,17 @@ void mostrarJugador(Player* jugador)
     printf("%d\n", jugador->pikasRestantes);
 
 }
-int guardarPartida(Admin* manager)
-{
-    char temporal[9];
-    strcpy(temporal, manager->jugador.nombre);
-    strcat(temporal, ".dat");
-    FILE* arch = fopen(temporal, "wb");
-    if(!arch)
-    {
-        return ARCHIVO_CORRUPTO;
-    }
-    fwrite(manager,sizeof(*manager),1, arch);
-    puts("El guardado ha sido exitoso.");
-    fclose(arch);
-    return TODO_OK;
-}
 
 int cargarPartida(Admin* manager, char* nomGuardado)
 {
+    char guardado[200];
+    guardado[0]='\0';
     char temporal[9];
     strcpy(temporal, nomGuardado);
     strcat(temporal, ".dat");
-    puts(temporal);
-    FILE* arch = fopen(temporal, "rb");
+    strcat(guardado,RUTA_PARTIDAS_GUARDADAS_PARA_CARGAR);
+    strcat(guardado,temporal);
+    FILE* arch = fopen(guardado, "rb");
     if(!arch)
     {
         return ARCHIVO_CORRUPTO;

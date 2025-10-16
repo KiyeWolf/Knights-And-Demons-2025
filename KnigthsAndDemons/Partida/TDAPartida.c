@@ -1,11 +1,5 @@
 #include "TDAPartida.h"
 
-/// BORRAR (SOLO ESTA PARA EVITAR EL ERROR AL COMPILAR)
-int main()
-{
-    return 0;
-}
-///
 
 /// FUNCIONES DE AGUS QUE IMPLEMENTÉ YO
 /*
@@ -100,6 +94,7 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
 
     while(!finSeleccion)
     {
+        
         if (kbhit())
         {
             tecla = getch();
@@ -158,10 +153,14 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
 
 int guardarPartida(Admin* manager) /// (Es la de Guille)
 {
+    char guardado[200];
+    guardado[0]='\0';
     char temporal[9];
     strcpy(temporal, manager->jugador.nombre);
     strcat(temporal, ".dat");
-    FILE* arch = fopen(temporal, "wb");
+    strcat(guardado,RUTA_PARTIDAS_GUARDADAS);
+    strcat(guardado,temporal);
+    FILE* arch = fopen(guardado, "wb");
     if(!arch)
     {
         return ARCHIVO_CORRUPTO;
@@ -180,6 +179,8 @@ size_t obtenerTamTablero(const Admin* admin) // DEVUELVE TAM TABLERO (ORDEN)
         case (2): return TAM_TABLERO_2;
         case (3): return TAM_TABLERO_3;
     }
+    //Para sacar el warning
+    return 1;
 }
 
 int tiempo(const Admin* admin, int operacion) // DEVUELVE TIEMPO (EN SEGUNDOS) O LO REINICIA SEGUN LA OPERACION
@@ -207,6 +208,8 @@ int tiempo(const Admin* admin, int operacion) // DEVUELVE TIEMPO (EN SEGUNDOS) O
             inicioNivel = 1; // Para que la logica funcione al cambiar de nivel
             return 0;
     }
+    //para sacar el warning nomás la linea de abajo.
+    return 0;
 }
 
 bool iniciarPartida(Admin* admin) // DEVUELVE SI GANÓ O NO (1 o 0)

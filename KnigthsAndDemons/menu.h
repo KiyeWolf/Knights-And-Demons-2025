@@ -4,14 +4,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "creditos.c"
-#include "TDAJuego.c"
-#include "scores.c"
+
 
 
 #define OPCIONES_VALIDAS 53
 #define CARGAR_PARTIDA 49
 #define INICIAR_NUEVA_PARTIDA 50
+#define MIN_CANTIDAD_LETRAS_NOMBRE 3
 #define CREDITOS 51
 #define TABLA_DE_PUNTAJES 52
 #define MENSAJE_DEL_MENU_PRINCIPAL \
@@ -27,6 +26,6 @@
 int solicitarDificultad();
 void pausaYLimpiadoDePantalla();
 char mostarMenuPrincipalConMensaje(char* msj, char* opciones);
-
+void limpiarBuffer();
 
 #endif // MENU_H_INCLUDED

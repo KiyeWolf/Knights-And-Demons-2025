@@ -6,19 +6,15 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
-
+//externa
+#include "../Juego/TDAJuego.h"
 //Defines
 #define CORRECTO 1
 #define INCORRECTO 0
 #define ADY 4 //cantidad de casillas adyacentes
 
-//Estructura de Jugada
-typedef struct Jugada{
-    size_t posCursorX;
-    size_t posCursorY;
-    bool actua;
-    bool seUsoPika;
-}tJugada;
+
+
 
 //Funciones del tablero
 int verificarCoordenadasCursor(const int, tJugada *);

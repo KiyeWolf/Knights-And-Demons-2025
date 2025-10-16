@@ -1,7 +1,9 @@
 #ifndef TDAJUEGO_H_INCLUDED
 #define TDAJUEGO_H_INCLUDED
+#include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+
 #define FACIL 1
 #define MEDIO 2
 #define DIFICIL 3
@@ -16,37 +18,52 @@
 #define TAM_PARTIDAS 20
 #define ARCHIVO_CORRUPTO 1
 #define TODO_OK 0
-
-//este pedazo de acá modifique
-#include "../Tablero/crearTablero.c"
-#include "../Tablero/inicializarTablero.c"
-#include "../Tablero/mostrarTablero.c"
-#define ORDEN_TEMPORAL 8
-//
+#define RUTA_PARTIDAS_GUARDADAS_PARA_CARGAR "./Juego/Saved/"    
 
 
-typedef struct Partidas
-{
-    int tiempo;
-    int dificultadDePartida;
-    bool estadoCompletado;
-}Partidas;
-typedef struct Usuario
-{
-    char nombre[TAM_NOMBRE];
-    int dificultadSeleccionada;
-    int TotalestadoUno;
-    int TotalestadoDos;
-    float tiempoDeJuego;
-    int nivelActual;
-    int pikasRestantes;
-}Player;
-typedef struct
-{
-    Partidas niveles[TAM_PARTIDAS];
-    Player jugador;
-    /* data */
-}Admin;
+typedef struct Jugada{
+            size_t posCursorX;
+            size_t posCursorY;
+            bool actua;
+            bool seUsoPika;
+       
+       
+         }tJugada;
+
+
+    
+
+//Estructura de Jugada
+    
+    typedef struct Partidas
+    {
+        int tiempo;
+        int dificultadDePartida;
+        bool estadoCompletado;
+    }Partidas;
+
+    typedef struct Usuario
+    {
+        char nombre[TAM_NOMBRE];
+        int dificultadSeleccionada;
+        int TotalestadoUno;
+        int TotalestadoDos;
+        float tiempoDeJuego;
+        int nivelActual;
+        int pikasRestantes;
+    }Player;
+
+
+
+    typedef struct
+    {
+        Partidas niveles[TAM_PARTIDAS];
+        Player jugador;
+        tJugada cursor;
+    }Admin;
+
+
+
 
 void inicializarJugador(Player* jugador, char* nombre, const  int* dificultad);
 int iniciarJuegoNuevo(Admin* manager, int* d, char*  nomNuevo);
@@ -55,7 +72,6 @@ void inicializarPartidas(Partidas* partidas,const  int* dificultad);
 void mostrarManager(Admin* manager);
 void mostrarNiveles(Partidas* niveles);
 void mostrarJugador(Player* jugador);
-int guardarPartida(Admin* manager);
 int cargarPartida(Admin* manager,  char* nomGuardado);
 
 
