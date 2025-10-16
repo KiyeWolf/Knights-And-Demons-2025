@@ -94,7 +94,7 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
 
     while(!finSeleccion)
     {
-        
+
         if (kbhit())
         {
             tecla = getch();
@@ -153,13 +153,8 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
 
 int guardarPartida(Admin* manager) /// (Es la de Guille)
 {
-    char guardado[200];
-    guardado[0]='\0';
-    char temporal[9];
-    strcpy(temporal, manager->jugador.nombre);
-    strcat(temporal, ".dat");
-    strcat(guardado,RUTA_PARTIDAS_GUARDADAS);
-    strcat(guardado,temporal);
+    char guardado[256];
+    snprintf(guardado, sizeof(guardado), "%s%s.dat", RUTA_PARTIDAS_GUARDADAS, manager->jugador.nombre);
     FILE* arch = fopen(guardado, "wb");
     if(!arch)
     {
@@ -295,4 +290,10 @@ void mostrarNivelPikasActual(int nivelActual, int pikasActuales) // MUESTRA PIKA
     // El "°|" y "*|" son un agregado estetico
 
     system("cls"); // Limpio la consola
+}
+int jugar(Admin* manager)
+{
+    ciclarPartida(manager);
+    //ARREGLA ESTA FUNCIÓN
+    return 0;
 }

@@ -1,17 +1,12 @@
 #include "TDAJuego.h"
-#include "../Partida/TDAPartida.h"
+
 int iniciarJuegoNuevo(Admin* manager, int* d, char*  nomNuevo)
 {
     inicializarPartidas(manager->niveles, d);
     inicializarJugador(&(manager->jugador), nomNuevo,d);
     return 0;
 }
-int jugar(Admin* manager)
-{
-    ciclarPartida(manager);
-    //ARREGLA ESTA FUNCIÓN
-    return 0;
-}
+
 void inicializarPartidas(Partidas* partidas,const  int* dificultad)
 {
     for(int i = 0 ; i < TAM_PARTIDAS ;i++ )
@@ -87,13 +82,8 @@ void mostrarJugador(Player* jugador)
 
 int cargarPartida(Admin* manager, char* nomGuardado)
 {
-    char guardado[200];
-    guardado[0]='\0';
-    char temporal[9];
-    strcpy(temporal, nomGuardado);
-    strcat(temporal, ".dat");
-    strcat(guardado,RUTA_PARTIDAS_GUARDADAS_PARA_CARGAR);
-    strcat(guardado,temporal);
+    char guardado[256];
+    snprintf(guardado, sizeof(guardado), "%s%s.dat", RUTA_PARTIDAS_GUARDADAS_PARA_CARGAR, nomGuardado);
     FILE* arch = fopen(guardado, "rb");
     if(!arch)
     {

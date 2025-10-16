@@ -1,7 +1,7 @@
 #include "creditos.h"
 void mostrarCreditos()
 {
-    system("chcp 65001<nul");
+    //system("chcp 65001<nul");
     FILE* archivoDeTxt = abrirArchivoTxt(RUTA_CREDITOS);
     leerStringDeArchivo(archivoDeTxt);
     fclose(archivoDeTxt);

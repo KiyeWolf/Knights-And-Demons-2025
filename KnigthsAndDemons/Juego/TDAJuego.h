@@ -18,7 +18,10 @@
 #define TAM_PARTIDAS 20
 #define ARCHIVO_CORRUPTO 1
 #define TODO_OK 0
-#define RUTA_PARTIDAS_GUARDADAS_PARA_CARGAR "./Juego/Saved/"    
+#define RUTA_PARTIDAS_GUARDADAS_PARA_CARGAR "./Juego/Saved/"
+
+
+
 
 
 typedef struct Jugada{
@@ -26,15 +29,15 @@ typedef struct Jugada{
             size_t posCursorY;
             bool actua;
             bool seUsoPika;
-       
-       
+
+
          }tJugada;
 
 
-    
+
 
 //Estructura de Jugada
-    
+
     typedef struct Partidas
     {
         int tiempo;
@@ -67,7 +70,7 @@ typedef struct Jugada{
 
 void inicializarJugador(Player* jugador, char* nombre, const  int* dificultad);
 int iniciarJuegoNuevo(Admin* manager, int* d, char*  nomNuevo);
-int jugar(Admin* manager);
+
 void inicializarPartidas(Partidas* partidas,const  int* dificultad);
 void mostrarManager(Admin* manager);
 void mostrarNiveles(Partidas* niveles);

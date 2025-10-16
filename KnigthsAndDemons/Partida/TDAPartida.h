@@ -66,5 +66,5 @@ int tiempo(const Admin*, int);
 size_t obtenerTamTablero(const Admin*);
 // void invertirCasilla(char* casilla);
 // int obtenerBandoGanador(char**, size_t);
-
+int jugar(Admin* manager);
 #endif // TDAPARTIDA_H_INCLUDED

@@ -8,6 +8,7 @@
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/KnigthsAndDemons" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="$(PROJECT_DIR)" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -17,6 +18,20 @@
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/KnigthsAndDemons" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="$(PROJECT_DIR)" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Final Package">
+				<Option output="bin/Release/KnigthsAndDemons" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="$(PROJECT_DIR)" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -33,11 +48,13 @@
 			<Add directory="Juego" />
 			<Add directory="Partida" />
 			<Add directory="Tablero" />
+			<Add directory="Juego/Saved" />
 		</Compiler>
 		<Linker>
 			<Add directory="Juego" />
 			<Add directory="Partida" />
 			<Add directory="Tablero" />
+			<Add directory="Juego/Saved" />
 		</Linker>
 		<Unit filename="Juego/TDAJuego.c">
 			<Option compilerVar="CC" />

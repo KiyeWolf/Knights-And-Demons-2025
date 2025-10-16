@@ -7,12 +7,12 @@
 
 
 
-#define OPCIONES_VALIDAS 53
-#define CARGAR_PARTIDA 49
-#define INICIAR_NUEVA_PARTIDA 50
+#define OPCIONES_VALIDAS '5'
+#define CARGAR_PARTIDA '1'
+#define INICIAR_NUEVA_PARTIDA '2'
 #define MIN_CANTIDAD_LETRAS_NOMBRE 3
-#define CREDITOS 51
-#define TABLA_DE_PUNTAJES 52
+#define CREDITOS '3'
+#define TABLA_DE_PUNTAJES '4'
 #define MENSAJE_DEL_MENU_PRINCIPAL \
 "------------------------------------------------\n"\
 "\tBienvenido a Knights && Demons (2025)\n"\

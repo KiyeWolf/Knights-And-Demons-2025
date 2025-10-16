@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// 🟩 Ruta relativa del archivo de puntajes
+//  Ruta relativa del archivo de puntajes
 #define RUTA_SCORES "./Juego/scores.txt"
 
 void leerLineasDeArchivoTxt(FILE* arch);

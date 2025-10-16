@@ -7,6 +7,7 @@
 int main() {
     Admin elAdmin = {0};
     char opcionElegida = mostarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, "12345");
+
     while(opcionElegida!=OPCIONES_VALIDAS)
     {
         if(opcionElegida==CARGAR_PARTIDA)
@@ -26,9 +27,9 @@ int main() {
             else
             {
                 jugar(&elAdmin);
-                
+
             }
-            
+
         }
         if(opcionElegida==INICIAR_NUEVA_PARTIDA)
         {
@@ -43,11 +44,12 @@ int main() {
                 strcpy(guardado, "AAA");
                 system("pause");
             }
-            system("cls");
+            //system("cls");
             int d = solicitarDificultad();
             iniciarJuegoNuevo(&elAdmin, &d, guardado);
+
             jugar(&elAdmin);
-            colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.tiempoDeJuego);
+            //colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.tiempoDeJuego);
         }
         if(opcionElegida==CREDITOS)
         {
@@ -58,7 +60,7 @@ int main() {
             mostrarTablaDePuntajes();
             pausaYLimpiadoDePantalla();
         }
-        system("cls");
+        //system("cls");
         opcionElegida = mostarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, "12345");
 
     }
@@ -74,26 +76,40 @@ char mostarMenuPrincipalConMensaje(char* msj, char* opciones)
     scanf(" %c", &opc);
     while(!strchr(opciones,opc))
     {
-       system("cls");
+       //system("cls");
         puts("Porfavor Ingrese una de las opciones mostradas");
         limpiarBuffer();
-        system("cls");
+        //system("cls");
         puts(msj);
         scanf(" %c", &opc);
     }
-    system("cls");
+    //system("cls");
     return opc;
 }
 int solicitarDificultad()
 {
     char dificultadElegidaPorElUsuario = mostarMenuPrincipalConMensaje("Ingrese la dificultad para jugar:\n1. FACIL\n2. MEDIO\n3. DIFICIL","123");
-    return atoi(&dificultadElegidaPorElUsuario);
+    switch(dificultadElegidaPorElUsuario)
+    {
+        case '1':
+        return 1;
+        break;
+        case '2':
+        return 2;
+        break;
+        case '3':
+        return 3;
+        break;
+        default:
+        return 1; //auqnque no debería pasar
+    }
+    return 1; //no debería suceder
 }
 void pausaYLimpiadoDePantalla()
 {
     limpiarBuffer();
     getchar();
-    system("cls");
+ //   system("cls");
 }
 void limpiarBuffer() {
     int c;
