@@ -15,7 +15,7 @@
 #define TABLA_DE_PUNTAJES '4'
 #define MENSAJE_DEL_MENU_PRINCIPAL \
 "------------------------------------------------\n"\
-"\tBienvenido a Knigths && Demons (2025)\n"\
+"\tBienvenido a Knights && Demons (2025)\n"\
 "------------------------------------------------\n"\
 "\t1. CARGAR PARTIDA \n"\
 "\t2. NUEVO JUEGO\n"\
