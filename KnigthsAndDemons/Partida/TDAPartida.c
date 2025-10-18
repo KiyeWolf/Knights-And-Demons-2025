@@ -82,10 +82,12 @@ int obtenerBandoGanador(char** tablero, size_t tamTablero) // RETORNA 1 SI GANAR
 
 void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA POSICION SELECCIONADA EN CURSOR
 {
-    char tecla, temp;
-    char* celda;
+    char tecla;
+    // char temp;
+    //char* celda;
     int finSeleccion = 0;
 
+    admin->cursor.seUsoPika = 0;
     admin->cursor.posCursorX = 0;
     admin->cursor.posCursorY = 0;
 
@@ -94,7 +96,6 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
 
     while(!finSeleccion)
     {
-
         if (kbhit())
         {
             tecla = getch();
@@ -129,29 +130,34 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
                     finSeleccion = 1;
                     break;
                 case 'p': // "Enter con Pika"
-                    finSeleccion = 1;
-                    admin->cursor.seUsoPika = 1;
-                    admin->jugador.pikasRestantes--;
+                    if(admin->jugador.pikasRestantes > 0)
+                    {
+                        admin->cursor.seUsoPika = 1;
+                        admin->jugador.pikasRestantes--;
+                        finSeleccion = 1;
+                    }else
+                        printf("No tenes mas pikas");
+
                     break;
             }
 
             system("cls"); // Limpiar consola antes de mostrar
 
             // Mostrar movimiento en el tablero y devolver el valor que habia originalmente
-            celda = *(tablero + admin->cursor.posCursorY) + admin->cursor.posCursorX;
-            temp = *celda;
-            *celda = '@'; // "arroba" (@) = cursor
+            //celda = *(tablero + admin->cursor.posCursorY) + admin->cursor.posCursorX;
+            //temp = *celda;
+            //*celda = 'x'; // "equis" (x) = cursor
 
             mostrarTablero(tamTablero, tablero, &admin->cursor);
-
-            *celda = temp;
+            //*celda = temp;
         }
 
-        sleep(50); // Pausa para no saturar
+        Sleep(50); // Pausa para no saturar
     }
+    system("cls"); // Limpiar consola despues de mostrar (evita duplicados)
 }
 
-int guardarPartida(Admin* manager) /// (Es la de Guille)
+int guardarPartida(Admin* manager) // GUARDA EL ESTADO ACTUAL DEL JUEGO (HASTA ULTIMO NIVEL JUGADO)
 {
     char guardado[256];
     snprintf(guardado, sizeof(guardado), "%s%s.dat", RUTA_PARTIDAS_GUARDADAS, manager->jugador.nombre);
@@ -291,9 +297,10 @@ void mostrarNivelPikasActual(int nivelActual, int pikasActuales) // MUESTRA PIKA
 
     system("cls"); // Limpio la consola
 }
-int jugar(Admin* manager)
+
+int jugar(Admin* manager) /// AGREGA GUILLE
 {
     ciclarPartida(manager);
-    //ARREGLA ESTA FUNCIÓN
+    ///ARREGLAR ESTA FUNCIÓN (GUILLE)
     return 0;
 }

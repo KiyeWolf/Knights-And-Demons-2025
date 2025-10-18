@@ -8,7 +8,7 @@
 #include <string.h>
 #include <time.h>
 #include <conio.h> /// para kbhit() y getch()
-#include <unistd.h> /// para sleep() (no me funciono con windows.h)
+#include <windows.h> /// para Sleep()
 #include "../Juego/TDAJuego.h"
 #include "../Tablero/TDATablero.h"
 /*Defines*/
@@ -46,7 +46,6 @@
 
 /*Archivos Externos*/
 #define RUTA_PARTIDAS_GUARDADAS "./Juego/Saved/"
-
 
 
 /* FUNCIONES */
