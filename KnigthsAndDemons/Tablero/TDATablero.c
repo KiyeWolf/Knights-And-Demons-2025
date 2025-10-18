@@ -17,9 +17,11 @@ void mostrarTablero(const int orden, char **mat, tJugada *jug){
     for(i=0; i<orden; i++){
         for(j=0; j<orden; j++){
             if(i==jug->posCursorY&&j==jug->posCursorX)
-                printf("\t|[x]|");
+                printf(ANSI_COLOR_CYAN "\t|" ANSI_COLOR_RESET "[x]" ANSI_COLOR_CYAN "|" ANSI_COLOR_RESET);
+            else if(*(*(mat+i)+j)=='K')
+                printf(ANSI_COLOR_CYAN "\t| " ANSI_COLOR_YELLOW "%c" ANSI_COLOR_CYAN " |" ANSI_COLOR_RESET, *(*(mat+i)+j));
             else
-                printf("\t| %c |", *(*(mat+i)+j));
+                printf(ANSI_COLOR_CYAN "\t| " ANSI_COLOR_RED "%c" ANSI_COLOR_CYAN " |" ANSI_COLOR_RESET, *(*(mat+i)+j));
         }
         printf("\n");
     }
@@ -74,9 +76,8 @@ void inicializarTablero(const int orden, char **mat, tJugada *jug){
     jug->posCursorY=0;
 }
 
-/*Verifica si todas las casillas del tablero son iguales. Si es asi, entonces el
-jugador gano la partida, se retorna un codigo CORRECTO (1). En el caso contrario se
-retorna un codigo INCORRECTO (0)*/
+/*Verifica si todas las casillas del tablero son iguales. Si no lo son retorna INCORRECTO (0),
+si ganaron los caballeros retorna GANO_KNIGHTS (1), y si ganaron los demonios retorna GANO_DEMONS (2)*/
 int verificarVictoria(const int orden, char **m){
     int i, j;
 
@@ -87,7 +88,7 @@ int verificarVictoria(const int orden, char **m){
         }
     }
 
-    return CORRECTO;
+    return **m == 'K' ? GANO_KNIGHTS : GANO_DEMONS;
 }
 
 /*Cambia una sola casilla. Si tenia una D pasa a tener una K y viceversa.*/

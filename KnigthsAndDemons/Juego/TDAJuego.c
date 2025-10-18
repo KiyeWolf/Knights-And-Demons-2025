@@ -38,7 +38,7 @@ void inicializarJugador(Player* jugador, char* nombre, const  int* dificultad)
     jugador->dificultadSeleccionada = *(dificultad);
     jugador->TotalestadoUno = 0;
     jugador->TotalestadoDos = 0;
-    jugador->tiempoDeJuego = 0;
+    jugador->nivelesCompletados = 0;
     jugador->nivelActual = 1;
     switch (*dificultad)
     {
@@ -74,7 +74,7 @@ void mostrarJugador(Player* jugador)
     printf("%d\n", jugador->dificultadSeleccionada);
     printf("%d\n", jugador->TotalestadoUno);
     printf("%d\n", jugador->TotalestadoDos);
-    printf("%f\n", jugador->tiempoDeJuego);
+    printf("%d\n", jugador->nivelesCompletados);
     printf("%d\n", jugador->nivelActual);
     printf("%d\n", jugador->pikasRestantes);
 

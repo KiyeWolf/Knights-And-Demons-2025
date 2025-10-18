@@ -6,7 +6,7 @@
 #include <stdbool.h>
 
 
-
+#define JUEGO_COMPLETADO 0
 #define OPCIONES_VALIDAS '5'
 #define CARGAR_PARTIDA '1'
 #define INICIAR_NUEVA_PARTIDA '2'
@@ -15,7 +15,7 @@
 #define TABLA_DE_PUNTAJES '4'
 #define MENSAJE_DEL_MENU_PRINCIPAL \
 "------------------------------------------------\n"\
-"\tBienvenido a Knights && Demons (2025)\n"\
+"\tBienvenido a Knigths && Demons (2025)\n"\
 "------------------------------------------------\n"\
 "\t1. CARGAR PARTIDA \n"\
 "\t2. NUEVO JUEGO\n"\

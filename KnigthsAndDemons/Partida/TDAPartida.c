@@ -138,7 +138,7 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
                         finSeleccion = 1;
                     }else
                     {
-                        printf("No tenes mas pikas");
+                        printf("No tienes mas pikas");
                         Sleep(3000);
                     }
 
@@ -151,7 +151,7 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
             //celda = *(tablero + admin->cursor.posCursorY) + admin->cursor.posCursorX;
             //temp = *celda;
             //*celda = 'x'; // "equis" (x) = cursor
-            
+
             mostrarTablero(tamTablero, tablero, &admin->cursor);
             //*celda = temp;
         }
@@ -220,9 +220,9 @@ int tiempo(const Admin* admin, int operacion) // DEVUELVE TIEMPO (EN SEGUNDOS) O
     return 0;
 }
 
-bool iniciarPartida(Admin* admin) // DEVUELVE SI GANÓ O NO (1 o 0)
+int iniciarPartida(Admin* admin) // DEVUELVE SI GANÓ O NO (1,2 o 0 si perdio el útlimo)
 {
-    bool gano;
+    int gano = 0;
     int tiempoTranscurrido = 0;
     int tiempoInicial = tiempo(admin, T_INICIAL);
 
@@ -233,7 +233,7 @@ bool iniciarPartida(Admin* admin) // DEVUELVE SI GANÓ O NO (1 o 0)
     inicializarTablero(tamTablero, tablero, &admin->cursor);
 
     // Mientras no se acabe el tiempo ni haya ganado, sigue la partida
-    while( ( (tiempoInicial - tiempoTranscurrido) > 0 ) && !gano)
+    while( ( (tiempoInicial - tiempoTranscurrido) > 0 ) && gano == 0)
     {
         mostrarTablero(tamTablero, tablero, &admin->cursor);
 
@@ -255,22 +255,35 @@ bool iniciarPartida(Admin* admin) // DEVUELVE SI GANÓ O NO (1 o 0)
     return gano;
 }
 
-void ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HASTA QUE SALGA AL MENÚ
+int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HASTA QUE SALGA AL MENÚ
 {
+    int finalJuego = 0;
     int gano;
     int estaEnMenu = 0;
     int respuesta;
 
-    while(!estaEnMenu && admin->jugador.nivelActual != 3)
+    while(!estaEnMenu && finalJuego == 0)
     {
         gano = iniciarPartida(admin);
-        if(gano)
+        if(gano != 0)
         {
+            if(gano == GANO_KNIGHTS){
+                admin->jugador.TotalestadoUno++;
+                admin->jugador.pikasRestantes+=PREMIO_PIKAS;
+                puts("¡Los caballeros están agradecidos!");
+                printf("Has obtenido %d pikas extras", PREMIO_PIKAS);
+            }
+            
+            // gano == GANO_DEMONS
+            else{
+                admin->jugador.TotalestadoDos++;
+                puts("");
+            }
+            admin->jugador.nivelesCompletados+=1;
             admin->jugador.nivelActual++;
-            admin->jugador.pikasRestantes+=4;
 
             printf("\n¿Desea guardar la partida?: ");
-            printf("\n1. Si\n2. No\n");
+            printf("\n1. Sí\n2. No\n");
             scanf("%d", &respuesta);
 
             if(respuesta == 1)
@@ -287,11 +300,19 @@ void ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HAS
             printf("%s", FINAL_BUENO);
         }
 
-        if(admin->jugador.nivelActual < 3)
-            estaEnMenu = postNivel(admin, gano);
+        if(admin->jugador.nivelActual < TAM_PARTIDAS)
+        {
+            //estaEnMenu = postNivel(admin, gano);
+            if(postNivel(admin, gano) == 1)
+                finalJuego = 1; // SE VA A MENU
+        }
         else
-            estaEnMenu = 1;
+        {
+            finalJuego = 2; // GANO
+        }
     }
+
+    return finalJuego;
 }
 
 int postNivel(Admin* admin, int resultado) // DEVUELVE SI SE VA O NO AL MENÚ (0 o 1)
@@ -310,7 +331,7 @@ int postNivel(Admin* admin, int resultado) // DEVUELVE SI SE VA O NO AL MENÚ (0
     system("cls");
 
     admin->niveles[admin->jugador.nivelActual].estadoCompletado = resultado; // Actualizo el estado del nivel a ganó o no ganó (1 o 0)
-    admin->jugador.tiempoDeJuego+=(admin->niveles[admin->jugador.nivelActual].tiempo); // Actualizo el tiempo total del jugador
+   // admin->jugador.tiempoDeJuego+=(admin->niveles[admin->jugador.nivelActual].tiempo); // Actualizo el tiempo total del jugador
 
     return (respuesta-1); // El -1 es para que devuelva 1 o 0 en vez de 1 o 2
 }
@@ -325,22 +346,33 @@ void mostrarNivelPikasActual(int nivelActual, int pikasActuales) // MUESTRA PIKA
 
 int jugar(Admin* manager) /// AGREGA GUILLE
 {
+    int finalJuego;
+
     barraDeCarga();
-    ciclarPartida(manager);
+    finalJuego = ciclarPartida(manager);
+    if(finalJuego == 2)
+    {
+        system("cls");
+        printf("Felicidades %s, has completado el juego...\n", manager->jugador.nombre);
+        printf("FINAL COMPLETADO: W.I.P (BUENO/MALO)\n"); /// COMPLETAR CON MSJ PERSONALIZADO
+        Sleep(5000);
+        return 0;
+    }
+    barraDeCarga();
     ///ARREGLAR ESTA FUNCIÓN (GUILLE)
-    return 0;
+    return 1;
 }
 void barraDeCarga()
 {
     system("cls");
     printf("Cargando");
-    Sleep(700);
+    Sleep(400);
     printf(".");
-    Sleep(700);
+    Sleep(400);
     printf(" .");
-    Sleep(700);
+    Sleep(400);
     printf(" .");
-    Sleep(700);
+    Sleep(400);
     printf(" .");
     system("cls");
 }

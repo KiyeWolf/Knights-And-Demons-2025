@@ -22,7 +22,7 @@ void mostrarStringPorPantallaSinSalto(char* str)
 {
     printf("%s",str);
 }
-int colocarJugadorEnTablaDePuntajes(char* nomJugador, int knightsTotales,int demonsTotales,int pikasRestantes, float tiempoTotal)
+int colocarJugadorEnTablaDePuntajes(char* nomJugador, int k,int d,int pikasRestantes, int nivelesCompletados)
 {
     FILE* arch = fopen(RUTA_SCORES, "r+t");
     if(!arch)
@@ -31,7 +31,7 @@ int colocarJugadorEnTablaDePuntajes(char* nomJugador, int knightsTotales,int dem
     }
     //buscarUltimoAparicionEnArch(arch, "| ....... | ........................ | ....................... | ............... | ............ |");
     fseek(arch,0*(long)TAM_LINEA,SEEK_END);
-    fprintf(arch, "\n| ..%s.. | .....%2d  KNIGHTS ....... | .....%2d  DEMONS ....... | ......%2d....... | ... %4.2f..... |", nomJugador,knightsTotales,demonsTotales,pikasRestantes,tiempoTotal);
+    fprintf(arch, "\n| ..%s.. | .....%2d  KNIGHTS ....... | .....%2d  DEMONS ....... | ......%2d....... | ... %d....... |", nomJugador,k,d,pikasRestantes,nivelesCompletados);
     fclose(arch);
     return TODO_OK;
 }

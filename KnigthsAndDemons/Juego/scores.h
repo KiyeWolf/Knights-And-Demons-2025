@@ -13,6 +13,6 @@
 void leerLineasDeArchivoTxt(FILE* arch);
 void mostrarStringPorPantallaSinSalto(char* str);
 int mostrarTablaDePuntajes();
-int colocarJugadorEnTablaDePuntajes(char* nomJugador, int knightsTotales,int demonsTotales,int pikasRestantes, float tiempoTotal);
+int colocarJugadorEnTablaDePuntajes(char* nomJugador, int k,int d,int pikasRestantes, int nivelesCompletados);
 
 #endif // SCORES_H_INCLUDED

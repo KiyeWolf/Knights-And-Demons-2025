@@ -37,7 +37,7 @@
                     " no se van a matar solos y yo... digamos que tengo para rato aquí, je\n"
 
 // Todos los tamanios son en realidad el orden de la matriz
-#define TAM_TABLERO_1 4 // 8x8
+#define TAM_TABLERO_1 8 // 8x8
 #define TAM_TABLERO_2 10 // 10x10
 #define TAM_TABLERO_3 12 // 12x12
 
@@ -50,8 +50,8 @@
 
 /* FUNCIONES */
 // Principales
-bool iniciarPartida(Admin* admin);
-void ciclarPartida(Admin*);
+int iniciarPartida(Admin* admin);
+int ciclarPartida(Admin*);
 int postNivel(Admin*, int);
 
 // Secundarias

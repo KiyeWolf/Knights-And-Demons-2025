@@ -1,14 +1,14 @@
 CRÉDITOS
-[TEMA]
-NombreAutor1 RolAutor1
-NombreAutor2 RolAutor2
-NombreAutor3 RolAutor3
-[TEMA]
-NombreAutor1 RolAutor1
-NombreAutor2 RolAutor2
-NombreAutor3 RolAutor3
-[TEMA]
-NombreAutor1 RolAutor1
-NombreAutor2 RolAutor2
-NombreAutor3 RolAutor3
+[DESIGN]
+Agustina Losada Martínez
+Guillermo Damian Miranda
+Jean Pierre Larán
+[TESTING]
+Agustina Losada Martínez
+Guillermo Damian Miranda
+Jean Pierre Larán
+[QUALITY ASSURANCE]
+Agustina Losada Martínez
+Guillermo Damian Miranda
+Jean Pierre Larán
 GRACIAS

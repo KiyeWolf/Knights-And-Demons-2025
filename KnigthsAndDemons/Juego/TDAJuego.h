@@ -7,7 +7,7 @@
 #define FACIL 1
 #define MEDIO 2
 #define DIFICIL 3
-#define PIKAS_INICIALES_FACIL 300
+#define PIKAS_INICIALES_FACIL 30
 #define PIKAS_INICIALES_MEDIO 15
 #define PIKAS_INICIALES_DIFICIL 7
 #define TIEMPO_INICIALES_FACIL 300
@@ -51,7 +51,7 @@ typedef struct Jugada{
         int dificultadSeleccionada;
         int TotalestadoUno;
         int TotalestadoDos;
-        float tiempoDeJuego;
+        int nivelesCompletados;
         int nivelActual;
         int pikasRestantes;
     }Player;
