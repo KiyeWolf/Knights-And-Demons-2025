@@ -6,13 +6,16 @@
 #include "./Tablero/TDATablero.h"
 int main() {
     Admin elAdmin = {0};
-    char opcionElegida = mostarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, "12345");
+    system("chcp 65001 >nul");
+    system("cls");
+    char opcionElegida = mostrarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, "12345");
 
     while(opcionElegida!=OPCIONES_VALIDAS)
     {
         if(opcionElegida==CARGAR_PARTIDA)
         {
             char guardado[4];
+            system("cls");
             puts("CARGAR PARTIDA");
             printf("Ingresa el nombre con el que se guardo la partida(3 caracteres alfanumericos):\n");
             limpiarBuffer();
@@ -34,6 +37,7 @@ int main() {
         if(opcionElegida==INICIAR_NUEVA_PARTIDA)
         {
             char guardado[4];
+            system("cls");
             puts("INICIO");
             printf("Ingresa el nombre con el que se inicie la partida(3 caracteres alfanumericos):\n");
             limpiarBuffer();
@@ -44,7 +48,7 @@ int main() {
                 strcpy(guardado, "AAA");
                 system("pause");
             }
-            //system("cls");
+            system("cls");
             int d = solicitarDificultad();
             iniciarJuegoNuevo(&elAdmin, &d, guardado);
 
@@ -60,8 +64,8 @@ int main() {
             mostrarTablaDePuntajes();
             pausaYLimpiadoDePantalla();
         }
-        //system("cls");
-        opcionElegida = mostarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, "12345");
+        system("cls");
+        opcionElegida = mostrarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, "12345");
 
     }
     puts("Gracias por jugar");
@@ -69,7 +73,7 @@ int main() {
     getchar();
     return 0;
 }
-char mostarMenuPrincipalConMensaje(char* msj, char* opciones)
+char mostrarMenuPrincipalConMensaje(char* msj, char* opciones)
 {
     char opc;
     puts(msj);
@@ -88,7 +92,7 @@ char mostarMenuPrincipalConMensaje(char* msj, char* opciones)
 }
 int solicitarDificultad()
 {
-    char dificultadElegidaPorElUsuario = mostarMenuPrincipalConMensaje("Ingrese la dificultad para jugar:\n1. FACIL\n2. MEDIO\n3. DIFICIL","123");
+    char dificultadElegidaPorElUsuario = mostrarMenuPrincipalConMensaje("Ingrese la dificultad para jugar:\n1. FACIL\n2. MEDIO\n3. DIFICIL","123");
     switch(dificultadElegidaPorElUsuario)
     {
         case '1':

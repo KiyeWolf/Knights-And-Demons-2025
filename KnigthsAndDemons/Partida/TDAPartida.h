@@ -16,9 +16,7 @@
 #define MEDIO 2
 #define DIFICIL 3
 
-#define PIKAS_INICIALES_FACIL 30
-#define PIKAS_INICIALES_MEDIO 15
-#define PIKAS_INICIALES_DIFICIL 7
+
 
 #define PREMIO_PIKAS 4
 
@@ -34,10 +32,12 @@
 //
 
 #define TAM_NOMBRE 4
-#define TAM_PARTIDAS 20
+#define FINAL_BUENO "\nParece que no pudiste manejar bien tu recurso mas preciado, becario...\n"\
+                    " aunque siempre vas a poder volver a intentarlo, al fin y al cabo esos demonios\n"\
+                    " no se van a matar solos y yo... digamos que tengo para rato aquí, je\n"
 
 // Todos los tamanios son en realidad el orden de la matriz
-#define TAM_TABLERO_1 8 // 8x8
+#define TAM_TABLERO_1 4 // 8x8
 #define TAM_TABLERO_2 10 // 10x10
 #define TAM_TABLERO_3 12 // 12x12
 
@@ -65,5 +65,10 @@ int tiempo(const Admin*, int);
 size_t obtenerTamTablero(const Admin*);
 // void invertirCasilla(char* casilla);
 // int obtenerBandoGanador(char**, size_t);
+
+
+
 int jugar(Admin* manager);
+void barraDeCarga();
+
 #endif // TDAPARTIDA_H_INCLUDED

@@ -17,9 +17,9 @@ void mostrarTablero(const int orden, char **mat, tJugada *jug){
     for(i=0; i<orden; i++){
         for(j=0; j<orden; j++){
             if(i==jug->posCursorY&&j==jug->posCursorX)
-                printf("\t[x]");
+                printf("\t|[x]|");
             else
-                printf("\t %c ", *(*(mat+i)+j));
+                printf("\t| %c |", *(*(mat+i)+j));
         }
         printf("\n");
     }

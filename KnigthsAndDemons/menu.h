@@ -25,7 +25,7 @@
 
 int solicitarDificultad();
 void pausaYLimpiadoDePantalla();
-char mostarMenuPrincipalConMensaje(char* msj, char* opciones);
+char mostrarMenuPrincipalConMensaje(char* msj, char* opciones);
 void limpiarBuffer();
 
 #endif // MENU_H_INCLUDED

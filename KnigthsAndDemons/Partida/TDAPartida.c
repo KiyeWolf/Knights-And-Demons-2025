@@ -93,6 +93,7 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
 
     printf("\nUsa las teclas W/A/S/D para moverte y Enter para confirmar\n");
     printf("Si usas una Pika, confirma con P\n");
+    mostrarNivelPikasActual(admin->jugador.nivelActual, admin->jugador.pikasRestantes);
 
     while(!finSeleccion)
     {
@@ -136,7 +137,10 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
                         admin->jugador.pikasRestantes--;
                         finSeleccion = 1;
                     }else
+                    {
                         printf("No tenes mas pikas");
+                        Sleep(3000);
+                    }
 
                     break;
             }
@@ -147,7 +151,7 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
             //celda = *(tablero + admin->cursor.posCursorY) + admin->cursor.posCursorX;
             //temp = *celda;
             //*celda = 'x'; // "equis" (x) = cursor
-
+            
             mostrarTablero(tamTablero, tablero, &admin->cursor);
             //*celda = temp;
         }
@@ -167,8 +171,11 @@ int guardarPartida(Admin* manager) // GUARDA EL ESTADO ACTUAL DEL JUEGO (HASTA U
         return ARCHIVO_CORRUPTO;
     }
     fwrite(manager,sizeof(*manager),1, arch);
+    system("cls");
     puts("El guardado ha sido exitoso.");
     fclose(arch);
+    Sleep(2000);
+    system("cls");
     return TODO_OK;
 }
 
@@ -252,20 +259,38 @@ void ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HAS
 {
     int gano;
     int estaEnMenu = 0;
+    int respuesta;
 
-    while(!estaEnMenu)
+    while(!estaEnMenu && admin->jugador.nivelActual != 3)
     {
         gano = iniciarPartida(admin);
         if(gano)
         {
             admin->jugador.nivelActual++;
-            guardarPartida(admin);
+            admin->jugador.pikasRestantes+=4;
+
+            printf("\n¿Desea guardar la partida?: ");
+            printf("\n1. Si\n2. No\n");
+            scanf("%d", &respuesta);
+
+            if(respuesta == 1)
+            {
+                if(guardarPartida(admin)!=0)
+                {
+                    puts("\nNo se ha podido guardar la partida correctamente.\n");
+                }
+            }
+            puts(" ");
+
         } else
-        {
-            printf("\nLo siento, perdiste\n");
+        { /// PERSONALIZAR FINAL BUENO/MALO
+            printf("%s", FINAL_BUENO);
         }
 
-        estaEnMenu = postNivel(admin, gano);
+        if(admin->jugador.nivelActual < 3)
+            estaEnMenu = postNivel(admin, gano);
+        else
+            estaEnMenu = 1;
     }
 }
 
@@ -282,6 +307,8 @@ int postNivel(Admin* admin, int resultado) // DEVUELVE SI SE VA O NO AL MENÚ (0
     }
     scanf("%d", &respuesta);
 
+    system("cls");
+
     admin->niveles[admin->jugador.nivelActual].estadoCompletado = resultado; // Actualizo el estado del nivel a ganó o no ganó (1 o 0)
     admin->jugador.tiempoDeJuego+=(admin->niveles[admin->jugador.nivelActual].tiempo); // Actualizo el tiempo total del jugador
 
@@ -290,17 +317,30 @@ int postNivel(Admin* admin, int resultado) // DEVUELVE SI SE VA O NO AL MENÚ (0
 
 void mostrarNivelPikasActual(int nivelActual, int pikasActuales) // MUESTRA PIKAS Y NIVEL ACTUALES + LIMPIA LA CONSOLA
 {
-    printf("\n<<Comienza una nueva batalla, preparate...>>\n");
+    // printf("\n<<Comienza una nueva batalla, preparate...>>\n"); COPIAR EN EL MENÚ (ANTES DE QUE EMPIECE LA PARTIDA)
     printf("\n°|Nivel actual: %d", nivelActual);
     printf("\n*|Pikas actuales: %d", pikasActuales);
     // El "°|" y "*|" son un agregado estetico
-
-    system("cls"); // Limpio la consola
 }
 
 int jugar(Admin* manager) /// AGREGA GUILLE
 {
+    barraDeCarga();
     ciclarPartida(manager);
     ///ARREGLAR ESTA FUNCIÓN (GUILLE)
     return 0;
+}
+void barraDeCarga()
+{
+    system("cls");
+    printf("Cargando");
+    Sleep(700);
+    printf(".");
+    Sleep(700);
+    printf(" .");
+    Sleep(700);
+    printf(" .");
+    Sleep(700);
+    printf(" .");
+    system("cls");
 }
