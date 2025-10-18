@@ -25,7 +25,7 @@ void mostrarStringPorPantalla(char* str)
 void leerStringDeArchivo(FILE* arch)
 {
     char linea[TAM_LINEA];
-    while(fscanf(arch,"%s", linea)==1)
+    while(fgets(linea, TAM_LINEA,arch)!=NULL)
     {
         mostrarStringPorPantalla(linea);
         getchar();

@@ -100,7 +100,7 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
         if (kbhit())
         {
             tecla = getch();
-
+            tecla = tolower(tecla);
             switch (tecla)
             {
                 case 'w': // Arriba

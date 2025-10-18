@@ -1,5 +1,5 @@
-CRÉDITOS
-[DESIGN]
+----------CRÉDITOS----------
+[SOFTWARE DEVELOPMENT]
 Agustina Losada Martínez
 Guillermo Damian Miranda
 Jean Pierre Larán
@@ -11,4 +11,4 @@ Jean Pierre Larán
 Agustina Losada Martínez
 Guillermo Damian Miranda
 Jean Pierre Larán
-GRACIAS
+----------GRACIAS----------

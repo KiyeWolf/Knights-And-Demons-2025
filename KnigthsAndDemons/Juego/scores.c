@@ -31,7 +31,7 @@ int colocarJugadorEnTablaDePuntajes(char* nomJugador, int k,int d,int pikasResta
     }
     //buscarUltimoAparicionEnArch(arch, "| ....... | ........................ | ....................... | ............... | ............ |");
     fseek(arch,0*(long)TAM_LINEA,SEEK_END);
-    fprintf(arch, "\n| ..%s.. | .....%2d  KNIGHTS ....... | .....%2d  DEMONS ....... | ......%2d....... | ... %d....... |", nomJugador,k,d,pikasRestantes,nivelesCompletados);
+    fprintf(arch, "\n| ..%s.. | .....%2d  KNIGHTS ....... | .....%2d  DEMONS ....... | ......%2d....... | ... %d......... |", nomJugador,k,d,pikasRestantes,nivelesCompletados);
     fclose(arch);
     return TODO_OK;
 }
