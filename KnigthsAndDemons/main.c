@@ -56,7 +56,7 @@ int main() {
                 system("cls");
                 int d = solicitarDificultad();
                 iniciarJuegoNuevo(&elAdmin, &d, guardado);
-
+                mostrarHistoriaInicial();
                 if(jugar(&elAdmin)==JUEGO_COMPLETADO)
                 {
                     colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);

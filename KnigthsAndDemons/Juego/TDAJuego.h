@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-
+#include <stdlib.h>
 #define FACIL 1
 #define MEDIO 2
 #define DIFICIL 3
@@ -15,11 +15,11 @@
 #define TIEMPO_INICIALES_DIFICIL 150
 #define PENALIZACION_DE_TIEMPO_POR_NIVEL 2
 #define TAM_NOMBRE 4
-#define TAM_PARTIDAS 10
+#define TAM_PARTIDAS 7
 #define ARCHIVO_CORRUPTO 1
 #define TODO_OK 0
 #define RUTA_PARTIDAS_GUARDADAS_PARA_CARGAR "./Juego/Saved/"
-
+#define RUTA_HISTORIA_INICIAL "./Juego/Saved/lore.txt"
 
 
 
@@ -76,6 +76,6 @@ void mostrarManager(Admin* manager);
 void mostrarNiveles(Partidas* niveles);
 void mostrarJugador(Player* jugador);
 int cargarPartida(Admin* manager,  char* nomGuardado);
-
+int mostrarHistoriaInicial();
 
 #endif // TDAJUEGO_H_INCLUDED

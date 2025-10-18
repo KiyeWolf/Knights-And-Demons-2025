@@ -225,7 +225,7 @@ int iniciarPartida(Admin* admin) // DEVUELVE SI GANÓ O NO (1,2 o 0 si perdio el
     int gano = 0;
     int tiempoTranscurrido = 0;
     int tiempoInicial = tiempo(admin, T_INICIAL);
-
+    
     size_t tamTablero = obtenerTamTablero(admin);
     char** tablero = NULL;
 
@@ -354,13 +354,23 @@ int jugar(Admin* manager) /// AGREGA GUILLE
     {
         system("cls");
         printf("Felicidades %s, has completado el juego...\n", manager->jugador.nombre);
-        printf("FINAL COMPLETADO: W.I.P (BUENO/MALO)\n"); /// COMPLETAR CON MSJ PERSONALIZADO
+        printf("FINAL COMPLETADO:\n"); /// COMPLETAR CON MSJ PERSONALIZADO
+        Sleep(300);
+        if(manager->jugador.TotalestadoUno==TAM_PARTIDAS)
+        {
+            //Entonces completo el final de Knigths
+            printf("%s", FINAL_BUENO);
+        }
+        else
+        {
+            printf("%s", FINAL_COMUN);
+        }
         Sleep(5000);
-        return 0;
+        return 0; //el jugador completo el juego
     }
     barraDeCarga();
-    ///ARREGLAR ESTA FUNCIÓN (GUILLE)
-    return 1;
+    
+    return 1; //El jugador no completo el juego
 }
 void barraDeCarga()
 {

@@ -35,7 +35,8 @@
 #define FINAL_BUENO "\nParece que no pudiste manejar bien tu recurso mas preciado, becario...\n"\
                     " aunque siempre vas a poder volver a intentarlo, al fin y al cabo esos demonios\n"\
                     " no se van a matar solos y yo... digamos que tengo para rato aquí, je\n"
-
+#define FINAL_COMUN "\nHas logrado completar el desafío; Bakelor está contento, pero no orgulloso...\n"\
+                     " Intenta nuevamente y demuestra que eres digno de manejar las Pikas!\n"
 // Todos los tamanios son en realidad el orden de la matriz
 #define TAM_TABLERO_1 8 // 8x8
 #define TAM_TABLERO_2 10 // 10x10

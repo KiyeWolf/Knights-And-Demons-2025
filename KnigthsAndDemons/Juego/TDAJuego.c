@@ -94,3 +94,23 @@ int cargarPartida(Admin* manager, char* nomGuardado)
     fclose(arch);
     return TODO_OK;
 }
+int mostrarHistoriaInicial()
+{
+
+    FILE* archivo = fopen(RUTA_HISTORIA_INICIAL, "r");
+    system("cls");
+    if (archivo == NULL) {
+        printf("No se pudo abrir el archivo de historia inicial.\n");
+        return ARCHIVO_CORRUPTO;
+    }
+
+    char linea[256];
+    while (fgets(linea, sizeof(linea), archivo) != NULL) {
+        printf("%s", linea);
+    }
+    puts("\n");
+    system("pause");// Pausa para que el jugador pueda leer la historia
+    fclose(archivo);
+    system("cls");
+    return TODO_OK;
+}
