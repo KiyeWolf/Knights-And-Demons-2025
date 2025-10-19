@@ -39,7 +39,7 @@ void inicializarJugador(Player* jugador, char* nombre, const  int* dificultad)
     jugador->TotalestadoUno = 0;
     jugador->TotalestadoDos = 0;
     jugador->nivelesCompletados = 0;
-    jugador->nivelActual = 1;
+    jugador->nivelActual = NIVEL_INICIAL;
     switch (*dificultad)
     {
     case FACIL:

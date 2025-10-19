@@ -168,7 +168,7 @@ int guardarPartida(Admin* manager) // GUARDA EL ESTADO ACTUAL DEL JUEGO (HASTA U
     FILE* arch = fopen(guardado, "wb");
     if(!arch)
     {
-        return ARCHIVO_CORRUPTO;
+        return ARCHIVO_CORRUPTO; //No se pudo encontrar el archivo, por tanto se retorna codigo de error
     }
     fwrite(manager,sizeof(*manager),1, arch);
     system("cls");
@@ -225,7 +225,7 @@ int iniciarPartida(Admin* admin) // DEVUELVE SI GANÓ O NO (1,2 o 0 si perdio el
     int gano = 0;
     int tiempoTranscurrido = 0;
     int tiempoInicial = tiempo(admin, T_INICIAL);
-    
+
     size_t tamTablero = obtenerTamTablero(admin);
     char** tablero = NULL;
 
@@ -264,8 +264,9 @@ int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HAST
 
     while(!estaEnMenu && finalJuego == 0)
     {
+        textoDeInicioDeNivel();
         gano = iniciarPartida(admin);
-        if(gano != 0)
+        if(gano != 0) //Por lo menos no perdió, entra dentro de este if
         {
             if(gano == GANO_KNIGHTS){
                 admin->jugador.TotalestadoUno++;
@@ -273,13 +274,14 @@ int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HAST
                 puts("¡Los caballeros están agradecidos!");
                 printf("Has obtenido %d pikas extras", PREMIO_PIKAS);
             }
-            
+
             // gano == GANO_DEMONS
             else{
                 admin->jugador.TotalestadoDos++;
                 puts("");
             }
             admin->jugador.nivelesCompletados+=1;
+            admin->niveles[admin->jugador.nivelActual].estadoCompletado = 1; // Actualizo el estado del nivel a ganó o no ganó (1 o 0)
             admin->jugador.nivelActual++;
 
             printf("\n¿Desea guardar la partida?: ");
@@ -296,11 +298,12 @@ int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HAST
             puts(" ");
 
         } else
-        { /// PERSONALIZAR FINAL BUENO/MALO
-            printf("%s", FINAL_BUENO);
+        {
+            //Significa que perdió, por eso se muestra este mensaje de derrota
+            printf("%s", MENSAJE_DERROTA);
         }
 
-        if(admin->jugador.nivelActual < TAM_PARTIDAS)
+        if(admin->jugador.nivelActual < TAM_PARTIDAS) //Se evalúa si quedan niveles por jugar o no.
         {
             //estaEnMenu = postNivel(admin, gano);
             if(postNivel(admin, gano) == 1)
@@ -308,6 +311,7 @@ int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HAST
         }
         else
         {
+            //Significa que se completo el juego, con todos sus niveles al menos
             finalJuego = 2; // GANO
         }
     }
@@ -330,7 +334,7 @@ int postNivel(Admin* admin, int resultado) // DEVUELVE SI SE VA O NO AL MENÚ (0
 
     system("cls");
 
-    admin->niveles[admin->jugador.nivelActual].estadoCompletado = resultado; // Actualizo el estado del nivel a ganó o no ganó (1 o 0)
+
    // admin->jugador.tiempoDeJuego+=(admin->niveles[admin->jugador.nivelActual].tiempo); // Actualizo el tiempo total del jugador
 
     return (respuesta-1); // El -1 es para que devuelva 1 o 0 en vez de 1 o 2
@@ -339,8 +343,8 @@ int postNivel(Admin* admin, int resultado) // DEVUELVE SI SE VA O NO AL MENÚ (0
 void mostrarNivelPikasActual(int nivelActual, int pikasActuales) // MUESTRA PIKAS Y NIVEL ACTUALES + LIMPIA LA CONSOLA
 {
     // printf("\n<<Comienza una nueva batalla, preparate...>>\n"); COPIAR EN EL MENÚ (ANTES DE QUE EMPIECE LA PARTIDA)
-    printf("\n°|Nivel actual: %d", nivelActual);
-    printf("\n*|Pikas actuales: %d", pikasActuales);
+    printf("\n°|Nivel actual: \t%d", (nivelActual + 1)); // Este nivelActual + 1, es porque el primer nivel en el codigo es el nivel 0, entonces acá se imprime como nivel 1
+    printf("\n*|Pikas actuales: \t%d", pikasActuales);
     // El "°|" y "*|" son un agregado estetico
 }
 
@@ -350,7 +354,7 @@ int jugar(Admin* manager) /// AGREGA GUILLE
 
     barraDeCarga();
     finalJuego = ciclarPartida(manager);
-    if(finalJuego == 2)
+    if(finalJuego == 2) //Este if pregunta si el jugador gano
     {
         system("cls");
         printf("Felicidades %s, has completado el juego...\n", manager->jugador.nombre);
@@ -359,17 +363,27 @@ int jugar(Admin* manager) /// AGREGA GUILLE
         if(manager->jugador.TotalestadoUno==TAM_PARTIDAS)
         {
             //Entonces completo el final de Knigths
-            printf("%s", FINAL_BUENO);
+            if(manager->jugador.dificultadSeleccionada == DIFICIL)
+            {
+                //En este caso completo un final de todos cablleros, en dificil
+                printf("%s",FINAL_BUENO_MAXIMA_DIFICULTAD);
+            }
+            else
+            {
+                //En este caso completo un final de todos caballeros, en facil o medio
+                printf("%s", FINAL_BUENO);
+            }
         }
         else
         {
+            //Completo otro final comun, es decir el tablero no es solo de Knights
             printf("%s", FINAL_COMUN);
         }
-        Sleep(5000);
+        Sleep(8000);
         return 0; //el jugador completo el juego
     }
     barraDeCarga();
-    
+
     return 1; //El jugador no completo el juego
 }
 void barraDeCarga()
@@ -384,5 +398,12 @@ void barraDeCarga()
     printf(" .");
     Sleep(400);
     printf(" .");
+    system("cls");
+}
+void textoDeInicioDeNivel()
+{
+    system("cls");
+    printf("Una nueva Batalla Comienza...");
+    Sleep(500);
     system("cls");
 }

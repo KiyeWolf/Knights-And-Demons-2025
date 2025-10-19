@@ -32,13 +32,35 @@
 //
 
 #define TAM_NOMBRE 4
-#define FINAL_BUENO "\nParece que no pudiste manejar bien tu recurso mas preciado, becario...\n"\
+//Todos los finales posibles del juego
+#define MENSAJE_DERROTA "\nParece que no pudiste manejar bien tu recurso mas preciado, becario...\n"\
                     " aunque siempre vas a poder volver a intentarlo, al fin y al cabo esos demonios\n"\
                     " no se van a matar solos y yo... digamos que tengo para rato aquí, je\n"
-#define FINAL_COMUN "\nHas logrado completar el desafío; Bakelor está contento, pero no orgulloso...\n"\
-                     " Intenta nuevamente y demuestra que eres digno de manejar las Pikas!\n"
+#define FINAL_BUENO "El reino estalló en vítores. Los Demonios, cuya influencia había sido totalmente borrada de la faz del mundo conocido, \n"\
+                    "se retiraron a las profundidades del Averno\n"\
+                    "Bakelor está orgulloso\n"
+
+#define FINAL_COMUN "\nDesde su cama de convalecencia, el Rey Bakelor observó por la ventana cómo el cielo de Garnick, una vez azul, se teñía de un perpetuo tono carmesí. \n"\
+                    "Las hordas demoníacas, al percibir la victoria táctica, irrumpieron en el castillo con una confianza renovada y brutal.\n"\
+                    "Has logrado completar el desafío; pero con un costo impensable.\n"\
+                    "Bakelor está horrorizado... Garnick está condenado\n"\
+                     "Intenta nuevamente y demuestra que eres digno de manejar las Pikas!\n"
+#define FINAL_BUENO_MAXIMA_DIFICULTAD "El reino estalló en vítores. Los Demonios, cuya influencia había sido totalmente borrada de la faz del mundo conocido, \n"\
+                                      "se retiraron a las profundidades del Averno\n"\
+                                      "Bakelor, orgulloso y alegre te dice:\n"\
+                                      "¡Valiente becario! No solo lograste la victoria donde yo temía la derrota,\n"\
+                                      "sino que lo hiciste en las condiciones más duras que jamás se han impuesto a un comandante.\n"\
+                                      "\n"\
+                                      "El Rey Bakelor tomó su espada ceremonial y, colocándola sobre tu hombro, continuó:\n"\
+                                      "A partir de este día, ya no eres un becario. Eres mi mano derecha, el Comandante Dorado de la Luz, el arquitecto de la paz en Garnick. \n"\
+                                      "Tu nombre será recordado no solo por la victoria, sino por la perfección con la que la lograste. \n"\
+                                      "Que el sol brille eternamente sobre nuestro reino gracias a tu heroísmo.\n"
+
+
 // Todos los tamanios son en realidad el orden de la matriz
-#define TAM_TABLERO_1 8 // 8x8
+
+
+#define TAM_TABLERO_1 4 // 8x8
 #define TAM_TABLERO_2 10 // 10x10
 #define TAM_TABLERO_3 12 // 12x12
 
@@ -68,8 +90,8 @@ size_t obtenerTamTablero(const Admin*);
 // int obtenerBandoGanador(char**, size_t);
 
 
-
+//Mixes de Guille
 int jugar(Admin* manager);
 void barraDeCarga();
-
+void textoDeInicioDeNivel();
 #endif // TDAPARTIDA_H_INCLUDED
