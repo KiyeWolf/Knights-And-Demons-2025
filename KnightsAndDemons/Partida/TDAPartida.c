@@ -1,6 +1,5 @@
 #include "TDAPartida.h"
 
-
 /// FUNCIONES DE AGUS QUE IMPLEMENTÉ YO
 /*
 
@@ -278,6 +277,7 @@ int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HAST
             // gano == GANO_DEMONS
             else{
                 admin->jugador.TotalestadoDos++;
+                puts("¡Los demonios están avanzando!");
                 puts("");
             }
             admin->jugador.nivelesCompletados+=1;
@@ -322,12 +322,14 @@ int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HAST
 int postNivel(Admin* admin, int resultado) // DEVUELVE SI SE VA O NO AL MENÚ (0 o 1)
 {
     int respuesta;
-    printf("\n¿Desea volver al menu?");
-    if(resultado == 1) // Si el resultado es 1 es porque gano
+
+    if(resultado != 0) // Si el resultado es 1 ó 2 es porque gano
     {
+        printf("\n¿Desea volver al menu?");
         printf("\n1. Continuar\n2. Volver al menu\n");
     } else
     {
+        printf("\n¿Desea volver al menu?");
         printf("\n1. Volver a intentar\n2. Volver al menu\n");
     }
     scanf("%d", &respuesta);
@@ -342,10 +344,14 @@ int postNivel(Admin* admin, int resultado) // DEVUELVE SI SE VA O NO AL MENÚ (0
 
 void mostrarNivelPikasActual(int nivelActual, int pikasActuales) // MUESTRA PIKAS Y NIVEL ACTUALES + LIMPIA LA CONSOLA
 {
-    // printf("\n<<Comienza una nueva batalla, preparate...>>\n"); COPIAR EN EL MENÚ (ANTES DE QUE EMPIECE LA PARTIDA)
     printf("\n°|Nivel actual: \t%d", (nivelActual + 1)); // Este nivelActual + 1, es porque el primer nivel en el codigo es el nivel 0, entonces acá se imprime como nivel 1
     printf("\n*|Pikas actuales: \t%d", pikasActuales);
     // El "°|" y "*|" son un agregado estetico
+}
+
+void mostrarBarraEstado()
+{
+    // W.I.P
 }
 
 int jugar(Admin* manager) /// AGREGA GUILLE
@@ -365,7 +371,7 @@ int jugar(Admin* manager) /// AGREGA GUILLE
             //Entonces completo el final de Knigths
             if(manager->jugador.dificultadSeleccionada == DIFICIL)
             {
-                //En este caso completo un final de todos cablleros, en dificil
+                //En este caso completo un final de todos caballeros, en dificil
                 printf("%s",FINAL_BUENO_MAXIMA_DIFICULTAD);
             }
             else
@@ -373,11 +379,14 @@ int jugar(Admin* manager) /// AGREGA GUILLE
                 //En este caso completo un final de todos caballeros, en facil o medio
                 printf("%s", FINAL_BUENO);
             }
-        }
-        else
+        } else if(manager->jugador.TotalestadoDos==TAM_PARTIDAS)
         {
-            //Completo otro final comun, es decir el tablero no es solo de Knights
-            printf("%s", FINAL_COMUN);
+            //En este caso completo un final de todos demonios, en cualquier dificultad
+            printf("%s", FINAL_MALO);
+        } else
+        {
+            //Completo otro final comun, es decir el tablero no es solo de Knights -> (neutral)
+            printf("%s", FINAL_NEUTRAL);
         }
         Sleep(8000);
         return 0; //el jugador completo el juego
@@ -386,6 +395,7 @@ int jugar(Admin* manager) /// AGREGA GUILLE
 
     return 1; //El jugador no completo el juego
 }
+
 void barraDeCarga()
 {
     system("cls");
@@ -400,10 +410,11 @@ void barraDeCarga()
     printf(" .");
     system("cls");
 }
+
 void textoDeInicioDeNivel()
 {
     system("cls");
-    printf("Una nueva Batalla Comienza...");
+    printf("<< Una nueva Batalla Comienza... >>");
     Sleep(500);
     system("cls");
 }

@@ -7,16 +7,16 @@
 #include <stdbool.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h> /// para tolower()
 #include <conio.h> /// para kbhit() y getch()
 #include <windows.h> /// para Sleep()
 #include "../Juego/TDAJuego.h"
 #include "../Tablero/TDATablero.h"
+
 /*Defines*/
 #define FACIL 1
 #define MEDIO 2
 #define DIFICIL 3
-
-
 
 #define PREMIO_PIKAS 4
 
@@ -32,19 +32,27 @@
 //
 
 #define TAM_NOMBRE 4
+
 //Todos los finales posibles del juego
 #define MENSAJE_DERROTA "\nParece que no pudiste manejar bien tu recurso mas preciado, becario...\n"\
                     " aunque siempre vas a poder volver a intentarlo, al fin y al cabo esos demonios\n"\
-                    " no se van a matar solos y yo... digamos que tengo para rato aquí, je\n"
+                    " no se van a matar solos y yo... digamos que tengo para rato aquí, je...\n"\
+                    " ¡¡Ve y defiende nuestros otros frentes!!\n"
+
 #define FINAL_BUENO "El reino estalló en vítores. Los Demonios, cuya influencia había sido totalmente borrada de la faz del mundo conocido, \n"\
                     "se retiraron a las profundidades del Averno\n"\
                     "Bakelor está orgulloso\n"
 
-#define FINAL_COMUN "\nDesde su cama de convalecencia, el Rey Bakelor observó por la ventana cómo el cielo de Garnick, una vez azul, se teñía de un perpetuo tono carmesí. \n"\
+#define FINAL_NEUTRAL "\n Becario, no lo has hecho mal, pero... ¡DEBEMOS GANAR LA GUERRA, NO ES SUFICIENTE CON TENER ALGUNOS FRENTES!\n"\
+                      " Apresurate y no me hagas enojar.\n"\
+                      "-Bakelor, el señor de la guerra (en una situación doméstica algo delicada)\n"
+
+#define FINAL_MALO "\nDesde su cama de convalecencia, el Rey Bakelor observó por la ventana cómo el cielo de Garnick, una vez azul, se teñía de un perpetuo tono carmesí. \n"\
                     "Las hordas demoníacas, al percibir la victoria táctica, irrumpieron en el castillo con una confianza renovada y brutal.\n"\
                     "Has logrado completar el desafío; pero con un costo impensable.\n"\
                     "Bakelor está horrorizado... Garnick está condenado\n"\
-                     "Intenta nuevamente y demuestra que eres digno de manejar las Pikas!\n"
+                     "¡Qué has hecho becario!\n"
+
 #define FINAL_BUENO_MAXIMA_DIFICULTAD "El reino estalló en vítores. Los Demonios, cuya influencia había sido totalmente borrada de la faz del mundo conocido, \n"\
                                       "se retiraron a las profundidades del Averno\n"\
                                       "Bakelor, orgulloso y alegre te dice:\n"\
@@ -56,11 +64,8 @@
                                       "Tu nombre será recordado no solo por la victoria, sino por la perfección con la que la lograste. \n"\
                                       "Que el sol brille eternamente sobre nuestro reino gracias a tu heroísmo.\n"
 
-
 // Todos los tamanios son en realidad el orden de la matriz
-
-
-#define TAM_TABLERO_1 4 // 8x8
+#define TAM_TABLERO_1 8 // 8x8
 #define TAM_TABLERO_2 10 // 10x10
 #define TAM_TABLERO_3 12 // 12x12
 
@@ -69,7 +74,6 @@
 
 /*Archivos Externos*/
 #define RUTA_PARTIDAS_GUARDADAS "./Juego/Saved/"
-
 
 /* FUNCIONES */
 // Principales
@@ -80,15 +84,11 @@ int postNivel(Admin*, int);
 // Secundarias
 int guardarPartida(Admin*);
 void pedirJugada(Admin*, char**, size_t);
-// bool ejecutarJugada(Admin*, char**, size_t);
 void mostrarNivelPikasActual(int, int);
 
 // Auxiliares
 int tiempo(const Admin*, int);
 size_t obtenerTamTablero(const Admin*);
-// void invertirCasilla(char* casilla);
-// int obtenerBandoGanador(char**, size_t);
-
 
 //Mixes de Guille
 int jugar(Admin* manager);

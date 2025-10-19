@@ -339,3 +339,66 @@
 1760828495 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\tablero\tdatablero.c
 	"TDATablero.h"
 
+1760909004 source:e:\cosas a guardar\de la facultad\segundo_cuatrimestre-2025\topicos_programacion\juegoknights&demons\knigths-demons-2025-\knightsanddemons\juego\creditos.c
+	"creditos.h"
+
+1760834816 e:\cosas a guardar\de la facultad\segundo_cuatrimestre-2025\topicos_programacion\juegoknights&demons\knigths-demons-2025-\knightsanddemons\juego\creditos.h
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+
+1760909004 source:e:\cosas a guardar\de la facultad\segundo_cuatrimestre-2025\topicos_programacion\juegoknights&demons\knigths-demons-2025-\knightsanddemons\juego\scores.c
+	"scores.h"
+
+1760834816 e:\cosas a guardar\de la facultad\segundo_cuatrimestre-2025\topicos_programacion\juegoknights&demons\knigths-demons-2025-\knightsanddemons\juego\scores.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1760909004 source:e:\cosas a guardar\de la facultad\segundo_cuatrimestre-2025\topicos_programacion\juegoknights&demons\knigths-demons-2025-\knightsanddemons\juego\tdajuego.c
+	"TDAJuego.h"
+
+1760909004 e:\cosas a guardar\de la facultad\segundo_cuatrimestre-2025\topicos_programacion\juegoknights&demons\knigths-demons-2025-\knightsanddemons\juego\tdajuego.h
+	<stdio.h>
+	<stdbool.h>
+	<string.h>
+	<stdlib.h>
+
+1760909004 source:e:\cosas a guardar\de la facultad\segundo_cuatrimestre-2025\topicos_programacion\juegoknights&demons\knigths-demons-2025-\knightsanddemons\main.c
+	"menu.h"
+	"./Juego/TDAJuego.h"
+	"./Juego/scores.h"
+	"./Juego/creditos.h"
+	"./Partida/TDAPartida.h"
+	"./Tablero/TDATablero.h"
+
+1760834817 e:\cosas a guardar\de la facultad\segundo_cuatrimestre-2025\topicos_programacion\juegoknights&demons\knigths-demons-2025-\knightsanddemons\menu.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+
+1760910677 e:\cosas a guardar\de la facultad\segundo_cuatrimestre-2025\topicos_programacion\juegoknights&demons\knigths-demons-2025-\knightsanddemons\partida\tdapartida.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	<conio.h>
+	<windows.h>
+	"../Juego/TDAJuego.h"
+	"../Tablero/TDATablero.h"
+
+1760834816 e:\cosas a guardar\de la facultad\segundo_cuatrimestre-2025\topicos_programacion\juegoknights&demons\knigths-demons-2025-\knightsanddemons\tablero\tdatablero.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<stdbool.h>
+	"../Juego/TDAJuego.h"
+
+1760910384 source:e:\cosas a guardar\de la facultad\segundo_cuatrimestre-2025\topicos_programacion\juegoknights&demons\knigths-demons-2025-\knightsanddemons\partida\tdapartida.c
+	"TDAPartida.h"
+
+1760834816 source:e:\cosas a guardar\de la facultad\segundo_cuatrimestre-2025\topicos_programacion\juegoknights&demons\knigths-demons-2025-\knightsanddemons\tablero\tdatablero.c
+	"TDATablero.h"
+
