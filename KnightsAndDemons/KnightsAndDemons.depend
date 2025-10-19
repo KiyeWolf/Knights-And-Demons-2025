@@ -277,7 +277,7 @@
 1760820802 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knigths-demons-2025-\knightsanddemons\tablero\tdatablero.c
 	"TDATablero.h"
 
-1760828495 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\creditos.c
+1760902867 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\creditos.c
 	"creditos.h"
 
 1760828495 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\creditos.h
@@ -285,7 +285,7 @@
 	<stdlib.h>
 	<ctype.h>
 
-1760828495 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\scores.c
+1760902030 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\scores.c
 	"scores.h"
 
 1760828495 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\scores.h
@@ -293,16 +293,16 @@
 	<stdlib.h>
 	<string.h>
 
-1760879177 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\tdajuego.c
+1760901818 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\tdajuego.c
 	"TDAJuego.h"
 
-1760879197 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\tdajuego.h
+1760901642 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\tdajuego.h
 	<stdio.h>
 	<stdbool.h>
 	<string.h>
 	<stdlib.h>
 
-1760828495 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\main.c
+1760904368 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\main.c
 	"menu.h"
 	"./Juego/TDAJuego.h"
 	"./Juego/scores.h"
@@ -333,7 +333,7 @@
 	<stdbool.h>
 	"../Juego/TDAJuego.h"
 
-1760882996 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\partida\tdapartida.c
+1760883243 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\partida\tdapartida.c
 	"TDAPartida.h"
 
 1760828495 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\tablero\tdatablero.c

@@ -18,7 +18,7 @@
 #define TAM_NOMBRE 4
 
 
-#define TAM_PARTIDAS 2
+#define TAM_PARTIDAS 8
 
 
 #define ARCHIVO_CORRUPTO 1
@@ -77,10 +77,13 @@ void inicializarJugador(Player* jugador, char* nombre, const  int* dificultad);
 int iniciarJuegoNuevo(Admin* manager, int* d, char*  nomNuevo);
 
 void inicializarPartidas(Partidas* partidas,const  int* dificultad);
-void mostrarManager(Admin* manager);
-void mostrarNiveles(Partidas* niveles);
-void mostrarJugador(Player* jugador);
+
 int cargarPartida(Admin* manager,  char* nomGuardado);
 int mostrarHistoriaInicial();
+
+//AUXILIAR AL DESARROLLO
+/*void mostrarManager(Admin* manager);
+void mostrarNiveles(Partidas* niveles);
+void mostrarJugador(Player* jugador);*/
 
 #endif // TDAJUEGO_H_INCLUDED

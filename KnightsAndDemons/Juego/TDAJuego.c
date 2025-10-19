@@ -1,12 +1,12 @@
 #include "TDAJuego.h"
-
+//Esta función se encarga de Iniciar las estructuras que componen al administrador, exceptuando el cursor.
 int iniciarJuegoNuevo(Admin* manager, int* d, char*  nomNuevo)
 {
     inicializarPartidas(manager->niveles, d);
     inicializarJugador(&(manager->jugador), nomNuevo,d);
     return 0;
 }
-
+//Inicia cada nivel acorde a la cantidad de niveles deseados en el header, además por cada nivel se coloca que no se completó y la dificultad del mismo.
 void inicializarPartidas(Partidas* partidas,const  int* dificultad)
 {
     for(int i = 0 ; i < TAM_PARTIDAS ;i++ )
@@ -32,6 +32,7 @@ void inicializarPartidas(Partidas* partidas,const  int* dificultad)
         }
     }
 }
+//Esta función inicia la estructura del jugador, colocando el nombre, la dificultad seleccionada, los niveles completados, la cantidad de tableros a favor de los caballeros y los demonios en 0
 void inicializarJugador(Player* jugador, char* nombre, const  int* dificultad)
 {
     strcpy(jugador->nombre,nombre);
@@ -53,7 +54,7 @@ void inicializarJugador(Player* jugador, char* nombre, const  int* dificultad)
         break;
     }
 }
-
+/*SOLO FUNCIONES DE DEVELOP
 void mostrarManager(Admin* manager)
 {
     mostrarNiveles(manager->niveles);
@@ -78,8 +79,10 @@ void mostrarJugador(Player* jugador)
     printf("%d\n", jugador->nivelActual);
     printf("%d\n", jugador->pikasRestantes);
 
-}
+}*/
 
+/*Esta función busca un archivo en la carpeta Juego/Saved con el nombre indicado y concatenandolo a .dat
+para luego cargar de ese archivo la estructura administrador, de esta manera recupera una estructura guardada anteriormente.*/
 int cargarPartida(Admin* manager, char* nomGuardado)
 {
     char guardado[256];
@@ -94,6 +97,9 @@ int cargarPartida(Admin* manager, char* nomGuardado)
     fclose(arch);
     return TODO_OK;
 }
+
+/*Se encarga de buscar en Juego/Saved un archivo txt y mostrar el texto contenido en el mismo.
+La ruta del archivo está definido en el encabezado*/
 int mostrarHistoriaInicial()
 {
 

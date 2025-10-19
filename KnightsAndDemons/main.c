@@ -14,12 +14,24 @@ int main() {
     {
             if(opcionElegida==CARGAR_PARTIDA)
             {
-                char guardado[4];
+                char guardado[TAM_NOMBRE]={0};
                 system("cls");
                 puts("CARGAR PARTIDA");
-                printf("Ingresa el nombre con el que se guardo la partida(3 caracteres alfanumericos):\n");
-                limpiarBuffer();
-                fgets(guardado, sizeof(guardado), stdin);
+                printf("Ingresa el nombre con el que se guardo la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE-1);
+                fflush(stdin);
+                gets(guardado);
+                if(strlen(guardado)>MIN_CANTIDAD_LETRAS_NOMBRE || strlen(guardado)<MIN_CANTIDAD_LETRAS_NOMBRE)
+                {
+                    while(strlen(guardado)>MIN_CANTIDAD_LETRAS_NOMBRE || strlen(guardado)<MIN_CANTIDAD_LETRAS_NOMBRE)
+                    {
+                        puts("Error, el nombre es inválido, respeta la longitud.\n");
+                        system("pause");
+                        system("cls");
+                        printf("Ingresa el nombre con el que se guardo la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE-1);
+                        fflush(stdin);
+                        gets(guardado);
+                    }
+                }
                 guardado[strcspn(guardado, "\n")] = '\0'; //saco el \n y lo cambio por el nulo
                 //VALIDAR QUE NO ENCUENTRA PARTIDA
                 if(cargarPartida(&elAdmin, guardado)!=TODO_OK)
@@ -40,19 +52,25 @@ int main() {
 
             if(opcionElegida==INICIAR_NUEVA_PARTIDA)
             {
-                char guardado[4];
+                char guardado[TAM_NOMBRE]={0};
                 system("cls");
                 puts("INICIO");
-                printf("Ingresa el nombre con el que se inicie la partida(3 caracteres alfanumericos):\n");
-                limpiarBuffer();
-                fgets(guardado, sizeof(guardado), stdin);
-                guardado[strcspn(guardado, "\n")] = '\0';
-                if (strlen(guardado) < MIN_CANTIDAD_LETRAS_NOMBRE)
+                printf("Ingresa el nombre con el que se inicie la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE-1);
+                fflush(stdin);
+                gets(guardado);
+                if(strlen(guardado)>MIN_CANTIDAD_LETRAS_NOMBRE || strlen(guardado)<MIN_CANTIDAD_LETRAS_NOMBRE)
                 {
-                    puts("Nombre demasiado corto. Se usarán valores por defecto.");
-                    strcpy(guardado, "AAA");
-                    system("pause");
+                    while(strlen(guardado)>MIN_CANTIDAD_LETRAS_NOMBRE || strlen(guardado)<MIN_CANTIDAD_LETRAS_NOMBRE)
+                    {
+                        puts("Error, el nombre es inválido, respeta la longitud.\n");
+                        system("pause");
+                        system("cls");
+                        printf("Ingresa el nombre con el que desea iniciar la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE-1);
+                        fflush(stdin);
+                        gets(guardado);
+                    }
                 }
+                guardado[strcspn(guardado, "\n")] = '\0';
                 system("cls");
                 int d = solicitarDificultad();
                 iniciarJuegoNuevo(&elAdmin, &d, guardado);
@@ -83,6 +101,8 @@ int main() {
         return 0;
 }
 
+/*Se encarga de mostrar un menu recibido de parámetro, y buscar entre las opciones disponibles
+también recibidas por parámetro. Además valida si la opción elegida por el usuario no es las propuestas.*/
 char mostrarMenuPrincipalConMensaje(char* msj, char* opciones)
 {
     char opc;
@@ -100,6 +120,9 @@ char mostrarMenuPrincipalConMensaje(char* msj, char* opciones)
     //system("cls");
     return opc;
 }
+
+/*Espera una entrada por teclado del usuario, y según esa entrada es el tipo retorno,
+en este caso cada número de retorno representa una dificultad, por ejemplo 1 Facil*/
 int solicitarDificultad()
 {
     char dificultadElegidaPorElUsuario = mostrarMenuPrincipalConMensaje("Ingrese la dificultad para jugar:\n1. FACIL\n2. MEDIO\n3. DIFICIL","123");
@@ -119,12 +142,16 @@ int solicitarDificultad()
     }
     return 1; //no debería suceder
 }
+
+/*Limpia el salto de línea del teclado y luego hace una pausa en el mismo.*/
 void pausaYLimpiadoDePantalla()
 {
     limpiarBuffer();
     getchar();
  //   system("cls");
 }
+
+/*Limpia el salto de linea al cometer un input del usuario*/
 void limpiarBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
