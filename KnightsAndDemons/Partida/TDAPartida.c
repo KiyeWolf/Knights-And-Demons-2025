@@ -152,6 +152,7 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
             //*celda = 'x'; // "equis" (x) = cursor
 
             mostrarTablero(tamTablero, tablero, &admin->cursor);
+
             //*celda = temp;
         }
 
@@ -234,6 +235,8 @@ int iniciarPartida(Admin* admin) // DEVUELVE SI GANÓ O NO (1,2 o 0 si perdio el
     // Mientras no se acabe el tiempo ni haya ganado, sigue la partida
     while( ( (tiempoInicial - tiempoTranscurrido) > 0 ) && gano == 0)
     {
+        mostrarBarraEstado(admin, gano);
+
         mostrarTablero(tamTablero, tablero, &admin->cursor);
 
         printf("\nTiempo restante: %d\n", (tiempoInicial - tiempoTranscurrido));
@@ -349,9 +352,44 @@ void mostrarNivelPikasActual(int nivelActual, int pikasActuales) // MUESTRA PIKA
     // El "°|" y "*|" son un agregado estetico
 }
 
-void mostrarBarraEstado()
+void mostrarBarraEstado(Admin* admin, int resultado)
 {
-    // W.I.P
+    const int largoBarra = 50;
+    int mitad = largoBarra / 2;
+    int baseCaballeros = mitad;
+
+    int diferencia = admin->jugador.TotalestadoUno - admin->jugador.TotalestadoDos;
+
+    // Cada victoria representa este cambio en cantidad de caracteres
+    float cambioPorVictoria = mitad / TAM_PARTIDAS;
+
+    // Ajustamos la longitud de cada lado según la diferencia
+    int parteCaballeros = (int)(baseCaballeros + diferencia * cambioPorVictoria);
+    int parteDemonios = largoBarra - parteCaballeros;
+
+    // Limitar por si acaso (que no se pase de los extremos)
+    if (parteCaballeros < 0) parteCaballeros = 0;
+    if (parteCaballeros > largoBarra) parteCaballeros = largoBarra;
+    if (parteDemonios < 0) parteDemonios = 0;
+    if (parteDemonios > largoBarra) parteDemonios = largoBarra;
+
+    printf("\nCaballeros [");
+
+    // Caballeros: más '#' si van ganando
+    for (int i = 0; i < parteCaballeros; i++)
+        putchar('#');
+
+    putchar('|');
+
+    // Demonios: más '-' si van ganando
+    for (int i = parteCaballeros; i < largoBarra; i++)
+        putchar('-');
+
+    printf("] Demonios\n");
+
+    printf("%d frentes                                                       %d frentes\n\n",
+           admin->jugador.TotalestadoUno,
+           admin->jugador.TotalestadoDos);
 }
 
 int jugar(Admin* manager) /// AGREGA GUILLE
