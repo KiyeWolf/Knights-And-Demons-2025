@@ -87,8 +87,8 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
     int finSeleccion = 0;
 
     admin->cursor.seUsoPika = 0;
-    admin->cursor.posCursorX = 0;
-    admin->cursor.posCursorY = 0;
+    //admin->cursor.posCursorX = 0;
+    //admin->cursor.posCursorY = 0;
 
     printf("\nUsa las teclas W/A/S/D para moverte y Enter para confirmar\n");
     printf("Si usas una Pika, confirma con P\n");
