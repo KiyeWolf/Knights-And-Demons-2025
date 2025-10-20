@@ -63,7 +63,8 @@
                                       "Tu nombre será recordado no solo por la victoria, sino por la perfección con la que la lograste. \n"\
                                       "Que el sol brille eternamente sobre nuestro reino gracias a tu heroísmo.\n"
 
-// Todos los tamanios son en realidad el orden de la matriz
+
+// (Todos los tamanios son en realidad el orden de la matriz)
 #define TAM_TABLERO_1 8 // 8x8
 #define TAM_TABLERO_2 10 // 10x10
 #define TAM_TABLERO_3 12 // 12x12
@@ -90,7 +91,7 @@ void mostrarBarraEstado(Admin*, int);
 int tiempo(const Admin*, int);
 size_t obtenerTamTablero(const Admin*);
 
-//Mixes de Guille
+// Mixes de Guille
 int jugar(Admin* manager);
 void barraDeCarga();
 void textoDeInicioDeNivel();

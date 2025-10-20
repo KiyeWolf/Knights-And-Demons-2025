@@ -1,89 +1,8 @@
 #include "TDAPartida.h"
 
-/// FUNCIONES DE AGUS QUE IMPLEMENTÉ YO
-/*
-
-bool ejecutarJugada(Admin* admin, char** tablero, size_t tamTablero) // RETORNA 1 SI GANO EN LA MISMA JUGADA, SINO 0
-{
-    int bandoGanador;
-    char* celdaAfectada = *(tablero + admin->cursor.fila) + admin->cursor.columna;
-
-    invertirCasilla(celdaAfectada);
-
-    if(admin->cursor.usoPika == 0) // Si NO uso Pika, se invierte en cruz
-    {
-        if(admin->cursor.fila > 0)
-           invertirCasilla(*(tablero + (admin->cursor.fila-1)) + admin->cursor.columna); // La de arriba
-
-        if(admin->cursor.fila < tamTablero-1)
-            invertirCasilla(*(tablero + (admin->cursor.fila+1)) + admin->cursor.columna); // La de abajo
-
-        if(admin->cursor.columna > 0)
-            invertirCasilla(*(tablero + admin->cursor.fila) + (admin->cursor.columna-1)); // La de la izquierda
-
-        if(admin->cursor.columna < tamTablero-1)
-            invertirCasilla(*(tablero + admin->cursor.fila) + (admin->cursor.columna+1)); // La de la derecha
-    }
-
-    bandoGanador = obtenerBandoGanador(tablero, tamTablero);
-
-    if(bandoGanador != 0) // Puede ser 0, 1 o 2
-    {
-        if(bandoGanador == 1) // Si ademas ganaron los caballeros se premia al jugador con Pikas
-            admin->jugador.pikasRestantes+=PREMIO_PIKAS;
-
-        return 1;
-    }
-
-    return 0;
-}
-
-void invertirCasilla(char* casilla) // RECIBE CONTENIDO DE UNA CASILLA Y LO INVIERTE IN SITU (AL OTRO BANDO)
-{
-    // Suponiendo que caballeros = 'K' (por "Knights") y demonios = 'D' (por "Demons")
-    if(*casilla == 'K')
-        *casilla = 'D';
-    else
-        *casilla = 'K';
-}
-
-*/
-///
-
-/// NO ES NECESARIA CON LAS DE AGUS
-/*
-int obtenerBandoGanador(char** tablero, size_t tamTablero) // RETORNA 1 SI GANARON LOS BUENOS, 2 SI LOS MALOS Y 0 SI NINGUNO
-{
-    int cantCaballeros = 0, cantDemonios = 0;
-
-    // Recorre el tablero para contar las piezas de cada bando
-    for(int i=0; i<tamTablero; i++)
-    {
-        for(int j=0; j<tamTablero; j++)
-        {
-            if(*(*(tablero + i) + j) == 'K')
-                cantCaballeros++;
-            else if(*(*(tablero + i) + j) == 'D')
-                cantDemonios++;
-        }
-    }
-
-    if(cantCaballeros == tamTablero*tamTablero)
-        return 1;
-    else if(cantDemonios == tamTablero*tamTablero)
-        return 2;
-
-    return 0;
-}
-
-*/
-///
-
 void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA POSICION SELECCIONADA EN CURSOR
 {
     char tecla;
-    // char temp;
-    //char* celda;
     int finSeleccion = 0;
 
     admin->cursor.seUsoPika = 0;
@@ -146,14 +65,7 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
 
             system("cls"); // Limpiar consola antes de mostrar
 
-            // Mostrar movimiento en el tablero y devolver el valor que habia originalmente
-            //celda = *(tablero + admin->cursor.posCursorY) + admin->cursor.posCursorX;
-            //temp = *celda;
-            //*celda = 'x'; // "equis" (x) = cursor
-
             mostrarTablero(tamTablero, tablero, &admin->cursor);
-
-            //*celda = temp;
         }
 
         Sleep(50); // Pausa para no saturar
@@ -176,6 +88,7 @@ int guardarPartida(Admin* manager) // GUARDA EL ESTADO ACTUAL DEL JUEGO (HASTA U
     fclose(arch);
     Sleep(2000);
     system("cls");
+
     return TODO_OK;
 }
 
@@ -187,7 +100,7 @@ size_t obtenerTamTablero(const Admin* admin) // DEVUELVE TAM TABLERO (ORDEN)
         case (2): return TAM_TABLERO_2;
         case (3): return TAM_TABLERO_3;
     }
-    //Para sacar el warning
+
     return 1;
 }
 
@@ -216,7 +129,7 @@ int tiempo(const Admin* admin, int operacion) // DEVUELVE TIEMPO (EN SEGUNDOS) O
             inicioNivel = 1; // Para que la logica funcione al cambiar de nivel
             return 0;
     }
-    //para sacar el warning nomás la linea de abajo.
+
     return 0;
 }
 
@@ -339,9 +252,6 @@ int postNivel(Admin* admin, int resultado) // DEVUELVE SI SE VA O NO AL MENÚ (0
 
     system("cls");
 
-
-   // admin->jugador.tiempoDeJuego+=(admin->niveles[admin->jugador.nivelActual].tiempo); // Actualizo el tiempo total del jugador
-
     return (respuesta-1); // El -1 es para que devuelva 1 o 0 en vez de 1 o 2
 }
 
@@ -352,7 +262,7 @@ void mostrarNivelPikasActual(int nivelActual, int pikasActuales) // MUESTRA PIKA
     // El "°|" y "*|" son un agregado estetico
 }
 
-void mostrarBarraEstado(Admin* admin, int resultado)
+void mostrarBarraEstado(Admin* admin, int resultado) // MUESTRA LA BARRA DE ESTADO GLOBAL DE LA PARTIDA
 {
     const int largoBarra = 50;
     int mitad = largoBarra / 2;
@@ -392,7 +302,7 @@ void mostrarBarraEstado(Admin* admin, int resultado)
            admin->jugador.TotalestadoDos);
 }
 
-int jugar(Admin* manager) /// AGREGA GUILLE
+int jugar(Admin* manager)
 {
     int finalJuego;
 
