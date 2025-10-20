@@ -176,6 +176,7 @@ int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HAST
     int gano;
     int estaEnMenu = 0;
     int respuesta;
+    int cantPikas;
 
     while(!estaEnMenu && finalJuego == 0)
     {
@@ -188,6 +189,8 @@ int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HAST
                 admin->jugador.pikasRestantes+=PREMIO_PIKAS;
                 puts("¡Los caballeros están agradecidos!");
                 printf("Has obtenido %d pikas extras", PREMIO_PIKAS);
+
+                cantPikas = admin->jugador.pikasRestantes; // Se recalcula su valor
             }
 
             // gano == GANO_DEMONS
@@ -195,6 +198,8 @@ int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HAST
                 admin->jugador.TotalestadoDos++;
                 puts("¡Los demonios están avanzando!");
                 puts("");
+
+                cantPikas = admin->jugador.pikasRestantes; // Se recalcula su valor
             }
             admin->jugador.nivelesCompletados+=1;
             admin->niveles[admin->jugador.nivelActual].estadoCompletado = 1; // Actualizo el estado del nivel a ganó o no ganó (1 o 0)
@@ -217,6 +222,28 @@ int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HAST
         {
             //Significa que perdió, por eso se muestra este mensaje de derrota
             printf("%s", MENSAJE_DERROTA);
+
+            // Se reinician las pikas a las que tenía al iniciar el nivel
+            if(admin->jugador.nivelActual > 1)
+                admin->jugador.pikasRestantes = cantPikas;
+            else
+            {
+                switch(admin->jugador.dificultadSeleccionada)
+                {
+                    case FACIL:
+                        admin->jugador.pikasRestantes = PIKAS_INICIALES_FACIL;
+                        break;
+
+                    case MEDIO:
+                        admin->jugador.pikasRestantes = PIKAS_INICIALES_MEDIO;
+                        break;
+
+                    case DIFICIL:
+                        admin->jugador.pikasRestantes = PIKAS_INICIALES_MEDIO;
+                        break;
+                }
+            }
+
         }
 
         if(admin->jugador.nivelActual < TAM_PARTIDAS) //Se evalúa si quedan niveles por jugar o no.
