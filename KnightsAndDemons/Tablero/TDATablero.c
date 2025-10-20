@@ -1,13 +1,5 @@
 #include "TDATablero.h"
 
-/*Verifica si las coordenadas del cursor (es decir, la posicion en la que se encuentra
-el jugador) son validas. Estas coordenadas seran validas siempre y cuando se encuentren
-dentro de la matriz. Si al menos una de ellas es un numero negativo o supera el orden
-de la matriz, deja de ser valida.*/
-int verificarCoordenadasCursor(const int orden, tJugada *jug){
-    return (jug->posCursorX >= 0 && jug->posCursorX < orden) && (jug->posCursorY >= 0 && jug->posCursorY < orden) ? 1 : 0;
-}
-
 /*Muestra el tablero. Si los indices coinciden con las coordenadas del cursor, mostraran
 [x] en esa casilla. La matriz no se modifica; "debajo" de donde esta el cursor ([x])
 seguira habiendo una K o una D.*/

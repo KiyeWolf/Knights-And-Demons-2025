@@ -6,8 +6,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
-//externa
+
+//Externa
 #include "../Juego/TDAJuego.h"
+
 //Defines
 #define CORRECTO 1
 #define INCORRECTO 0
@@ -22,7 +24,6 @@
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
 //Funciones del tablero
-int verificarCoordenadasCursor(const int, tJugada *);
 void mostrarTablero(const int, char **, tJugada *);
 void liberarMemoriaTablero(char **, const int);
 char **crearTablero(const int);
