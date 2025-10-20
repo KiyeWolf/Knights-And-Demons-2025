@@ -1,6 +1,6 @@
 #ifndef SCORES_H_INCLUDED
 #define SCORES_H_INCLUDED
-#define TAM_LINEA 2001
+#define TAM_LINEA_SCORES 2001
 #define ARCHIVO_CORRUPTO 1
 #define TODO_OK 0
 #include <stdio.h>

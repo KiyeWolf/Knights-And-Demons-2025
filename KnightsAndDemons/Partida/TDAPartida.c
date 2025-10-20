@@ -163,7 +163,7 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
 
 int guardarPartida(Admin* manager) // GUARDA EL ESTADO ACTUAL DEL JUEGO (HASTA ULTIMO NIVEL JUGADO)
 {
-    char guardado[256];
+    char guardado[TAM_LINEA_JUEGO];
     snprintf(guardado, sizeof(guardado), "%s%s.dat", RUTA_PARTIDAS_GUARDADAS, manager->jugador.nombre);
     FILE* arch = fopen(guardado, "wb");
     if(!arch)
@@ -200,9 +200,9 @@ int tiempo(const Admin* admin, int operacion) // DEVUELVE TIEMPO (EN SEGUNDOS) O
         case T_INICIAL:
             switch(admin->jugador.dificultadSeleccionada)
             {
-                case (1): return TIEMPO_INICIALES_FACIL;
-                case (2): return TIEMPO_INICIALES_MEDIO;
-                case (3): return TIEMPO_INICIALES_DIFICIL;
+                case (1): return admin->niveles[admin->jugador.nivelActual].tiempo;
+                case (2): return admin->niveles[admin->jugador.nivelActual].tiempo;
+                case (3): return admin->niveles[admin->jugador.nivelActual].tiempo;
             }
 
         case T_TRANSCURRIDO:

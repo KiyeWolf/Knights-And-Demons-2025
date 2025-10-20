@@ -3,8 +3,8 @@
 /*Recibe un archivo y lee el archivo por linea, mostrando la linea y luego un salto de linea*/
 void leerLineasDeArchivoTxt(FILE* arch)
 {
-    char linea[TAM_LINEA];
-    while(fgets(linea, TAM_LINEA,arch)!=NULL)
+    char linea[TAM_LINEA_SCORES];
+    while(fgets(linea, TAM_LINEA_SCORES,arch)!=NULL)
     {
        printf("%s\n",linea);
     }
@@ -30,7 +30,7 @@ void mostrarStringPorPantallaSinSalto(char* str)
     printf("%s",str);
 }
 
-/*Se encarga de recibir multiples datos de la estructura de Jugador y abrir un archivo txt en la ruta 
+/*Se encarga de recibir multiples datos de la estructura de Jugador y abrir un archivo txt en la ruta
 predefinida en el encabezado, luego al final del archivo coloca todos los datos del jugador.
 Con un formato específico*/
 int colocarJugadorEnTablaDePuntajes(char* nomJugador, int k,int d,int pikasRestantes, int nivelesCompletados)
@@ -40,8 +40,8 @@ int colocarJugadorEnTablaDePuntajes(char* nomJugador, int k,int d,int pikasResta
     {
         return ARCHIVO_CORRUPTO;
     }
-    //buscarUltimoAparicionEnArch(arch, "| ....... | ........................ | ....................... | ............... | ............ |");
-    fseek(arch,0*(long)TAM_LINEA,SEEK_END);
+
+    fseek(arch,0*(long)TAM_LINEA_SCORES,SEEK_END);
     fprintf(arch, "\n| ..%s.. | .....%2d  KNIGHTS ....... | .....%2d  DEMONS ....... | ......%2d....... | ..... %d......... |", nomJugador,k,d,pikasRestantes,nivelesCompletados);
     fclose(arch);
     return TODO_OK;

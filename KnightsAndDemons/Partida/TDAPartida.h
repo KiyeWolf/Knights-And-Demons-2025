@@ -31,7 +31,6 @@
 #define T_REINICIO 3
 //
 
-#define TAM_NOMBRE 4
 
 //Todos los finales posibles del juego
 #define MENSAJE_DERROTA "\nParece que no pudiste manejar bien tu recurso mas preciado, becario...\n"\

@@ -15,8 +15,8 @@
 #define TIEMPO_INICIALES_DIFICIL 150
 #define NIVEL_INICIAL 0
 #define PENALIZACION_DE_TIEMPO_POR_NIVEL 2
-#define TAM_NOMBRE 4
-
+#define TAM_NOMBRE 3 //Recuerda que se le suma uno por el caracter nulo dentro del código
+#define TAM_LINEA_JUEGO 2001
 
 #define TAM_PARTIDAS 8
 
@@ -52,7 +52,7 @@ typedef struct Jugada{
 
     typedef struct Usuario
     {
-        char nombre[TAM_NOMBRE];
+        char nombre[TAM_NOMBRE+1];
         int dificultadSeleccionada;
         int TotalestadoUno;
         int TotalestadoDos;

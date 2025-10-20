@@ -54,38 +54,13 @@ void inicializarJugador(Player* jugador, char* nombre, const  int* dificultad)
         break;
     }
 }
-/*SOLO FUNCIONES DE DEVELOP
-void mostrarManager(Admin* manager)
-{
-    mostrarNiveles(manager->niveles);
-    mostrarJugador(&(manager->jugador));
-}
-void mostrarNiveles(Partidas* niveles)
-{
-    for(int i = 0 ; i < TAM_PARTIDAS ; i++)
-    {
-        printf("%d\n", (*(niveles+i)).tiempo);
-        printf("%d\n", (niveles+i)->dificultadDePartida);
-        printf("%d\n", (*(niveles+i)).estadoCompletado);
-    }
-}
-void mostrarJugador(Player* jugador)
-{
-    printf("%s\n", jugador->nombre);
-    printf("%d\n", jugador->dificultadSeleccionada);
-    printf("%d\n", jugador->TotalestadoUno);
-    printf("%d\n", jugador->TotalestadoDos);
-    printf("%d\n", jugador->nivelesCompletados);
-    printf("%d\n", jugador->nivelActual);
-    printf("%d\n", jugador->pikasRestantes);
 
-}*/
 
 /*Esta función busca un archivo en la carpeta Juego/Saved con el nombre indicado y concatenandolo a .dat
 para luego cargar de ese archivo la estructura administrador, de esta manera recupera una estructura guardada anteriormente.*/
 int cargarPartida(Admin* manager, char* nomGuardado)
 {
-    char guardado[256];
+    char guardado[TAM_LINEA_JUEGO];
     snprintf(guardado, sizeof(guardado), "%s%s.dat", RUTA_PARTIDAS_GUARDADAS_PARA_CARGAR, nomGuardado);
     FILE* arch = fopen(guardado, "rb");
     if(!arch)
@@ -110,7 +85,7 @@ int mostrarHistoriaInicial()
         return ARCHIVO_CORRUPTO;
     }
 
-    char linea[256];
+    char linea[TAM_LINEA_JUEGO];
     while (fgets(linea, sizeof(linea), archivo) != NULL) {
         printf("%s", linea);
     }

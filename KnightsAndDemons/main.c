@@ -8,26 +8,26 @@ int main() {
     Admin elAdmin = {0};
     system("chcp 65001 >nul");
     system("cls");
-    char opcionElegida = mostrarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, "12345");
+    char opcionElegida = mostrarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, OPCIONES_MENU_PRINCIPAL);
 
-    while(opcionElegida!=OPCIONES_VALIDAS)
+    while(opcionElegida!=SALIR)
     {
             if(opcionElegida==CARGAR_PARTIDA)
             {
-                char guardado[TAM_NOMBRE]={0};
+                char guardado[TAM_NOMBRE+1]={0};
                 system("cls");
                 puts("CARGAR PARTIDA");
-                printf("Ingresa el nombre con el que se guardo la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE-1);
+                printf("Ingresa el nombre con el que se guardo la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE);
                 fflush(stdin);
                 gets(guardado);
-                if(strlen(guardado)>MIN_CANTIDAD_LETRAS_NOMBRE || strlen(guardado)<MIN_CANTIDAD_LETRAS_NOMBRE)
+                if(strlen(guardado)>TAM_NOMBRE || strlen(guardado)<TAM_NOMBRE)
                 {
-                    while(strlen(guardado)>MIN_CANTIDAD_LETRAS_NOMBRE || strlen(guardado)<MIN_CANTIDAD_LETRAS_NOMBRE)
+                    while(strlen(guardado)>TAM_NOMBRE || strlen(guardado)<TAM_NOMBRE)
                     {
                         puts("Error, el nombre es inválido, respeta la longitud.\n");
                         system("pause");
                         system("cls");
-                        printf("Ingresa el nombre con el que se guardo la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE-1);
+                        printf("Ingresa el nombre con el que se guardo la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE);
                         fflush(stdin);
                         gets(guardado);
                     }
@@ -52,20 +52,20 @@ int main() {
 
             if(opcionElegida==INICIAR_NUEVA_PARTIDA)
             {
-                char guardado[TAM_NOMBRE]={0};
+                char guardado[TAM_NOMBRE+1]={0};
                 system("cls");
                 puts("INICIO");
                 printf("Ingresa el nombre con el que se inicie la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE-1);
                 fflush(stdin);
                 gets(guardado);
-                if(strlen(guardado)>MIN_CANTIDAD_LETRAS_NOMBRE || strlen(guardado)<MIN_CANTIDAD_LETRAS_NOMBRE)
+                if(strlen(guardado)>TAM_NOMBRE || strlen(guardado)<TAM_NOMBRE)
                 {
-                    while(strlen(guardado)>MIN_CANTIDAD_LETRAS_NOMBRE || strlen(guardado)<MIN_CANTIDAD_LETRAS_NOMBRE)
+                    while(strlen(guardado)>TAM_NOMBRE || strlen(guardado)<TAM_NOMBRE)
                     {
                         puts("Error, el nombre es inválido, respeta la longitud.\n");
                         system("pause");
                         system("cls");
-                        printf("Ingresa el nombre con el que desea iniciar la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE-1);
+                        printf("Ingresa el nombre con el que desea iniciar la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE);
                         fflush(stdin);
                         gets(guardado);
                     }
@@ -92,7 +92,7 @@ int main() {
                 pausaYLimpiadoDePantalla();
             }
             system("cls");
-            opcionElegida = mostrarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, "12345");
+            opcionElegida = mostrarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, OPCIONES_MENU_PRINCIPAL);
 
     }
         puts("Gracias por jugar");
@@ -110,14 +110,11 @@ char mostrarMenuPrincipalConMensaje(char* msj, char* opciones)
     scanf(" %c", &opc);
     while(!strchr(opciones,opc))
     {
-       //system("cls");
         puts("Porfavor Ingrese una de las opciones mostradas");
         limpiarBuffer();
-        //system("cls");
         puts(msj);
         scanf(" %c", &opc);
     }
-    //system("cls");
     return opc;
 }
 
@@ -148,7 +145,6 @@ void pausaYLimpiadoDePantalla()
 {
     limpiarBuffer();
     getchar();
- //   system("cls");
 }
 
 /*Limpia el salto de linea al cometer un input del usuario*/
