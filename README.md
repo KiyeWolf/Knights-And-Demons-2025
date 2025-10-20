@@ -19,6 +19,9 @@ El juego busca replicar la funcionalidad central del original, rindiendo homenaj
     * **Code::Blocks 20.03:** Utilizado para la compilación y gestión del proyecto.
     * **Visual Studio Code:** Utilizado por el equipo para edición colaborativa y herramientas de desarrollo.
 
+## Gameplay
+https://youtu.be/QoQPxZlQ4c8
+
 ---
 
 ## ⚙️ Instalación y Compilación
