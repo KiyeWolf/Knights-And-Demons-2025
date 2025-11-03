@@ -4,10 +4,20 @@
 #include "./Juego/creditos.h"
 #include "./Partida/TDAPartida.h"
 #include "./Tablero/TDATablero.h"
-int main() {
+
+#include "./SDL3-Archivos/Visual/Visual.h"
+int main(int argc, char *argv[]) {
     Admin elAdmin = {0};
     system("chcp 65001 >nul");
     system("cls");
+
+    //PRUEBA SDL
+    if(funcionDePrueba()!=0)
+    {
+        return 10;
+    }
+
+
     char opcionElegida = mostrarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, OPCIONES_MENU_PRINCIPAL);
 
     while(opcionElegida!=SALIR)

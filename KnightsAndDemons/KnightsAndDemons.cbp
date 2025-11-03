@@ -49,12 +49,18 @@
 			<Add directory="Partida" />
 			<Add directory="Tablero" />
 			<Add directory="Juego/Saved" />
+			<Add directory="SDL3-Archivos/SDL3-3.2.26/x86_64-w64-mingw32/include" />
 		</Compiler>
 		<Linker>
+			<Add option="-static-libstdc++" />
+			<Add option="-static-libgcc" />
+			<Add option="-lmingw32" />
+			<Add option="-lSDL3" />
 			<Add directory="Juego" />
 			<Add directory="Partida" />
 			<Add directory="Tablero" />
 			<Add directory="Juego/Saved" />
+			<Add directory="SDL3-Archivos/SDL3-3.2.26/x86_64-w64-mingw32/lib" />
 		</Linker>
 		<Unit filename="Juego/TDAJuego.c">
 			<Option compilerVar="CC" />
@@ -66,6 +72,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Partida/TDAPartida.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="SDL3-Archivos/Visual/Visual.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Tablero/TDATablero.c">
