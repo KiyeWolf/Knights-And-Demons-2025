@@ -9,7 +9,8 @@
 #define HIGHT 600
 #define HEIGHT 600
 #define RUTA_ARCHIVO_FUENTES_DE_TEXTO "./SDL3-Archivos/Visual/freefont-20120503/FreeMono.ttf"
-
+#define MENSAJE "Bienvenido a Knights && Demons 2025"
+#define MENSAJE2 "Valiente Guerrero..."
 int funcionDePrueba();
 
 #endif // VISUAL_H_INCLUDED
