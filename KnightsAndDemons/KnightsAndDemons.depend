@@ -541,10 +541,18 @@
 1761581326 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\tablero\tdatablero.c
 	"TDATablero.h"
 
-1762197672 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\visual\visual.c
+1762535997 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\visual\visual.c
 	"Visual.h"
 
-1762197672 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\visual\visual.h
+1762535840 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\visual\visual.h
 	<SDL3/SDL.h>
 	<stdio.h>
+	<stdbool.h>
+	<SDL3/SDL_surface.h>
+	<SDL3_ttf/SDL_ttf.h>
+
+1743454446 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\sdl3_ttf-3.2.2\x86_64-w64-mingw32\include\sdl3_ttf\sdl_ttf.h
+	<SDL3/SDL.h>
+	<SDL3/SDL_begin_code.h>
+	<SDL3/SDL_close_code.h>
 
