@@ -26,9 +26,11 @@ int main(int argc, char *argv[]) {
 
     SDL_Window* window = SDL_CreateWindow("Knights && Demons", WIDTH, HEIGHT, 0);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL);
-    TTF_Font* font = TTF_OpenFont(RUTA_ARCHIVO_FUENTES_DE_TEXTO, 28);
+    TTF_Font* font = TTF_OpenFont(RUTA_ARCHIVO_FUENTES_DE_TEXTO_1, 28);
 
-    SDL_SetWindowFullscreen(window, true);
+
+    //SIEMPRE QUE HAYAN PROBLEMAS, QUITAR LA PANTALLA COMPLETA PARA DEBUG
+    //SDL_SetWindowFullscreen(window, true);
 
     mostrarPantallaBienvenida(renderer,font);
     char opcionElegida;
@@ -37,8 +39,8 @@ int main(int argc, char *argv[]) {
     {
             if(opcionElegida==CARGAR_PARTIDA)
             {
-                char guardado[TAM_NOMBRE+1]={0};
-                system("cls");
+
+                /*system("cls");
                 puts("CARGAR PARTIDA");
                 printf("Ingresa el nombre con el que se guardo la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE);
                 fflush(stdin);
@@ -68,8 +70,20 @@ int main(int argc, char *argv[]) {
                     {
                         colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
                     }
-                }
+                }*/
 
+                //NUEVO SDL3
+                char nombre[TAM_NOMBRE+1]={0};
+                mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer,font,"[ Debes ingresar el nombre con el que se  guardo la partida]");
+                mostrarPantallaNombre(renderer,font,nombre, window);
+                if(cargarPartida(&elAdmin, nombre)!=TODO_OK)
+                {
+                    mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer,font,"Lo siento, no se encontró la partida Cargada");
+                }
+                else
+                {
+                    jugar(&elAdmin);
+                }
             }
 
 
@@ -117,22 +131,20 @@ int main(int argc, char *argv[]) {
             }
             if(opcionElegida==CREDITOS)
             {
-                system("cls");
-                mostrarCreditos();
+                mostrarCreditosEnPantalla(renderer,font);
             }
             if(opcionElegida==TABLA_DE_PUNTAJES)
             {
-                system("cls");
+                /*system("cls");
                 mostrarTablaDePuntajes();
                 pausaYLimpiadoDePantalla();
+                */
+               mostrarTablaDePuntajesDeArchivo(renderer,font);
             }
-            system("cls");
             mostrarMenuPrincipal(renderer,font,&opcionElegida);;
 
     }
-        puts("Gracias por jugar");
-        limpiarBuffer();
-        getchar();
+        mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer,font,"Gracias Por jugar");
 
         //destrozar los usos de sdl2
         TTF_CloseFont(font);
@@ -147,7 +159,9 @@ int main(int argc, char *argv[]) {
 
 /*Se encarga de mostrar un menu recibido de parámetro, y buscar entre las opciones disponibles
 también recibidas por parámetro. Además valida si la opción elegida por el usuario no es las propuestas.*/
-char mostrarMenuPrincipalConMensaje(char* msj, char* opciones)
+
+//ANTIGUA FUNCION, YA REEMPLAZADA EN SDL3
+/*char mostrarMenuPrincipalConMensaje(char* msj, char* opciones)
 {
     char opc;
     puts(msj);
@@ -160,10 +174,12 @@ char mostrarMenuPrincipalConMensaje(char* msj, char* opciones)
         scanf(" %c", &opc);
     }
     return opc;
-}
+}*/
 
 /*Espera una entrada por teclado del usuario, y según esa entrada es el tipo retorno,
 en este caso cada número de retorno representa una dificultad, por ejemplo 1 Facil*/
+//ANTIGUA FUNCION. Ya reemplazada en SDL3
+/*
 int solicitarDificultad()
 {
     char dificultadElegidaPorElUsuario = mostrarMenuPrincipalConMensaje("Ingrese la dificultad para jugar:\n1. FACIL\n2. MEDIO\n3. DIFICIL","123");
@@ -183,7 +199,7 @@ int solicitarDificultad()
     }
     return 1; //no debería suceder
 }
-
+*/
 /*Limpia el salto de línea del teclado y luego hace una pausa en el mismo.*/
 void pausaYLimpiadoDePantalla()
 {

@@ -1,6 +1,8 @@
 #include "scores.h"
 
 /*Recibe un archivo y lee el archivo por linea, mostrando la linea y luego un salto de linea*/
+//REEMPLAZADA POR SDL3
+/*
 void leerLineasDeArchivoTxt(FILE* arch)
 {
     char linea[TAM_LINEA_SCORES];
@@ -9,9 +11,12 @@ void leerLineasDeArchivoTxt(FILE* arch)
        printf("%s\n",linea);
     }
 }
-
+*/
 /*Buscar un archivo txt en la ruta definida en el encabezado y luego leer el archivo txt, mostrandolo en
 pantalla sin hacer pausas y cierra los archivos correspondientes.*/
+//YA NO HACE FALTA
+//REEMPLAZADA POR NUEVA VERSION EN SDL3
+/*
 int mostrarTablaDePuntajes()
 {
     FILE* arch = fopen(RUTA_SCORES, "rt");
@@ -22,8 +27,37 @@ int mostrarTablaDePuntajes()
     leerLineasDeArchivoTxt(arch);
     fclose(arch);
     return TODO_OK;
+}*/
+int cargarTablaDePuntajes(char* vector, int* cantidadCargada)
+{
+    FILE* arch = fopen(RUTA_SCORES, "rt");
+    if(!arch)
+    {
+        return ARCHIVO_CORRUPTO;
+    }
+    char* direccionDeLaLinea = vector;
+    char* salto;
+    char linea[TAM_LINEA_SCORES];
+    int i = 0;
+    while(fgets(linea, TAM_LINEA_SCORES,arch)!=NULL)
+    {
+        salto = strrchr(linea,'\n');
+        if(salto)
+        {
+            //printf("[DEBUG] Se llegó encontrar el salto de linea");
+            *salto = '\0';
+        }
+        
+        strcpy(direccionDeLaLinea, linea);
+        // printf("[DEBUG] Se llego a copiar la linea al vector: %s\n", direccionDeLaLinea);
+        direccionDeLaLinea+=TAM_LINEA_SCORES+1;
+        i++;
+    }
+    *(cantidadCargada) = i;
+    //printf("[DEBUG] Se llegó a completar las lineas: %d\n", *cantidadCargada);
+    fclose(arch);
+    return TODO_OK;
 }
-
 /*Solo es una función que imprime un string recibido por parámetro*/
 void mostrarStringPorPantallaSinSalto(char* str)
 {

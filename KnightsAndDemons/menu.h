@@ -25,9 +25,9 @@
 "\t4. TABLA DE PUNTAJES\n"\
 "\t5. SALIR"
 
-int solicitarDificultad();
+//int solicitarDificultad();
 void pausaYLimpiadoDePantalla();
-char mostrarMenuPrincipalConMensaje(char* msj, char* opciones);
+//char mostrarMenuPrincipalConMensaje(char* msj, char* opciones);
 void limpiarBuffer();
 
 #endif // MENU_H_INCLUDED
