@@ -82,7 +82,10 @@ int main(int argc, char *argv[]) {
                 }
                 else
                 {
-                    jugar(&elAdmin);
+                    if(jugar(&elAdmin)==JUEGO_COMPLETADO)
+                    {
+                        colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
+                    }
                 }
             }
 
@@ -127,7 +130,10 @@ int main(int argc, char *argv[]) {
                 mostrarPantallaDificultad(renderer,font,&d);
                 iniciarJuegoNuevo(&elAdmin, &d, nombre);
                 mostrarPantallaHistoriaInicial(renderer,font,&retornos);
-                jugar(&elAdmin);
+                if(jugar(&elAdmin)==JUEGO_COMPLETADO)
+                {
+                    colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
+                }
             }
             if(opcionElegida==CREDITOS)
             {

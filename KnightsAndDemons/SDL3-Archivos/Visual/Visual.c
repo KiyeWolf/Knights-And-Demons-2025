@@ -416,7 +416,7 @@ void mostrarMensajeEnVentanaYBorrarDespuesDeTecla(SDL_Renderer* renderer, TTF_Fo
 }
 void mostrarCreditosEnPantalla(SDL_Renderer* renderer, TTF_Font* font)
 {
-    //
+    //FALTA HACER ESTOOOOO , no creo que sea dificil
 }
 void mostrarTablaDePuntajesDeArchivo(SDL_Renderer* renderer,TTF_Font* font)
 {
