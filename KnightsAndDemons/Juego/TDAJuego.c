@@ -75,6 +75,8 @@ int cargarPartida(Admin* manager, char* nomGuardado)
 
 /*Se encarga de buscar en Juego/Saved un archivo txt y mostrar el texto contenido en el mismo.
 La ruta del archivo está definido en el encabezado*/
+//FUNCION ANTIGUA YA REEMPLAZADA EN SDL3-ARCHIVOS
+/*
 int mostrarHistoriaInicial()
 {
 
@@ -94,4 +96,4 @@ int mostrarHistoriaInicial()
     fclose(archivo);
     system("cls");
     return TODO_OK;
-}
+}*/

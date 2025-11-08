@@ -8,18 +8,31 @@
 #include "./SDL3-Archivos/Visual/Visual.h"
 int main(int argc, char *argv[]) {
     Admin elAdmin = {0};
-    system("chcp 65001 >nul");
-    system("cls");
-
+    //system("chcp 65001 >nul");
+    //system("cls");
+    size_t retornos;
     //PRUEBA SDL
-    if(funcionDePrueba()!=0)
+    /*if(funcionDePrueba()!=0)
     {
         return 10;
-    }
+    }*/
 
+    //MENU ANTIGUOOOOO
+    //char opcionElegida = mostrarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, OPCIONES_MENU_PRINCIPAL);
 
-    char opcionElegida = mostrarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, OPCIONES_MENU_PRINCIPAL);
+    //MENU NUEVOOO
+    SDL_Init(SDL_INIT_VIDEO);
+    TTF_Init();
 
+    SDL_Window* window = SDL_CreateWindow("Knights && Demons", WIDTH, HEIGHT, 0);
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, NULL);
+    TTF_Font* font = TTF_OpenFont(RUTA_ARCHIVO_FUENTES_DE_TEXTO, 28);
+
+    SDL_SetWindowFullscreen(window, true);
+
+    mostrarPantallaBienvenida(renderer,font);
+    char opcionElegida;
+    mostrarMenuPrincipal(renderer,font,&opcionElegida);
     while(opcionElegida!=SALIR)
     {
             if(opcionElegida==CARGAR_PARTIDA)
@@ -62,6 +75,8 @@ int main(int argc, char *argv[]) {
 
             if(opcionElegida==INICIAR_NUEVA_PARTIDA)
             {
+                //ANTIGUO USO
+                /*
                 char guardado[TAM_NOMBRE+1]={0};
                 system("cls");
                 puts("INICIO");
@@ -89,6 +104,16 @@ int main(int argc, char *argv[]) {
                 {
                     colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
                 }
+                */
+
+                //NUEVO CON SDL3
+                char nombre[TAM_NOMBRE+1];
+                int d;
+                mostrarPantallaNombre(renderer,font,nombre, window);
+                mostrarPantallaDificultad(renderer,font,&d);
+                iniciarJuegoNuevo(&elAdmin, &d, nombre);
+                mostrarPantallaHistoriaInicial(renderer,font,&retornos);
+                jugar(&elAdmin);
             }
             if(opcionElegida==CREDITOS)
             {
@@ -102,12 +127,21 @@ int main(int argc, char *argv[]) {
                 pausaYLimpiadoDePantalla();
             }
             system("cls");
-            opcionElegida = mostrarMenuPrincipalConMensaje(MENSAJE_DEL_MENU_PRINCIPAL, OPCIONES_MENU_PRINCIPAL);
+            mostrarMenuPrincipal(renderer,font,&opcionElegida);;
 
     }
         puts("Gracias por jugar");
         limpiarBuffer();
         getchar();
+
+        //destrozar los usos de sdl2
+        TTF_CloseFont(font);
+        TTF_Quit();
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+
+
         return 0;
 }
 
