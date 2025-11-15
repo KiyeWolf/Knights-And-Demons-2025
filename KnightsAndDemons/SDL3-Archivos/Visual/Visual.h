@@ -31,7 +31,7 @@ void mostrarMensajeEnVentanaYBorrarDespuesDeTecla(SDL_Renderer* renderer, TTF_Fo
 //void mostrarPantallaSolicitudDeNombreParaCargarPartida(SDL_Renderer* renderer, TTF_Font* font);
 //void mostrarMensajeDePartidaNoEncontrada(SDL_Renderer* renderer, TTF_Font* font);
 
-void mostrarCreditosEnPantalla(SDL_Renderer* renderer, TTF_Font* font);
+void mostrarCreditosEnPantalla(SDL_Renderer* renderer, TTF_Font* font, size_t* retorno);
 
 void mostrarTablaDePuntajesDeArchivo(SDL_Renderer* renderer,TTF_Font* font);
 

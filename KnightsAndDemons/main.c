@@ -137,7 +137,7 @@ int main(int argc, char *argv[]) {
             }
             if(opcionElegida==CREDITOS)
             {
-                mostrarCreditosEnPantalla(renderer,font);
+                mostrarCreditosEnPantalla(renderer,font,&retornos);
             }
             if(opcionElegida==TABLA_DE_PUNTAJES)
             {

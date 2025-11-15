@@ -24,6 +24,11 @@ void mostrarPantallaBienvenida(SDL_Renderer* renderer, TTF_Font* font) {
                 //presionando cualquier tecla se sale
                 esperando = false;
             }
+            if(e.type==SDL_EVENT_MOUSE_BUTTON_DOWN)
+            {
+                esperando = false;
+            }
+            
         }
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -42,6 +47,10 @@ void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion) 
         "4. TABLA DE PUNTAJES",
         "5. SALIR"
     };
+
+    //guardo en un array los botones para saber su información
+     SDL_FRect botones[CANT_OPCIONES_MENU_PRINCIPAL];
+
     int numOpciones = CANT_OPCIONES_MENU_PRINCIPAL;
 
     bool enMenu = true;
@@ -54,6 +63,24 @@ void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion) 
                  *(opcion) = '5';
                  enMenu=false;
             }
+            //esta es la parte del click del mouse
+            if (e.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
+                float mx = e.button.x;
+                float my = e.button.y;
+
+                for (int i = 0; i < CANT_OPCIONES_MENU_PRINCIPAL; i++) {
+                    SDL_FRect r = botones[i];
+
+                    if (mx >= r.x && mx <= r.x + r.w &&
+                        my >= r.y && my <= r.y + r.h)
+                    {
+                        *opcion = '1' + i;
+                        enMenu = false;
+                    }
+                }
+            }
+
+
             if (e.type == SDL_EVENT_KEY_DOWN) {
                 if (e.key.key >= '1' && e.key.key <= '5')
                 {
@@ -72,6 +99,10 @@ void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion) 
             SDL_Surface* surf = TTF_RenderText_Solid(font, opciones[i], 0, blanco);
             SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, surf);
             SDL_FRect rect = { (WIDTH - surf->w)/2, y, surf->w, surf->h };
+
+            //en esta parte guardo el rectangulo formado en el array, para luego conocer su información.
+            botones[i] = rect;
+
             SDL_RenderTexture(renderer, tex, NULL, &rect);
             SDL_DestroySurface(surf);
             SDL_DestroyTexture(tex);
@@ -93,11 +124,13 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
     SDL_RenderPresent(renderer);
     SDL_StartTextInput(window);
 
+    SDL_FRect r3;
+
     //cuando hay que escribir se usa startTextInput
     SDL_StartTextInput(window);
 
-    if (!renderer) { printf("[ERROR] renderer es NULL\n");}
-    if (!font) { printf("[ERROR] font es NULL\n");  }
+    //if (!renderer) { printf("[ERROR] renderer es NULL\n");}
+    //if (!font) { printf("[ERROR] font es NULL\n");  }
 
 
     while (escribiendo) {
@@ -109,7 +142,7 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
             }
             if (e.type == SDL_EVENT_TEXT_INPUT)
             {
-                printf("[DEBUG] evento TEXT_INPUT: \"%s\"\n", e.text.text); fflush(stdout);
+               // printf("[DEBUG] evento TEXT_INPUT: \"%s\"\n", e.text.text); fflush(stdout);
                 /* evitar overflow: concatenar solo lo que cabe en buffer */
                 size_t avail = sizeof(buffer) - 1 - strlen(buffer);
                 if (avail > 0) {
@@ -126,10 +159,18 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
                     escribiendo = false;
                 }
             }
+            if(e.type == SDL_EVENT_MOUSE_BUTTON_DOWN)
+            {
+                if(e.button.x >= r3.x && e.button.x <= r3.x + r3.w &&
+                         e.button.y >= r3.y && e.button.y <= r3.y + r3.h
+                        && strlen(buffer)==MIN_CANTIDAD_LETRAS_NOMBRE)
+                         {
+                            escribiendo = false;
+                         }
+            }
         }
 
 
-        printf("[DEBUG] mostrarPantallaNombre: inicio. MIN_LETRAS=%d\n", MIN_CANTIDAD_LETRAS_NOMBRE);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
@@ -180,6 +221,20 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
         SDL_DestroySurface(s2);
         SDL_DestroyTexture(t2);
 
+        SDL_Surface* s3 = TTF_RenderText_Solid(font,"Aceptar",0,blanco);
+        SDL_Texture* t3 = SDL_CreateTextureFromSurface(renderer,s3);
+        if(!t3)
+        {
+            printf("[ERROR] SDL_CreateTextureFromSurface fallo: %s\n", SDL_GetError());
+            SDL_Delay(3000);
+            SDL_DestroySurface(s1);
+        }
+        SDL_FRect r4 = { (WIDTH - s3->w)/2, (HEIGHT - 150),s3->w,s3->h};
+        SDL_RenderTexture(renderer,t3,NULL,&r4);
+        r3 = r4;
+        SDL_DestroySurface(s3);
+        SDL_DestroyTexture(t3);
+
         SDL_RenderPresent(renderer);
     }
     SDL_StopTextInput(window);
@@ -196,7 +251,7 @@ void mostrarPantallaDificultad(SDL_Renderer* renderer,TTF_Font* font,int* dificu
     SDL_Event e;
     SDL_Color blanco = {255,255,255,255};
     int numOpciones = 3;
-
+    SDL_FRect rects[3];
     while(esperando)
     {
         while(SDL_PollEvent(&e))
@@ -227,7 +282,21 @@ void mostrarPantallaDificultad(SDL_Renderer* renderer,TTF_Font* font,int* dificu
                     }
                 }
             }
+            if(e.type == SDL_EVENT_MOUSE_BUTTON_DOWN)
+            {
+                float mx = e.button.x;
+                float my = e.button.y;
 
+                for(int i = 0; i < numOpciones ; i++)
+                {
+                    if(mx >= rects[i].x && mx <= rects[i].x + rects[i].w &&
+                        my >= rects[i].y && my <= rects[i].y + rects[i].h)
+                        {
+                            *dificultad = i + 1;
+                            esperando = false;
+                        }
+                }
+            }
 
         }
         SDL_SetRenderDrawColor(renderer,0,0,0,255);
@@ -244,6 +313,8 @@ void mostrarPantallaDificultad(SDL_Renderer* renderer,TTF_Font* font,int* dificu
                 SDL_Surface* surf = TTF_RenderText_Solid(font, opciones[i], 0, blanco);
                 SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, surf);
                 SDL_FRect rect = { (WIDTH - surf->w)/2, y, surf->w, surf->h };
+                rects[i] = rect;
+
                 SDL_RenderTexture(renderer, tex, NULL, &rect);
                 SDL_DestroySurface(surf);
                 SDL_DestroyTexture(tex);
@@ -279,7 +350,8 @@ void mostrarPantallaHistoriaInicial(SDL_Renderer* renderer,TTF_Font* font, size_
                     //CORREGIR CERRAR EL PROGRAMA ESTA MAL
                     exit(0);
                 }
-                if(e.type == SDL_EVENT_KEY_DOWN && e.key.key == SDLK_RETURN)
+                if((e.type == SDL_EVENT_KEY_DOWN && e.key.key == SDLK_RETURN)
+                 || (e.type == SDL_EVENT_MOUSE_BUTTON_DOWN))
                 {
 
                     if(fgets(linea, sizeof(linea), archivo)==NULL)
@@ -398,6 +470,10 @@ void mostrarMensajeEnVentanaYBorrarDespuesDeTecla(SDL_Renderer* renderer, TTF_Fo
             {
                 estaLeyendo = false;
             }
+            if(e.type == SDL_EVENT_MOUSE_BUTTON_DOWN)
+            {
+                estaLeyendo = false;
+            }
         }
 
         SDL_SetRenderDrawColor(renderer,0,0,0,255);
@@ -414,9 +490,54 @@ void mostrarMensajeEnVentanaYBorrarDespuesDeTecla(SDL_Renderer* renderer, TTF_Fo
         SDL_RenderPresent(renderer);
     }
 }
-void mostrarCreditosEnPantalla(SDL_Renderer* renderer, TTF_Font* font)
+void mostrarCreditosEnPantalla(SDL_Renderer* renderer, TTF_Font* font, size_t* retorno)
 {
-    //FALTA HACER ESTOOOOO , no creo que sea dificil
+    /*
+    bool estaLeyendo = true;
+
+    int cantLineas;
+    char  vectorLineas[TAM_LINEA_SCORES+1][CANT_LINEAS_MAX];
+    if(cargarTablaDePuntajes((char*)vectorLineas, &cantLineas)!=TODO_OK)
+    {
+        exit(4);
+    }
+    SDL_Color blanco = {255,255,255,255};
+    SDL_Event e;
+    printf("[DEBUG] Se llegó a cargar la tabla de puntajes");
+    char* direccionDeLaLinea = (char*)vectorLineas;
+    while(estaLeyendo)
+    {
+        while(SDL_PollEvent(&e))
+        {
+            if(e.type == SDL_EVENT_QUIT)
+            {
+                //CORREGIR ESETO, NO PUEDE SALIR ASI NO MAS DLE PROGRAMA
+                exit(3);
+            }
+            if(e.type == SDL_EVENT_KEY_DOWN)
+            {
+                estaLeyendo = false;
+            }
+        }
+        SDL_SetRenderDrawColor(renderer,0,0,0,255);
+        SDL_RenderClear(renderer);
+
+        int y = 20;
+        direccionDeLaLinea = (char*)vectorLineas;
+        for(int i = 0; i < cantLineas; i++)
+        {
+            SDL_Surface* surf = TTF_RenderText_Solid(font,direccionDeLaLinea,0,blanco);
+            SDL_Texture* text = SDL_CreateTextureFromSurface(renderer,surf);
+            SDL_FRect rect = { 20, y , surf->w, surf->h };
+            SDL_RenderTexture(renderer,text,NULL,&rect);
+            SDL_DestroySurface(surf);
+            SDL_DestroyTexture(text);
+            y+=40;
+            direccionDeLaLinea+=TAM_LINEA_SCORES+1;
+        }
+        SDL_RenderPresent(renderer);
+    }
+    */
 }
 void mostrarTablaDePuntajesDeArchivo(SDL_Renderer* renderer,TTF_Font* font)
 {
@@ -445,7 +566,7 @@ void mostrarTablaDePuntajesDeArchivo(SDL_Renderer* renderer,TTF_Font* font)
             if(e.type == SDL_EVENT_QUIT)
             {
                 //CORREGIR ESETO, NO PUEDE SALIR ASI NO MAS DLE PROGRAMA
-                exit(3);
+                return;
             }
             if(e.type == SDL_EVENT_KEY_DOWN)
             {

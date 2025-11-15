@@ -24,7 +24,7 @@
 	<string.h>
 	<stdlib.h>
 
-1762608647 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\main.c
+1763169026 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\main.c
 	"menu.h"
 	"./Juego/TDAJuego.h"
 	"./Juego/scores.h"
@@ -541,10 +541,10 @@
 1761581326 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\tablero\tdatablero.c
 	"TDATablero.h"
 
-1762609646 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\visual\visual.c
+1763172003 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\visual\visual.c
 	"Visual.h"
 
-1762607622 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\visual\visual.h
+1763168874 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\visual\visual.h
 	<SDL3/SDL.h>
 	<stdio.h>
 	<stdbool.h>
