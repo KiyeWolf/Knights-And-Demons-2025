@@ -1,4 +1,4 @@
-#include "Visual.h"
+#include "VisualJuego.h"
 
 
 void mostrarPantallaBienvenida(SDL_Renderer* renderer, TTF_Font* font) {
@@ -28,7 +28,7 @@ void mostrarPantallaBienvenida(SDL_Renderer* renderer, TTF_Font* font) {
             {
                 esperando = false;
             }
-            
+
         }
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
@@ -123,7 +123,7 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
     SDL_StartTextInput(window);
-
+    float mx, my;
     SDL_FRect r3;
 
     //cuando hay que escribir se usa startTextInput
@@ -221,6 +221,11 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
         SDL_DestroySurface(s2);
         SDL_DestroyTexture(t2);
 
+
+
+
+
+        //boton aceptar
         SDL_Surface* s3 = TTF_RenderText_Solid(font,"Aceptar",0,blanco);
         SDL_Texture* t3 = SDL_CreateTextureFromSurface(renderer,s3);
         if(!t3)
@@ -230,11 +235,44 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
             SDL_DestroySurface(s1);
         }
         SDL_FRect r4 = { (WIDTH - s3->w)/2, (HEIGHT - 150),s3->w,s3->h};
+
+
+
+        //padding acolchado del boton justo aca
+        float botonPaddingX  = 200;
+        float botonPaddingY = 20;
+        SDL_FRect botonAceptar = {r4.x - botonPaddingX, r4.y - botonPaddingY, r4.w + botonPaddingX*2, r4.h + botonPaddingY*2};
+
+        // boton colores
+        SDL_GetMouseState(&mx,&my);
+        bool hover = (mx >= botonAceptar.x && mx <= botonAceptar.x + botonAceptar.w && my >= botonAceptar.y && my <= botonAceptar.y + botonAceptar.h) ? true : false;
+
+
+        //Esta parte de aca pregunta si hay o no hover:
+        SDL_Color fondoNormal = {40,40,40,255}; //opc 1
+        SDL_Color fondoHover  = {70,70,70,255}; // opc 2
+        SDL_Color borde       = {80,80,80,255};
+
+        SDL_Color fondo = hover ? fondoHover : fondoNormal;
+
+        //la clave esta en ahora fijar el draw color para el render, sacandolo de los colores que destine antes
+        SDL_SetRenderDrawColor(renderer, fondo.r, fondo.g, fondo.b, fondo.a);
+        //Fill rect, rellena el rectangulo con los colores seteados.
+        SDL_RenderFillRect(renderer, &botonAceptar);
+
+
+        //lo mismo para el borde:
+        SDL_SetRenderDrawColor(renderer, borde.r, borde.g, borde.b, 255);
+        //render REct solo renderiza el borde
+        SDL_RenderRect(renderer,&botonAceptar);
+        //Ahora si renderizo la textura del anterior (porque debe ir arriba del rectangulo.)
         SDL_RenderTexture(renderer,t3,NULL,&r4);
-        r3 = r4;
+
+        //importante que el r3 usado para los clicks ahora debe ser el rectangulo, no el texto.
+        r3 = botonAceptar;
         SDL_DestroySurface(s3);
         SDL_DestroyTexture(t3);
-
+        //
         SDL_RenderPresent(renderer);
     }
     SDL_StopTextInput(window);
@@ -554,11 +592,7 @@ void mostrarTablaDePuntajesDeArchivo(SDL_Renderer* renderer,TTF_Font* font)
     SDL_Event e;
     printf("[DEBUG] Se llegó a cargar la tabla de puntajes");
     char* direccionDeLaLinea = (char*)vectorLineas;
-    /*for(int i = 0 ; i < cantLineas ;i++)
-    {
-        printf("%s\n",direccionDeLaLinea);
-        direccionDeLaLinea+=TAM_LINEA_SCORES+1;
-    }*/
+
     while(estaLeyendo)
     {
         while(SDL_PollEvent(&e))

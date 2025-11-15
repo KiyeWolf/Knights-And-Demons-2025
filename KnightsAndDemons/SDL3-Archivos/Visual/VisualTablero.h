@@ -1,0 +1,7 @@
+#ifndef VISUAL_TABLERO_H_INCLUDED
+#define VISUAL_TABLERO_H_INCLUDED
+
+
+
+
+#endif

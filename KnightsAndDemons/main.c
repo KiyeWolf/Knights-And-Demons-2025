@@ -5,7 +5,8 @@
 #include "./Partida/TDAPartida.h"
 #include "./Tablero/TDATablero.h"
 
-#include "./SDL3-Archivos/Visual/Visual.h"
+#include "./SDL3-Archivos/Visual/VisualJuego.h"
+#include "./SDL3-Archivos/Visual/VisualTablero.h"
 int main(int argc, char *argv[]) {
     Admin elAdmin = {0};
     //system("chcp 65001 >nul");
