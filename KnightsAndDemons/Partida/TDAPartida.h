@@ -77,22 +77,30 @@
 
 /* FUNCIONES */
 // Principales
-int iniciarPartida(Admin* admin);
-int ciclarPartida(Admin*);
+
+
+
+//int iniciarPartida(Admin* admin);
+//int ciclarPartida(Admin*);
+
+
 int postNivel(Admin*, int);
 
 // Secundarias
 int guardarPartida(Admin*);
-void pedirJugada(Admin*, char**, size_t);
+//void pedirJugada(Admin*, char**, size_t);
 void mostrarNivelPikasActual(int, int);
 void mostrarBarraEstado(Admin*, int);
 
 // Auxiliares
 int tiempo(const Admin*, int);
 size_t obtenerTamTablero(const Admin*);
+bool tienePikas(int* ahora);
+void actualizarPikas(int* source,int* dest);
+
 
 // Mixes de Guille
-int jugar(Admin* manager);
+//int jugar(Admin* manager);
 void barraDeCarga();
-void textoDeInicioDeNivel();
+//void textoDeInicioDeNivel();
 #endif // TDAPARTIDA_H_INCLUDED

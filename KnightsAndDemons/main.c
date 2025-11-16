@@ -7,6 +7,9 @@
 
 #include "./SDL3-Archivos/Visual/VisualJuego.h"
 #include "./SDL3-Archivos/Visual/VisualTablero.h"
+#include "./SDL3-Archivos/Visual/VisualPartida.h"
+
+
 int main(int argc, char *argv[]) {
     Admin elAdmin = {0};
     //system("chcp 65001 >nul");
@@ -83,7 +86,7 @@ int main(int argc, char *argv[]) {
                 }
                 else
                 {
-                    if(jugar(&elAdmin)==JUEGO_COMPLETADO)
+                    if(jugar(&elAdmin, renderer, font)==JUEGO_COMPLETADO)
                     {
                         colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
                     }
@@ -93,36 +96,6 @@ int main(int argc, char *argv[]) {
 
             if(opcionElegida==INICIAR_NUEVA_PARTIDA)
             {
-                //ANTIGUO USO
-                /*
-                char guardado[TAM_NOMBRE+1]={0};
-                system("cls");
-                puts("INICIO");
-                printf("Ingresa el nombre con el que se inicie la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE-1);
-                fflush(stdin);
-                gets(guardado);
-                if(strlen(guardado)>TAM_NOMBRE || strlen(guardado)<TAM_NOMBRE)
-                {
-                    while(strlen(guardado)>TAM_NOMBRE || strlen(guardado)<TAM_NOMBRE)
-                    {
-                        puts("Error, el nombre es inválido, respeta la longitud.\n");
-                        system("pause");
-                        system("cls");
-                        printf("Ingresa el nombre con el que desea iniciar la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE);
-                        fflush(stdin);
-                        gets(guardado);
-                    }
-                }
-                guardado[strcspn(guardado, "\n")] = '\0';
-                system("cls");
-                int d = solicitarDificultad();
-                iniciarJuegoNuevo(&elAdmin, &d, guardado);
-                mostrarHistoriaInicial();
-                if(jugar(&elAdmin)==JUEGO_COMPLETADO)
-                {
-                    colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
-                }
-                */
 
                 //NUEVO CON SDL3
                 char nombre[TAM_NOMBRE+1];
@@ -131,7 +104,7 @@ int main(int argc, char *argv[]) {
                 mostrarPantallaDificultad(renderer,font,&d);
                 iniciarJuegoNuevo(&elAdmin, &d, nombre);
                 mostrarPantallaHistoriaInicial(renderer,font,&retornos);
-                if(jugar(&elAdmin)==JUEGO_COMPLETADO)
+                if(jugar(&elAdmin, renderer, font)==JUEGO_COMPLETADO)
                 {
                     colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
                 }

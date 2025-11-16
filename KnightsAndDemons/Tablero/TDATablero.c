@@ -5,7 +5,6 @@
 seguira habiendo una K o una D.*/
 void mostrarTablero(const int orden, char **mat, tJugada *jug){
     int i, j;
-
     for(i=0; i<orden; i++){
         for(j=0; j<orden; j++){
             if(i==jug->posCursorY&&j==jug->posCursorX)
@@ -36,7 +35,7 @@ se haya reservado).*/
 char **crearTablero(const int orden){
     int i;
     char **mat = (char **) malloc(orden*sizeof(char *));
-
+    
     if(mat==NULL)
         return NULL;
 
@@ -92,6 +91,7 @@ char intercambiarEstadoCasilla(char *casilla){
 Independientemente de si se use o no la pika, la casilla en la que se encuentra el
 cursor cambia. Con la pika solo cambia esa casilla, si no se usa tambien cambian
 las adyacentes*/
+/*
 int ejecutarJugada(const int orden, char **mat, tJugada *jug){
     int fil=jug->posCursorY, col=jug->posCursorX;
 
@@ -113,3 +113,4 @@ int ejecutarJugada(const int orden, char **mat, tJugada *jug){
 
     return verificarVictoria(orden, mat);
 }
+    */

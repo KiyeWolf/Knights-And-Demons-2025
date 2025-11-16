@@ -30,6 +30,6 @@ char **crearTablero(const int);
 void inicializarTablero(const int, char **, tJugada *);
 int verificarVictoria(const int, char **);
 char intercambiarEstadoCasilla(char *);
-int ejecutarJugada(const int, char **, tJugada *);
+//int ejecutarJugada(const int, char **, tJugada *);
 
 #endif // TDATABLERO_H_INCLUDED

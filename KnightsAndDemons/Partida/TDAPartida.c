@@ -1,6 +1,6 @@
 #include "TDAPartida.h"
 
-void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA POSICION SELECCIONADA EN CURSOR
+/*void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA POSICION SELECCIONADA EN CURSOR
 {
     char tecla;
     int finSeleccion = 0;
@@ -72,8 +72,8 @@ void pedirJugada(Admin* admin, char** tablero, size_t tamTablero) // CARGA LA PO
     }
     system("cls"); // Limpiar consola despues de mostrar (evita duplicados)
 }
-
-int guardarPartida(Admin* manager) // GUARDA EL ESTADO ACTUAL DEL JUEGO (HASTA ULTIMO NIVEL JUGADO)
+*/
+/*int guardarPartida(Admin* manager) // GUARDA EL ESTADO ACTUAL DEL JUEGO (HASTA ULTIMO NIVEL JUGADO)
 {
     char guardado[TAM_LINEA_JUEGO];
     snprintf(guardado, sizeof(guardado), "%s%s.dat", RUTA_PARTIDAS_GUARDADAS, manager->jugador.nombre);
@@ -89,6 +89,20 @@ int guardarPartida(Admin* manager) // GUARDA EL ESTADO ACTUAL DEL JUEGO (HASTA U
     Sleep(2000);
     system("cls");
 
+    return TODO_OK;
+}
+*/
+int guardarPartida(Admin* manager) // GUARDA EL ESTADO ACTUAL DEL JUEGO (HASTA ULTIMO NIVEL JUGADO)
+{
+    char guardado[TAM_LINEA_JUEGO];
+    snprintf(guardado, sizeof(guardado), "%s%s.dat", RUTA_PARTIDAS_GUARDADAS, manager->jugador.nombre);
+    FILE* arch = fopen(guardado, "wb");
+    if(!arch)
+    {
+        return ARCHIVO_CORRUPTO; //No se pudo encontrar el archivo, por tanto se retorna codigo de error
+    }
+    fwrite(manager,sizeof(*manager),1, arch);
+    fclose(arch);
     return TODO_OK;
 }
 
@@ -132,7 +146,7 @@ int tiempo(const Admin* admin, int operacion) // DEVUELVE TIEMPO (EN SEGUNDOS) O
 
     return 0;
 }
-
+/*
 int iniciarPartida(Admin* admin) // DEVUELVE SI GANÓ O NO (1,2 o 0 si perdio el útlimo)
 {
     int gano = 0;
@@ -169,15 +183,20 @@ int iniciarPartida(Admin* admin) // DEVUELVE SI GANÓ O NO (1,2 o 0 si perdio el
 
     return gano;
 }
-
-int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HASTA QUE SALGA AL MENÚ
+*/
+/*int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HASTA QUE SALGA AL MENÚ
 {
     int finalJuego = 0;
     int gano;
     int estaEnMenu = 0;
     int respuesta;
     int cantPikas;
-
+    SDL_Surface* sKnight = SDL_LoadBMP(RUTA_IMAGEN_CABALLERO);
+    SDL_Surface* sDemon = IMG_LoadBMP(RUTA_IMAGEN_DEMONIO);
+    if(!sKnight || !sDemon)
+    {
+        //printf("[DEBUG] Error al cargar las imagenes: %d", SDL_GetErro());
+    }
     while(!estaEnMenu && finalJuego == 0)
     {
         textoDeInicioDeNivel();
@@ -260,9 +279,9 @@ int ciclarPartida(Admin* admin) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HAST
     }
 
     return finalJuego;
-}
+}*/
 
-int postNivel(Admin* admin, int resultado) // DEVUELVE SI SE VA O NO AL MENÚ (0 o 1)
+/*int postNivel(Admin* admin, int resultado) // DEVUELVE SI SE VA O NO AL MENÚ (0 o 1)
 {
     int respuesta;
 
@@ -280,7 +299,7 @@ int postNivel(Admin* admin, int resultado) // DEVUELVE SI SE VA O NO AL MENÚ (0
     system("cls");
 
     return (respuesta-1); // El -1 es para que devuelva 1 o 0 en vez de 1 o 2
-}
+}*/
 
 void mostrarNivelPikasActual(int nivelActual, int pikasActuales) // MUESTRA PIKAS Y NIVEL ACTUALES + LIMPIA LA CONSOLA
 {
@@ -329,7 +348,7 @@ void mostrarBarraEstado(Admin* admin, int resultado) // MUESTRA LA BARRA DE ESTA
            admin->jugador.TotalestadoDos);
 }
 
-int jugar(Admin* manager)
+/*int jugar(Admin* manager)
 {
     int finalJuego;
 
@@ -369,7 +388,8 @@ int jugar(Admin* manager)
     barraDeCarga();
 
     return 1; //El jugador no completo el juego
-}
+}*/
+
 
 void barraDeCarga()
 {
@@ -386,10 +406,23 @@ void barraDeCarga()
     system("cls");
 }
 
-void textoDeInicioDeNivel()
+/*void textoDeInicioDeNivel()
 {
     system("cls");
     printf("<< Una nueva Batalla Comienza... >>");
     Sleep(500);
     system("cls");
+}*/
+bool tienePikas(int* ahora)
+{
+    if(*ahora > 0)
+    {
+        *ahora = *ahora-1;
+        return true;
+    }
+    return false;
+}
+void actualizarPikas(int* source,int* dest)
+{
+    *dest = *source;
 }
