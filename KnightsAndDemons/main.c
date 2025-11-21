@@ -54,7 +54,12 @@ int main(int argc, char *argv[]) {
     {
         printf("[ERROR] No pude cargar sonido del botón\n");
     }
-
+    tSonido sonidoBotonCasilla;
+    if (!cargarUnSonidoNuevo(RUTA_SONIDO_BOTON_CASILLA,
+                            &sonidoBotonCasilla))
+    {
+        printf("[ERROR] No pude cargar sonido del botón\n");
+    }
     mostrarPantallaBienvenida(renderer,font);
     char opcionElegida;
     mostrarMenuPrincipal(renderer,font,&opcionElegida, &sonidoBotonMenu);
@@ -98,14 +103,14 @@ int main(int argc, char *argv[]) {
                 //NUEVO SDL3
                 char nombre[TAM_NOMBRE+1]={0};
                 mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer,font,"[ Debes ingresar el nombre con el que se  guardo la partida]");
-                mostrarPantallaNombre(renderer,font,nombre, window);
+                mostrarPantallaNombre(renderer,font,nombre, window, &sonidoBotonMenu);
                 if(cargarPartida(&elAdmin, nombre)!=TODO_OK)
                 {
                     mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer,font,"Lo siento, no se encontró la partida Cargada");
                 }
                 else
                 {
-                    if(jugar(&elAdmin, renderer, font)==JUEGO_COMPLETADO)
+                    if(jugar(&elAdmin, renderer, font,&sonidoBotonCasilla)==JUEGO_COMPLETADO)
                     {
                         colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
                     }
@@ -119,11 +124,11 @@ int main(int argc, char *argv[]) {
                 //NUEVO CON SDL3
                 char nombre[TAM_NOMBRE+1];
                 int d;
-                mostrarPantallaNombre(renderer,font,nombre, window);
-                mostrarPantallaDificultad(renderer,font,&d);
+                mostrarPantallaNombre(renderer,font,nombre, window,&sonidoBotonMenu);
+                mostrarPantallaDificultad(renderer,font,&d, &sonidoBotonMenu);
                 iniciarJuegoNuevo(&elAdmin, &d, nombre);
                 mostrarPantallaHistoriaInicial(renderer,font,&retornos);
-                if(jugar(&elAdmin, renderer, font)==JUEGO_COMPLETADO)
+                if(jugar(&elAdmin, renderer, font,&sonidoBotonCasilla)==JUEGO_COMPLETADO)
                 {
                     colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
                 }
@@ -148,6 +153,7 @@ int main(int argc, char *argv[]) {
         //destrozar los usos de sdl3
 
         liberarSonido(&sonidoBotonMenu);
+        liberarSonido(&sonidoBotonCasilla);
         cerrarAudio();
         SDL_QuitSubSystem(SDL_INIT_AUDIO);
         SDL_QuitSubSystem(SDL_INIT_VIDEO);

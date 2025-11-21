@@ -116,7 +116,8 @@ void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, 
     }
 
 }
-void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombrePlayer, SDL_Window* window) {
+void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombrePlayer, SDL_Window* window,tSonido* sonidoBotonMenu)
+{
     bool escribiendo = true;
     SDL_Event e;
     char buffer[32] = "";
@@ -168,6 +169,7 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
                          e.button.y >= r3.y && e.button.y <= r3.y + r3.h
                         && strlen(buffer)==MIN_CANTIDAD_LETRAS_NOMBRE)
                          {
+                            reproducirSFX(sonidoBotonMenu);
                             escribiendo = false;
                          }
             }
@@ -281,7 +283,7 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
     SDL_StopTextInput(window);
     strcpy(nombrePlayer, buffer);
 }
-void mostrarPantallaDificultad(SDL_Renderer* renderer,TTF_Font* font,int* dificultad)
+void mostrarPantallaDificultad(SDL_Renderer* renderer,TTF_Font* font,int* dificultad, tSonido* sonidoBotonMenu)
 {
     const char* opciones[3]={
         "1. FACIL",
@@ -333,6 +335,7 @@ void mostrarPantallaDificultad(SDL_Renderer* renderer,TTF_Font* font,int* dificu
                     if(mx >= rects[i].x && mx <= rects[i].x + rects[i].w &&
                         my >= rects[i].y && my <= rects[i].y + rects[i].h)
                         {
+                            reproducirSFX(sonidoBotonMenu);
                             *dificultad = i + 1;
                             esperando = false;
                         }

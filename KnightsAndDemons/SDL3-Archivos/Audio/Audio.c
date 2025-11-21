@@ -110,6 +110,7 @@ bool reproducirSFX(const tSonido* sonido)
         SDL_DestroyAudioStream(streamActivo);
         streamActivo = NULL;
     }
+    
     //un chequeo rapidito de que no esté vació
     if(!sonido || !sonido->buffer|| sonido->longitud <= 0)
     {
@@ -117,6 +118,7 @@ bool reproducirSFX(const tSonido* sonido)
         printf("[DEBUG]: Error sonido sin longitud o sonido sin buffer: %s", SDL_GetError());
         return false;
     }
+    SDL_ClearAudioStream(streamActivo);
     //no queda de otra opcion qeu destrozar el stream anterior y crear uno nuevo
     SDL_AudioStream* stream = SDL_CreateAudioStream(&sonido->sonidoSpec, &dispositivoDeAudio.spec);
     if (!stream) {

@@ -11,7 +11,7 @@
 #define CANAL_MONO 1
 
 #define RUTA_SONIDO_BOTON_MENU "./SDL3-Archivos/Audio/Menu/BotonPresionadoRecortado.wav"
-
+#define RUTA_SONIDO_BOTON_CASILLA "./SDL3-Archivos/Audio/Menu/BotonPresionadoCasilla.wav"
 typedef struct {
 
     // tan solo un identificador del dispositivo

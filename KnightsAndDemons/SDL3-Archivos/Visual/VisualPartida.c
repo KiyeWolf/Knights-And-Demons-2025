@@ -1,10 +1,10 @@
 #include "VisualPartida.h"
 
-int jugar(Admin* manager,  SDL_Renderer* renderer, TTF_Font* font)
+int jugar(Admin* manager,  SDL_Renderer* renderer, TTF_Font* font,tSonido* sonidoBotonCasilla)
 {
     int finalJuego;
     //barraDeCarga();
-    finalJuego = ciclarPartida(manager, renderer);
+    finalJuego = ciclarPartida(manager, renderer,sonidoBotonCasilla);
     if(finalJuego == 2) //Este if pregunta si el jugador gano todos los niveles
     {
         char mensajeFinal[100];
@@ -39,7 +39,7 @@ int jugar(Admin* manager,  SDL_Renderer* renderer, TTF_Font* font)
 
     return 1; //El jugador no completo el juego
 }
-int ciclarPartida(Admin* admin, SDL_Renderer* renderer) // CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HASTA QUE SALGA AL MENÚ
+int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasilla)// CICLA TODA LA PARTIDA (1 NIVEL A LA VEZ) HASTA QUE SALGA AL MENÚ
 {
     int finalJuego = 0;
     int gano;
@@ -66,7 +66,7 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer) // CICLA TODA LA PARTIDA
     while(!estaEnMenu && finalJuego == 0)
     {
         mostrarMensajeDeInicioDeNivel(renderer, fontMensajeInicioNivel);
-        gano = iniciarPartidaConSDL(admin, textKnight,textDemon,renderer);
+        gano = iniciarPartidaConSDL(admin, textKnight,textDemon,renderer,sonidoBotonCasilla);
         if(gano != 0) //Por lo menos no perdió, entra dentro de este if
         {
             if(gano == GANO_KNIGHTS){
@@ -150,7 +150,7 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer) // CICLA TODA LA PARTIDA
 
     return finalJuego;
 }
-int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* textDemon, SDL_Renderer* renderer) // DEVUELVE SI GANÓ O NO (1,2 o 0 si perdio el útlimo)
+int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* textDemon, SDL_Renderer* renderer,tSonido* sonidoBotonCasilla) // DEVUELVE SI GANÓ O NO (1,2 o 0 si perdio el útlimo)
 {
 
 
@@ -208,6 +208,11 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
                     int posX = (mouseX - (WIDTH - tamTablero*TAMANIO_CELDA)/2)/TAMANIO_CELDA;
                     int posY = (mouseY - (HEIGHT - tamTablero*TAMANIO_CELDA)/2)/TAMANIO_CELDA;
                     //printf("[DEBUG]: posX: %d , posY: %d \n", posX, posY);
+
+                    //reproduce sonido
+                    reproducirSFX(sonidoBotonCasilla);
+
+
                     if(e.button.button == SDL_BUTTON_LEFT)
                     {
                         actualizarCursor(&(admin->cursor), posX, posY, false);
