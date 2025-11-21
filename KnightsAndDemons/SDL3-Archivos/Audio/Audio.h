@@ -11,8 +11,9 @@
 #define CANAL_MONO 1
 
 #define RUTA_SONIDO_BOTON_MENU "./SDL3-Archivos/Audio/Menu/BotonPresionadoRecortado.wav"
-#define RUTA_SONIDO_BOTON_CASILLA "./SDL3-Archivos/Audio/Menu/BotonPresionadoCasilla.wav"
+#define RUTA_SONIDO_BOTON_CASILLA "./SDL3-Archivos/Audio/Tablero/BotonPresionadoCasilla.wav"
 #define RUTA_BACKGROUND_MUSIC_HISTORIA_PRINCIPAL "./SDL3-Archivos/Audio/Historia/mainHistoryTheme.wav"
+#define RUTA_BACKGROUND_MUSIC_MENU "./SDL3-Archivos/Audio/Menu/mainMenuTheme.wav"
 typedef struct {
 
     // tan solo un identificador del dispositivo
@@ -66,4 +67,8 @@ bool cargarUnaBGMNueva(const char* rutaArch, tSonido* salida);
 bool reproducirBGM(const tSonido* musica);
 bool liberarBGM(tSonido* sonido);
 void detenerMusicaBGM();
+bool terminoLaMusica();
+void recargarLaBGM(tSonido* bgm);
+
+
 #endif // AUDIO_H_INCLUDED

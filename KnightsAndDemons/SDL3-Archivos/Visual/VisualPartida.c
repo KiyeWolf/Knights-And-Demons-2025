@@ -178,7 +178,10 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
     tablero = crearTablero(tamTablero);
     inicializarTablero(tamTablero, tablero, &admin->cursor);
 
-    //parteSDL
+    //parteSonido
+
+
+
     while(estaJugando)
     {
         //printf("[DEBUG]: ME LLEGUE A METER EN EL WHILE DE INICIAR PARTIDA");

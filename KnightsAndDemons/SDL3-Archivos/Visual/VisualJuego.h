@@ -21,7 +21,7 @@
 
 
 void mostrarPantallaBienvenida(SDL_Renderer* renderer,TTF_Font* font);
-void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, tSonido* sonidoBotonMenu);
+void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, tSonido* sonidoBotonMenu, tSonido* bgm);
 void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombrePlayer, SDL_Window* window,tSonido* sonidoBotonMenu);
 void mostrarPantallaDificultad(SDL_Renderer* renderer,TTF_Font* font,int* dificultad, tSonido* sonidoBotonMenu);
 void mostrarPantallaHistoriaInicial(SDL_Renderer* renderer,TTF_Font* font, size_t* retorno);

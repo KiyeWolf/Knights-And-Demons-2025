@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 
 
     //PRUEBA DE SONIDOSSSS
-    
+
 
     if(!inicializarAudioSDL())
     {
@@ -60,9 +60,17 @@ int main(int argc, char *argv[]) {
     {
         printf("[ERROR] No pude cargar sonido del botón\n");
     }
+    tSonido bgm;
+    if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_MENU,&bgm))
+    {
+        printf("[ERROR] No pude musica del main menu\n");
+    }
+
+    reproducirBGM(&bgm);
+
     mostrarPantallaBienvenida(renderer,font);
     char opcionElegida;
-    mostrarMenuPrincipal(renderer,font,&opcionElegida, &sonidoBotonMenu);
+    mostrarMenuPrincipal(renderer,font,&opcionElegida, &sonidoBotonMenu,&bgm);
     while(opcionElegida!=SALIR)
     {
             if(opcionElegida==CARGAR_PARTIDA)
@@ -110,6 +118,7 @@ int main(int argc, char *argv[]) {
                 }
                 else
                 {
+                    detenerMusicaBGM();
                     if(jugar(&elAdmin, renderer, font,&sonidoBotonCasilla)==JUEGO_COMPLETADO)
                     {
                         colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
@@ -129,6 +138,7 @@ int main(int argc, char *argv[]) {
                 iniciarJuegoNuevo(&elAdmin, &d, nombre);
                 mostrarPantallaHistoriaInicial(renderer,font,&retornos);
                // printf("[DEBUG TIME]: si logre salir de la pantalla principal");
+               detenerMusicaBGM();
                 if(jugar(&elAdmin, renderer, font,&sonidoBotonCasilla)==JUEGO_COMPLETADO)
                 {
                     colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
@@ -146,15 +156,17 @@ int main(int argc, char *argv[]) {
                 */
                mostrarTablaDePuntajesDeArchivo(renderer,font);
             }
-            mostrarMenuPrincipal(renderer,font,&opcionElegida, &sonidoBotonMenu);
+            mostrarMenuPrincipal(renderer,font,&opcionElegida, &sonidoBotonMenu,&bgm);
 
     }
         mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer,font,"Gracias Por jugar");
 
         //destrozar los usos de sdl3
-
+        liberarBGM(&bgm);
         liberarSonido(&sonidoBotonMenu);
+        printf("Se libero correctamente la bgm");
         liberarSonido(&sonidoBotonCasilla);
+        printf("se libero correctamente: sonido Boton casilla");
         cerrarAudio();
         SDL_QuitSubSystem(SDL_INIT_AUDIO);
         SDL_QuitSubSystem(SDL_INIT_VIDEO);

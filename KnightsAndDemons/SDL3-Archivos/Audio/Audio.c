@@ -40,10 +40,7 @@ bool cargarUnSonidoNuevo(const char* rutaArch, tSonido* salida)
         return false;
     }
     //en esta parte hay que chequear si el formato del audio es compatible con el dispositivo
-    if(necesitaConversionDeAudio(&audio))
-    {
-        printf("[DEBUG]Al parecer el sonido necesita conversion\n");
-        //entonces hago la conversión
+    //entonces hago la conversión
         SDL_AudioStream* stream = SDL_CreateAudioStream(&audio,&(dispositivoDeAudio.spec));
         if(!stream)
         {
@@ -85,13 +82,6 @@ bool cargarUnSonidoNuevo(const char* rutaArch, tSonido* salida)
         printf("[DEBUG]La conversion se logró\n");
         SDL_free(sound.buffer);
         return true;
-    }
-    salida->buffer = sound.buffer;
-    salida->longitud = sound.longitud;
-    salida->sonidoSpec = audio;
-
-    printf("[DEBUG]Al parecer el sonido se cargo correctamente\n");
-    return true;
 }
 bool cargarUnaBGMNueva(const char* rutaArch, tSonido* salida)
 {
@@ -240,7 +230,7 @@ bool reproducirSFX(const tSonido* sonido)
     /*SDL_PauseAudioDevice(dispositivoDeAudio.id, false);
     guardarStreamActivo(stream);*/
    // SDL_PauseAudioDevice(dispositivoDeAudio.id);
-    if (SDL_ResumeAudioDevice(dispositivoDeAudio.id))
+    if (!SDL_ResumeAudioDevice(dispositivoDeAudio.id))
     {
          printf("[DEBUG] Error al resumir dispositivo: %s\n", SDL_GetError());
     }
@@ -256,6 +246,9 @@ bool liberarSonido(tSonido* sonido)
     {
         //printf("yes llegue hasta liberarSonido");
         // libera buffer (sea WAV directo o convertido)
+
+       // printf("[DEBUG liberarSonido] buffer=%p, longitud=%d\n",
+           //sonido->buffer, sonido->longitud);
         SDL_free(sonido->buffer);
         sonido->buffer = NULL;
     }
@@ -366,4 +359,14 @@ void detenerMusicaBGM()
     {
         printf("[DEBUG] Intente detener BGM pero el puntero era NULL (¿Ya estaba detenida?)\n");
     }
+}
+bool terminoLaMusica()
+{
+    return (streamBGM && SDL_GetAudioStreamAvailable(streamBGM) == 0);
+}
+void recargarLaBGM(tSonido* bgm)
+{
+    // Recargar la música para el siguiente loop
+        SDL_PutAudioStreamData(streamBGM, bgm->buffer, bgm->longitud);
+        SDL_FlushAudioStream(streamBGM);
 }

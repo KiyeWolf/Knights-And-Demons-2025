@@ -39,7 +39,7 @@ void mostrarPantallaBienvenida(SDL_Renderer* renderer, TTF_Font* font) {
 
     SDL_DestroyTexture(tex);
 }
-void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, tSonido* sonidoBotonMenu)
+void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, tSonido* sonidoBotonMenu, tSonido* bgm)
 {
     const char* opciones[CANT_OPCIONES_MENU_PRINCIPAL] = {
         "1. CARGAR PARTIDA",
@@ -56,6 +56,7 @@ void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, 
 
     bool enMenu = true;
     SDL_Event e;
+
 
     while (enMenu) {
         while (SDL_PollEvent(&e)) {
@@ -110,6 +111,12 @@ void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, 
             SDL_DestroySurface(surf);
             SDL_DestroyTexture(tex);
             y += 60;
+        }
+
+        //parte donde pregunto si se termino la musica
+        if(terminoLaMusica())
+        {
+            recargarLaBGM(bgm);
         }
 
         SDL_RenderPresent(renderer);
@@ -427,11 +434,9 @@ void mostrarPantallaHistoriaInicial(SDL_Renderer* renderer,TTF_Font* font, size_
                 SDL_DestroySurface(surf);
                 SDL_DestroyTexture(tex);
             }
-            if (streamBGM && SDL_GetAudioStreamAvailable(streamBGM) == 0)
+            if(terminoLaMusica())
             {
-                // Recargar la música para el siguiente loop
-                SDL_PutAudioStreamData(streamBGM, bgm.buffer, bgm.longitud);
-                SDL_FlushAudioStream(streamBGM);
+                recargarLaBGM(&bgm);
             }
             SDL_RenderPresent(renderer);
         }
@@ -440,7 +445,6 @@ void mostrarPantallaHistoriaInicial(SDL_Renderer* renderer,TTF_Font* font, size_
         *(retorno) = TODO_OK;
     }
     detenerMusicaBGM();
-    printf("[DEBUG TIME]: si logre salir del bucle: %d",*retorno);
    if(!liberarBGM(&bgm))
    {
     printf("[DEBUG]: no pude liberar bgm: %s", SDL_GetError());
