@@ -105,7 +105,7 @@ void renderizarTableroConSDL(SDL_Renderer *renderer,
         SDL_RenderRect(renderer, &boardRect);
     }
 }
-bool hizoClickEnTablero(int mouseX,int mouseY,char** tablero,size_t tamTablero, int tamCelda)
+bool hizoClickEnTablero(const int mouseX,const int mouseY,char** tablero,const size_t tamTablero,const int tamCelda)
 {
     float offsetEnX = (WIDTH - tamTablero*tamCelda)/2;
     float offsetEnY = (HEIGHT - tamTablero*tamCelda)/2;

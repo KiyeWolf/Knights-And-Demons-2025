@@ -8,7 +8,7 @@
 #include "../../menu.h"
 #include "../../Juego/TDAJuego.h"
 #include "../../Juego/scores.h"
-
+#include "../../SDL3-Archivos/Audio/Audio.h"
 
 #define WIDTH 800
 #define HIGHT 600
@@ -20,7 +20,7 @@
 
 
 void mostrarPantallaBienvenida(SDL_Renderer* renderer,TTF_Font* font);
-void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion);
+void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, tSonido* sonidoBotonMenu);
 void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombrePlayer, SDL_Window* window);
 void mostrarPantallaDificultad(SDL_Renderer* renderer,TTF_Font* font,int* dificultad);
 void mostrarPantallaHistoriaInicial(SDL_Renderer* renderer,TTF_Font* font, size_t* retorno);

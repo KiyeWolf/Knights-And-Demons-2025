@@ -77,6 +77,9 @@
 		<Unit filename="Partida/TDAPartida.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="SDL3-Archivos/Audio/Audio.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="SDL3-Archivos/Visual/VisualJuego.c">
 			<Option compilerVar="CC" />
 		</Unit>

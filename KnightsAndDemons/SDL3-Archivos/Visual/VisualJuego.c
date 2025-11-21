@@ -39,7 +39,8 @@ void mostrarPantallaBienvenida(SDL_Renderer* renderer, TTF_Font* font) {
 
     SDL_DestroyTexture(tex);
 }
-void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion) {
+void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, tSonido* sonidoBotonMenu)
+{
     const char* opciones[CANT_OPCIONES_MENU_PRINCIPAL] = {
         "1. CARGAR PARTIDA",
         "2. NUEVO JUEGO",
@@ -74,6 +75,8 @@ void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion) 
                     if (mx >= r.x && mx <= r.x + r.w &&
                         my >= r.y && my <= r.y + r.h)
                     {
+                        //si estoy aca entonces clickeo una opcion del menu, 
+                        reproducirSFX(sonidoBotonMenu);
                         *opcion = '1' + i;
                         enMenu = false;
                     }

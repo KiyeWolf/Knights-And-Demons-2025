@@ -32,4 +32,9 @@ int verificarVictoria(const int, char **);
 char intercambiarEstadoCasilla(char *);
 //int ejecutarJugada(const int, char **, tJugada *);
 
+//agregados de Guille (por sintaxis)
+void actualizarCursor(tJugada* jug, const int x, const int y, bool usoPika);
+
+
+
 #endif // TDATABLERO_H_INCLUDED

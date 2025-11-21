@@ -200,20 +200,17 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
                 mouseX =  e.motion.x;
                 mouseY  = e.motion.y;
                 //primero chequear que celda fue.
-                printf("[DEBUG]: mousex: %d , mouseY: %d \n", mouseX, mouseY);
+                //printf("[DEBUG]: mousex: %d , mouseY: %d \n", mouseX, mouseY);
                 if(hizoClickEnTablero(mouseX,mouseY,tablero,tamTablero, TAMANIO_CELDA))
                 {
-                    printf("[DEBUG]: TABLERO");
+                    //printf("[DEBUG]: TABLERO");
                     //deben ir al reves por eso los invierto
                     int posX = (mouseX - (WIDTH - tamTablero*TAMANIO_CELDA)/2)/TAMANIO_CELDA;
                     int posY = (mouseY - (HEIGHT - tamTablero*TAMANIO_CELDA)/2)/TAMANIO_CELDA;
-                    printf("[DEBUG]: posX: %d , posY: %d \n", posX, posY);
+                    //printf("[DEBUG]: posX: %d , posY: %d \n", posX, posY);
                     if(e.button.button == SDL_BUTTON_LEFT)
                     {
-
-                        admin->cursor.posCursorX = posX;
-                        admin->cursor.posCursorY = posY;
-                        admin->cursor.seUsoPika = false;
+                        actualizarCursor(&(admin->cursor), posX, posY, false);
                         gano = ejecutarJugadaSDL(tamTablero, tablero, TAMANIO_CELDA, &(admin->cursor));
                     }
                     if(e.button.button == SDL_BUTTON_RIGHT)
@@ -222,15 +219,14 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
                         //printf("[DEBUG]: ME LLEGUE A METER EN EL EVENTO MOUSE BUTTON DOWN y entre al if del tablero");
                         if(tienePikas(&pikasDeInicio))
                         {
-                            admin->cursor.seUsoPika = true;
-                            admin->cursor.posCursorX = posX;
-                            admin->cursor.posCursorY = posY;
+                            restarUnaPika(&pikasDeInicio);
+                            actualizarCursor(&(admin->cursor), posX, posY, true);
                             gano = ejecutarJugadaSDL(tamTablero, tablero, TAMANIO_CELDA, &(admin->cursor));
                         }
                         else
                         {
                             //no tiene pikas habría que avisarle.
-                            mostrarMensajeDeQueNoHayPikas(renderer,font);
+                            renderizarMensajeDeQueNoHayPikas(renderer,font);
                         }
                         admin->cursor.seUsoPika = false;
                     }
@@ -335,7 +331,7 @@ void renderizarContadoresSDL(SDL_Renderer* renderer, const int tiempo, TTF_Font*
     SDL_DestroySurface(surf);
     SDL_DestroyTexture(text);
 }
-void mostrarMensajeDeQueNoHayPikas(SDL_Renderer* renderer, TTF_Font* font)
+void renderizarMensajeDeQueNoHayPikas(SDL_Renderer* renderer, TTF_Font* font)
 {
     char texto[70]="¡No tienes más Pikas para usar!";
     SDL_Color blanco = {255,255,255,255};

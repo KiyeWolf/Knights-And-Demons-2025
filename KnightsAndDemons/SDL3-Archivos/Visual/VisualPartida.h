@@ -21,7 +21,7 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer);
 int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* textDemon, SDL_Renderer* renderer);
 void actualizarHoverCelda(int* hoverEnFila,int* hoverEnColumna,int mouseX,int mouseY,const size_t tamTablero,const int tamCelda);
 void renderizarContadoresSDL(SDL_Renderer* renderer, const int tiempo, TTF_Font* font);
-void mostrarMensajeDeQueNoHayPikas(SDL_Renderer* renderer, TTF_Font* font);
+void renderizarMensajeDeQueNoHayPikas(SDL_Renderer* renderer, TTF_Font* font);
 void mostrarMensajeDeInicioDeNivel(SDL_Renderer* renderer, TTF_Font* font);
 void preguntarGuardarPartida(int* respuesta, SDL_Renderer* renderer, TTF_Font* font);
 

@@ -15,7 +15,7 @@ void renderizarTableroConSDL(SDL_Renderer *renderer,
                           int luzHoverFila,
                           int luzHoverColumna);
 
-bool hizoClickEnTablero(int mouseX,int mouseY,char** tablero,size_t tamTablero, int tamCelda);
+bool hizoClickEnTablero(const int mouseX,const int mouseY,char** tablero,const size_t tamTablero,const int tamCelda);
 int ejecutarJugadaSDL(const int orden,char** mat, int tamCelda,tJugada *jug);
 
 #endif

@@ -95,12 +95,13 @@ void mostrarBarraEstado(Admin*, int);
 // Auxiliares
 int tiempo(const Admin*, int);
 size_t obtenerTamTablero(const Admin*);
-bool tienePikas(int* ahora);
-void actualizarPikas(int* source,int* dest);
-
+//Auxilires que Agregro Guille
+bool tienePikas(const int* ahora);
+void actualizarPikas(const int* source,int* dest);
+void restarUnaPika(int* ahora);
 
 // Mixes de Guille
 //int jugar(Admin* manager);
-void barraDeCarga();
+//void barraDeCarga();
 //void textoDeInicioDeNivel();
 #endif // TDAPARTIDA_H_INCLUDED

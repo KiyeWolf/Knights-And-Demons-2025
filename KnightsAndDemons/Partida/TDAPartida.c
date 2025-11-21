@@ -391,7 +391,7 @@ void mostrarBarraEstado(Admin* admin, int resultado) // MUESTRA LA BARRA DE ESTA
 }*/
 
 
-void barraDeCarga()
+/*void barraDeCarga()
 {
     system("cls");
     printf("Cargando");
@@ -404,7 +404,7 @@ void barraDeCarga()
     Sleep(400);
     printf(" .");
     system("cls");
-}
+}*/
 
 /*void textoDeInicioDeNivel()
 {
@@ -413,16 +413,22 @@ void barraDeCarga()
     Sleep(500);
     system("cls");
 }*/
-bool tienePikas(int* ahora)
+bool tienePikas(const int* ahora)
 {
     if(*ahora > 0)
     {
-        *ahora = *ahora-1;
         return true;
     }
     return false;
 }
-void actualizarPikas(int* source,int* dest)
+void actualizarPikas(const int* source,int* dest)
 {
     *dest = *source;
+}
+void restarUnaPika(int* ahora)
+{
+    if(*ahora > 0)
+    {
+        (*ahora)--;
+    }
 }

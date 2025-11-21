@@ -8,6 +8,7 @@
 #include "./SDL3-Archivos/Visual/VisualJuego.h"
 #include "./SDL3-Archivos/Visual/VisualTablero.h"
 #include "./SDL3-Archivos/Visual/VisualPartida.h"
+#include "./SDL3-Archivos/Audio/Audio.h"
 
 
 int main(int argc, char *argv[]) {
@@ -26,6 +27,7 @@ int main(int argc, char *argv[]) {
 
     //MENU NUEVOOO
     SDL_Init(SDL_INIT_VIDEO);
+    SDL_Init(SDL_INIT_AUDIO);
     TTF_Init();
 
     SDL_Window* window = SDL_CreateWindow("Knights && Demons", WIDTH, HEIGHT, 0);
@@ -36,9 +38,26 @@ int main(int argc, char *argv[]) {
     //SIEMPRE QUE HAYAN PROBLEMAS, QUITAR LA PANTALLA COMPLETA PARA DEBUG
     //SDL_SetWindowFullscreen(window, true);
 
+
+    //PRUEBA DE SONIDOSSSS
+    
+
+    if(!inicializarAudioSDL())
+    {
+        printf("[DEBUG]: Error inciando el audio SDL3: %s", SDL_GetError());
+    }
+
+    tSonido sonidoBotonMenu;
+
+    if (!cargarUnSonidoNuevo(RUTA_SONIDO_BOTON_MENU,
+                            &sonidoBotonMenu))
+    {
+        printf("[ERROR] No pude cargar sonido del botón\n");
+    }
+
     mostrarPantallaBienvenida(renderer,font);
     char opcionElegida;
-    mostrarMenuPrincipal(renderer,font,&opcionElegida);
+    mostrarMenuPrincipal(renderer,font,&opcionElegida, &sonidoBotonMenu);
     while(opcionElegida!=SALIR)
     {
             if(opcionElegida==CARGAR_PARTIDA)
@@ -121,12 +140,18 @@ int main(int argc, char *argv[]) {
                 */
                mostrarTablaDePuntajesDeArchivo(renderer,font);
             }
-            mostrarMenuPrincipal(renderer,font,&opcionElegida);;
+            mostrarMenuPrincipal(renderer,font,&opcionElegida, &sonidoBotonMenu);
 
     }
         mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer,font,"Gracias Por jugar");
 
-        //destrozar los usos de sdl2
+        //destrozar los usos de sdl3
+
+        liberarSonido(&sonidoBotonMenu);
+        cerrarAudio();
+        SDL_QuitSubSystem(SDL_INIT_AUDIO);
+        SDL_QuitSubSystem(SDL_INIT_VIDEO);
+
         TTF_CloseFont(font);
         TTF_Quit();
         SDL_DestroyRenderer(renderer);

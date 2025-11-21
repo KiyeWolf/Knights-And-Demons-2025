@@ -114,3 +114,9 @@ int ejecutarJugada(const int orden, char **mat, tJugada *jug){
     return verificarVictoria(orden, mat);
 }
     */
+void actualizarCursor(tJugada* jug, const int x, const int y, bool usoPika)
+{
+    jug->posCursorX = x;
+    jug->posCursorY = y;
+    jug->seUsoPika = usoPika;
+}
