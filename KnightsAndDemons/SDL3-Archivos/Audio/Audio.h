@@ -12,6 +12,7 @@
 
 #define RUTA_SONIDO_BOTON_MENU "./SDL3-Archivos/Audio/Menu/BotonPresionadoRecortado.wav"
 #define RUTA_SONIDO_BOTON_CASILLA "./SDL3-Archivos/Audio/Menu/BotonPresionadoCasilla.wav"
+#define RUTA_BACKGROUND_MUSIC_HISTORIA_PRINCIPAL "./SDL3-Archivos/Audio/Historia/mainHistoryTheme.wav"
 typedef struct {
 
     // tan solo un identificador del dispositivo
@@ -25,6 +26,7 @@ typedef struct {
 static tDispositivoAudio dispositivoDeAudio={0};
 //este stream de aca abajo es para reproducir NO TIENE NADA QUE VER CON LA CONVERSION DE AUDIO
 static SDL_AudioStream* streamActivo = NULL;
+static SDL_AudioStream* streamBGM = NULL;
 
 typedef struct AudioWAV
 {
@@ -59,6 +61,9 @@ bool reproducirSFX(const tSonido* sonido);
 bool liberarSonido(tSonido* sonido);
 void cerrarAudio();
 //BGMusic
-
-
+bool crearBackgroundMusic(const char* ruta,tSonido* s);
+bool cargarUnaBGMNueva(const char* rutaArch, tSonido* salida);
+bool reproducirBGM(const tSonido* musica);
+bool liberarBGM(tSonido* sonido);
+void detenerMusicaBGM();
 #endif // AUDIO_H_INCLUDED

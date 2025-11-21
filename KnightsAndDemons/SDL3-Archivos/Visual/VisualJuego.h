@@ -19,6 +19,7 @@
 #define MENSAJE2 "Valiente Guerrero..."
 
 
+
 void mostrarPantallaBienvenida(SDL_Renderer* renderer,TTF_Font* font);
 void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, tSonido* sonidoBotonMenu);
 void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombrePlayer, SDL_Window* window,tSonido* sonidoBotonMenu);

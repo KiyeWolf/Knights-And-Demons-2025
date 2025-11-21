@@ -75,7 +75,7 @@ void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, 
                     if (mx >= r.x && mx <= r.x + r.w &&
                         my >= r.y && my <= r.y + r.h)
                     {
-                        //si estoy aca entonces clickeo una opcion del menu, 
+                        //si estoy aca entonces clickeo una opcion del menu,
                         reproducirSFX(sonidoBotonMenu);
                         *opcion = '1' + i;
                         enMenu = false;
@@ -376,8 +376,14 @@ void mostrarPantallaHistoriaInicial(SDL_Renderer* renderer,TTF_Font* font, size_
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
 
+    tSonido bgm;
+    if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_HISTORIA_PRINCIPAL,&bgm))
+    {
+        printf("[DEBUG]: No se encontro la musica de la historia principal: %s", SDL_GetError());
+    }
+    reproducirBGM(&bgm);
+
     FILE* archivo = fopen(RUTA_HISTORIA_INICIAL, "r");
-    system("cls");
     if (archivo == NULL) {
         *retorno = ARCHIVO_CORRUPTO;
         return;
@@ -421,12 +427,24 @@ void mostrarPantallaHistoriaInicial(SDL_Renderer* renderer,TTF_Font* font, size_
                 SDL_DestroySurface(surf);
                 SDL_DestroyTexture(tex);
             }
+            if (streamBGM && SDL_GetAudioStreamAvailable(streamBGM) == 0)
+            {
+                // Recargar la música para el siguiente loop
+                SDL_PutAudioStreamData(streamBGM, bgm.buffer, bgm.longitud);
+                SDL_FlushAudioStream(streamBGM);
+            }
             SDL_RenderPresent(renderer);
         }
 
         fclose(archivo);
         *(retorno) = TODO_OK;
     }
+    detenerMusicaBGM();
+    printf("[DEBUG TIME]: si logre salir del bucle: %d",*retorno);
+   if(!liberarBGM(&bgm))
+   {
+    printf("[DEBUG]: no pude liberar bgm: %s", SDL_GetError());
+   }
 }
 /*void mostrarPantallaSolicitudDeNombreParaCargarPartida(SDL_Renderer* renderer, TTF_Font* font)
 {

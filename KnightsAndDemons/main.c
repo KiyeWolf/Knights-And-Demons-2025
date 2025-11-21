@@ -128,6 +128,7 @@ int main(int argc, char *argv[]) {
                 mostrarPantallaDificultad(renderer,font,&d, &sonidoBotonMenu);
                 iniciarJuegoNuevo(&elAdmin, &d, nombre);
                 mostrarPantallaHistoriaInicial(renderer,font,&retornos);
+               // printf("[DEBUG TIME]: si logre salir de la pantalla principal");
                 if(jugar(&elAdmin, renderer, font,&sonidoBotonCasilla)==JUEGO_COMPLETADO)
                 {
                     colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
