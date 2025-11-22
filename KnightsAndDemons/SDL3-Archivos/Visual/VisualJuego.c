@@ -39,6 +39,7 @@ void mostrarPantallaBienvenida(SDL_Renderer* renderer, TTF_Font* font) {
 
     SDL_DestroyTexture(tex);
 }
+
 void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, tSonido* sonidoBotonMenu, tSonido* bgm)
 {
     const char* opciones[CANT_OPCIONES_MENU_PRINCIPAL] = {
@@ -48,35 +49,40 @@ void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, 
         "4. TABLA DE PUNTAJES",
         "5. SALIR"
     };
-
-    //guardo en un array los botones para saber su información
-     SDL_FRect botones[CANT_OPCIONES_MENU_PRINCIPAL];
-
+    SDL_RenderClear(renderer);
+    SDL_FRect botones[CANT_OPCIONES_MENU_PRINCIPAL];
     int numOpciones = CANT_OPCIONES_MENU_PRINCIPAL;
-
     bool enMenu = true;
     SDL_Event e;
 
+    // CONSTANTES DE ESTILO
+    const float ANCHO_BOTON = 400.0f;
+    const float ALTO_BOTON = 50.0f;
+    const float ESPACIO_ENTRE_BOTONES = 20.0f;
 
     while (enMenu) {
+        
+        // 1. OBTENER MOUSE PARA HOVER (Fuera del pool de eventos para que sea continuo)
+        float mx, my;
+        SDL_GetMouseState(&mx, &my);
+
         while (SDL_PollEvent(&e)) {
-            if (e.type == SDL_EVENT_QUIT)
-            {
+            if (e.type == SDL_EVENT_QUIT) {
                  *(opcion) = '5';
-                 enMenu=false;
+                 enMenu = false;
             }
-            //esta es la parte del click del mouse
+
+            // CLICK
             if (e.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
-                float mx = e.button.x;
-                float my = e.button.y;
+                // Usamos las coordenadas del evento, que son precisas al momento del click
+                float clickX = e.button.x;
+                float clickY = e.button.y;
 
-                for (int i = 0; i < CANT_OPCIONES_MENU_PRINCIPAL; i++) {
+                for (int i = 0; i < numOpciones; i++) {
                     SDL_FRect r = botones[i];
-
-                    if (mx >= r.x && mx <= r.x + r.w &&
-                        my >= r.y && my <= r.y + r.h)
+                    if (clickX >= r.x && clickX <= r.x + r.w &&
+                        clickY >= r.y && clickY <= r.y + r.h)
                     {
-                        //si estoy aca entonces clickeo una opcion del menu,
                         reproducirSFX(sonidoBotonMenu);
                         *opcion = '1' + i;
                         enMenu = false;
@@ -84,44 +90,93 @@ void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, 
                 }
             }
 
-
+            // TECLADO
             if (e.type == SDL_EVENT_KEY_DOWN) {
-                if (e.key.key >= '1' && e.key.key <= '5')
-                {
+                if (e.key.key >= '1' && e.key.key <= '5') {
+                    reproducirSFX(sonidoBotonMenu); // Agregué sonido aquí también ;)
                     *(opcion) = e.key.key;
                     enMenu = false;
                 }
             }
         }
 
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        // --- RENDERIZADO ---
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Fondo negro de pantalla
         SDL_RenderClear(renderer);
 
-        SDL_Color blanco = {255, 255, 255, 255};
-        int y = 200;
+        // Calculamos la Y inicial para que el bloque de botones quede centrado verticalmente
+        float totalAltoMenu = (numOpciones * ALTO_BOTON) + ((numOpciones - 1) * ESPACIO_ENTRE_BOTONES);
+        float yActual = (HEIGHT - totalAltoMenu) / 2.0f;
+
         for (int i = 0; i < numOpciones; i++) {
-            SDL_Surface* surf = TTF_RenderText_Solid(font, opciones[i], 0, blanco);
-            SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, surf);
-            SDL_FRect rect = { (WIDTH - surf->w)/2, y, surf->w, surf->h };
+            
+            // 2. DEFINIR LA CAJA DEL BOTÓN
+            SDL_FRect box = { 
+                (WIDTH - ANCHO_BOTON) / 2.0f, // Centrado horizontal
+                yActual, 
+                ANCHO_BOTON, 
+                ALTO_BOTON 
+            };
+            botones[i] = box; // Guardamos para la lógica de click
 
-            //en esta parte guardo el rectangulo formado en el array, para luego conocer su información.
-            botones[i] = rect;
+            // 3. DETECTAR HOVER (¿El mouse está sobre esta caja?)
+            bool isHover = (mx >= box.x && mx <= box.x + box.w && 
+                            my >= box.y && my <= box.y + box.h);
 
-            SDL_RenderTexture(renderer, tex, NULL, &rect);
-            SDL_DestroySurface(surf);
-            SDL_DestroyTexture(tex);
-            y += 60;
+            // 4. ELEGIR COLORES SEGÚN ESTADO
+            SDL_Color colorTexto;
+            SDL_Color colorBorde;
+            
+            if (isHover) {
+                // ESTILO HOVER: Borde Dorado, Relleno gris oscuro, Texto Dorado
+                SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Relleno gris
+                SDL_RenderFillRect(renderer, &box);
+                
+                SDL_SetRenderDrawColor(renderer, 255, 215, 0, 255); // Borde Dorado
+                colorBorde = (SDL_Color){255, 215, 0, 255};
+                colorTexto = (SDL_Color){255, 215, 0, 255};
+            } else {
+                // ESTILO NORMAL: Sin relleno (o negro), Borde Blanco, Texto Blanco
+                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Relleno negro
+                SDL_RenderFillRect(renderer, &box);
+
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Borde Blanco
+                colorBorde = (SDL_Color){255, 255, 255, 255};
+                colorTexto = (SDL_Color){255, 255, 255, 255};
+            }
+
+            // Dibujar el borde (outline)
+            SDL_RenderRect(renderer, &box); 
+
+            // 5. DIBUJAR TEXTO (Centrado en la caja)
+            SDL_Surface* surf = TTF_RenderText_Solid(font, opciones[i], 0, colorTexto);
+            if(surf) {
+                SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, surf);
+                
+                // Matemáticas para centrar texto dentro de la caja:
+                // X = CajaX + (AnchoCaja - AnchoTexto) / 2
+                SDL_FRect rectTexto = { 
+                    box.x + (box.w - surf->w) / 2.0f, 
+                    box.y + (box.h - surf->h) / 2.0f, 
+                    (float)surf->w, 
+                    (float)surf->h 
+                };
+                
+                SDL_RenderTexture(renderer, tex, NULL, &rectTexto);
+                SDL_DestroySurface(surf);
+                SDL_DestroyTexture(tex);
+            }
+
+            // Avanzar Y para el siguiente botón
+            yActual += ALTO_BOTON + ESPACIO_ENTRE_BOTONES;
         }
 
-        //parte donde pregunto si se termino la musica
-        if(terminoLaMusica())
-        {
+        if(terminoLaMusica()) {
             recargarLaBGM(bgm);
         }
 
         SDL_RenderPresent(renderer);
     }
-
 }
 void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombrePlayer, SDL_Window* window,tSonido* sonidoBotonMenu)
 {
@@ -290,88 +345,153 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
     SDL_StopTextInput(window);
     strcpy(nombrePlayer, buffer);
 }
-void mostrarPantallaDificultad(SDL_Renderer* renderer,TTF_Font* font,int* dificultad, tSonido* sonidoBotonMenu)
+
+void mostrarPantallaDificultad(SDL_Renderer* renderer, TTF_Font* font, int* dificultad, tSonido* sonidoBotonMenu)
 {
-    const char* opciones[3]={
+    const char* opciones[3] = {
         "1. FACIL",
         "2. MEDIO",
         "3. DIFICIL"
     };
+
+    // Configuración de estilo (Mismos valores que Menu Principal para coherencia)
+    const float ANCHO_BOTON = 400.0f;
+    const float ALTO_BOTON = 50.0f;
+    const float ESPACIO_ENTRE_BOTONES = 20.0f;
+    const float Y_INICIO_BOTONES = 250.0f; // Un poco más abajo para dejar lugar al título
+
+    SDL_FRect botones[3];
+    int numOpciones = 3;
     bool esperando = true;
     SDL_Event e;
-    SDL_Color blanco = {255,255,255,255};
-    int numOpciones = 3;
-    SDL_FRect rects[3];
+    
+    // Colores
+    SDL_Color blanco = {255, 255, 255, 255};
+    SDL_Color dorado = {255, 215, 0, 255};
+
     while(esperando)
     {
+        // 1. Obtener estado del mouse para Hover
+        float mx, my;
+        SDL_GetMouseState(&mx, &my);
+
         while(SDL_PollEvent(&e))
         {
             if (e.type == SDL_EVENT_QUIT)
             {
-                //CORREGIR CERRAR EL PROGRAMA ESTA MAL
-              exit(0);
+                // Mantenemos tu lógica de salida abrupta por ahora
+                exit(0);
             }
+
+            // TECLADO
             if(e.type == SDL_EVENT_KEY_DOWN)
             {
                 if(e.key.key >= '1' && e.key.key <= '3')
                 {
+                    reproducirSFX(sonidoBotonMenu); // ¡Feedback sonoro!
                     esperando = false;
                     switch(e.key.key)
                     {
-                        case '1':
-                        *(dificultad) = 1;
-                        break;
-                        case '2':
-                        *(dificultad) = 2;
-                        break;
-                        case '3':
-                        *(dificultad) = 3;
-                        break;
-                        default:
-                        break;
+                        case '1': *(dificultad) = 1; break;
+                        case '2': *(dificultad) = 2; break;
+                        case '3': *(dificultad) = 3; break;
                     }
                 }
             }
+
+            // MOUSE CLICK
             if(e.type == SDL_EVENT_MOUSE_BUTTON_DOWN)
             {
-                float mx = e.button.x;
-                float my = e.button.y;
+                float clickX = e.button.x;
+                float clickY = e.button.y;
 
-                for(int i = 0; i < numOpciones ; i++)
+                for(int i = 0; i < numOpciones; i++)
                 {
-                    if(mx >= rects[i].x && mx <= rects[i].x + rects[i].w &&
-                        my >= rects[i].y && my <= rects[i].y + rects[i].h)
-                        {
-                            reproducirSFX(sonidoBotonMenu);
-                            *dificultad = i + 1;
-                            esperando = false;
-                        }
+                    SDL_FRect r = botones[i];
+                    // Chequeo de colisión con la CAJA, no con el texto
+                    if(clickX >= r.x && clickX <= r.x + r.w &&
+                       clickY >= r.y && clickY <= r.y + r.h)
+                    {
+                        reproducirSFX(sonidoBotonMenu);
+                        *dificultad = i + 1;
+                        esperando = false;
+                    }
                 }
             }
-
         }
-        SDL_SetRenderDrawColor(renderer,0,0,0,255);
+
+        // --- RENDERIZADO ---
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-            SDL_Surface* surf = TTF_RenderText_Solid(font,"Selecciona la dificultad:",0, blanco);
-            SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer,surf);
-            SDL_FRect rect = { (WIDTH- surf->w)/2, 100, surf->w, surf->h };
-            SDL_RenderTexture(renderer,texture,NULL,&rect);
-            SDL_DestroySurface(surf);
-            SDL_DestroyTexture(texture);
-            int y = 200;
-            for (int i = 0; i < numOpciones; i++) {
-                SDL_Surface* surf = TTF_RenderText_Solid(font, opciones[i], 0, blanco);
-                SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, surf);
-                SDL_FRect rect = { (WIDTH - surf->w)/2, y, surf->w, surf->h };
-                rects[i] = rect;
+        // 1. DIBUJAR TÍTULO (Fijo arriba)
+        SDL_Surface* surfTitulo = TTF_RenderText_Solid(font, "Selecciona la dificultad:", 0, blanco);
+        if (surfTitulo) {
+            SDL_Texture* texTitulo = SDL_CreateTextureFromSurface(renderer, surfTitulo);
+            SDL_FRect rectTitulo = { (WIDTH - surfTitulo->w)/2, 100, surfTitulo->w, surfTitulo->h };
+            SDL_RenderTexture(renderer, texTitulo, NULL, &rectTitulo);
+            SDL_DestroySurface(surfTitulo);
+            SDL_DestroyTexture(texTitulo);
+        }
 
-                SDL_RenderTexture(renderer, tex, NULL, &rect);
+        // 2. DIBUJAR BOTONES
+        float yActual = Y_INICIO_BOTONES;
+
+        for (int i = 0; i < numOpciones; i++) {
+            
+            // Definir Caja
+            SDL_FRect box = { 
+                (WIDTH - ANCHO_BOTON) / 2.0f, 
+                yActual, 
+                ANCHO_BOTON, 
+                ALTO_BOTON 
+            };
+            botones[i] = box; // Guardar para el click
+
+            // Detectar Hover
+            bool isHover = (mx >= box.x && mx <= box.x + box.w && 
+                            my >= box.y && my <= box.y + box.h);
+
+            SDL_Color colorTexto;
+
+            if (isHover) {
+                // Hover: Relleno gris, Borde dorado, Texto dorado
+                SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255);
+                SDL_RenderFillRect(renderer, &box);
+                
+                SDL_SetRenderDrawColor(renderer, 255, 215, 0, 255);
+                colorTexto = dorado;
+            } else {
+                // Normal: Relleno negro, Borde blanco, Texto blanco
+                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+                SDL_RenderFillRect(renderer, &box); // Limpia el fondo del botón
+                
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+                colorTexto = blanco;
+            }
+
+            // Dibujar borde
+            SDL_RenderRect(renderer, &box);
+
+            // Dibujar Texto Centrado en la Caja
+            SDL_Surface* surf = TTF_RenderText_Solid(font, opciones[i], 0, colorTexto);
+            if (surf) {
+                SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, surf);
+                SDL_FRect rectTexto = { 
+                    box.x + (box.w - surf->w) / 2.0f, 
+                    box.y + (box.h - surf->h) / 2.0f, 
+                    (float)surf->w, 
+                    (float)surf->h 
+                };
+                SDL_RenderTexture(renderer, tex, NULL, &rectTexto);
                 SDL_DestroySurface(surf);
                 SDL_DestroyTexture(tex);
-                y += 60;
             }
-            SDL_RenderPresent(renderer);
+
+            yActual += ALTO_BOTON + ESPACIO_ENTRE_BOTONES;
+        }
+
+        SDL_RenderPresent(renderer);
     }
 }
 void mostrarPantallaHistoriaInicial(SDL_Renderer* renderer,TTF_Font* font, size_t* retorno)

@@ -12,9 +12,9 @@
 #include "../../SDL3-Archivos/Audio/Audio.h"
 
 
-#define WIDTH 800
-#define HIGHT 600
-#define HEIGHT 600
+#define WIDTH 1024
+#define HIGHT 768
+#define HEIGHT 768
 #define RUTA_ARCHIVO_FUENTES_DE_TEXTO_1 "./SDL3-Archivos/Visual/freefont-20120503/FreeMono.ttf"
 #define RUTA_ARCHIVO_FUENTES_DE_TEXTO_2 "./SDL3-Archivos/Visual/freefont-20120503/FreeMono.ttf"
 #define MENSAJE_MENU_PRINCIPAL "Knights && Demons 2025"
