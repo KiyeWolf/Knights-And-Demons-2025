@@ -13,7 +13,11 @@
 #define RUTA_SONIDO_BOTON_MENU "./SDL3-Archivos/Audio/Menu/BotonPresionadoRecortado.wav"
 #define RUTA_SONIDO_BOTON_CASILLA "./SDL3-Archivos/Audio/Tablero/BotonPresionadoCasilla.wav"
 #define RUTA_SONIDO_BOTON_PIKA "./SDL3-Archivos/Audio/Tablero/BotonPresionadoPikaCasilla.wav"
-
+#define RUTA_BACKGROUND_MUSIC_FINAL_KNIGHTS "./SDL3-Archivos/Audio/Historia/endingHistoryTheme1.wav"
+#define RUTA_BACKGROUND_MUSIC_FINAL_DEMONS "./SDL3-Archivos/Audio/Historia/endingHistoryTheme2.wav"
+#define RUTA_BACKGROUND_MUSIC_FINAL_VERDADERO "./SDL3-Archivos/Audio/Historia/endingHistoryTheme3.wav"
+//#define RUTA_BACKGROUND_MUSIC_FINAL_NEUTRAL "./SDL3-Archivos/Audio/Historia/endingHistoryTheme0.wav"
+#define RUTA_BACKGROUND_MUSIC_FINAL "./SDL3-Archivos/Audio/Historia/endingMusicBackground.wav"
 
 #define RUTA_BACKGROUND_MUSIC_HISTORIA_PRINCIPAL "./SDL3-Archivos/Audio/Historia/mainHistoryTheme.wav"
 #define RUTA_BACKGROUND_MUSIC_MENU "./SDL3-Archivos/Audio/Menu/mainMenuTheme.wav"
@@ -77,5 +81,6 @@ bool terminoLaMusica();
 void recargarLaBGM(tSonido* bgm);
 bool bajarElVolumenDeLaMusica(float factorDecremento);
 bool restaurarVolumenMusica();
+void pausarMusicaBGM();
 
 #endif // AUDIO_H_INCLUDED

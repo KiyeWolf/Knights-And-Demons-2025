@@ -79,6 +79,8 @@ bool seActivoEfectoAlpha(tVFX* vfx);
 //VFX Particular
 void activarEfectoFuego(tVFX* fuego);
 
-
+//Funcionees del post nivel
 int postNivelUsandoSDL(Admin* admin, int resultado, SDL_Renderer* renderer, TTF_Font* font);
+bool mostrarAgradecimientoCaballeros(SDL_Renderer* renderer, TTF_Font* font, const char* mensaje);
+void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer, TTF_Font* font);
 #endif

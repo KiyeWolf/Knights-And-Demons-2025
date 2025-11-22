@@ -432,3 +432,19 @@ void restarUnaPika(int* ahora)
         (*ahora)--;
     }
 }
+bool noPerdio(const int* resultado)
+{
+    if(*resultado != 0)
+    {
+        return true;
+    }
+    return false;
+}
+bool seCompletoElJuego(const int* resultado)
+{
+    if(*resultado == 2)
+    {
+        return true;
+    }
+    return false;
+}

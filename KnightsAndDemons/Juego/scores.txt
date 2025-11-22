@@ -1,2 +1,5 @@
 TABLA DE PUNTAJES o()xxxx[{::::::::::::::::::>
 | NOMBRE  | TABLEROS KNIGHTS TOTALES | TABLEROS DEMONS TOTALES | PIKAS RESTANTES | NIVELES COMPLETADOS |
+| ..ppp.. | ..... 2  KNIGHTS ....... | ..... 0  DEMONS ....... | ......13....... | ..... 2......... |
+| ..rrr.. | ..... 2  KNIGHTS ....... | ..... 0  DEMONS ....... | ......18....... | ..... 2......... |
+| ..wss.. | ..... 2  KNIGHTS ....... | ..... 0  DEMONS ....... | ...... 4....... | ..... 2......... |

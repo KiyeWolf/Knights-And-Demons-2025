@@ -5,34 +5,10 @@ int jugar(Admin* manager,  SDL_Renderer* renderer, TTF_Font* font,tSonido* sonid
     int finalJuego;
     //barraDeCarga();
     finalJuego = ciclarPartida(manager, renderer,sonidoBotonCasilla);
-    if(finalJuego == 2) //Este if pregunta si el jugador gano todos los niveles
+    if(seCompletoElJuego(&finalJuego)) //Este if pregunta si el jugador gano todos los niveles
     {
-        char mensajeFinal[100];
-        sprintf(mensajeFinal, "Felicidades %s, has completado el juego...", manager->jugador.nombre);
-        mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, mensajeFinal);
-        mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, "FINAL COMPLETADO:");
-        if(manager->jugador.TotalestadoUno==TAM_PARTIDAS)
-        {
-            //Entonces completo el final de Knigths
-            if(manager->jugador.dificultadSeleccionada == DIFICIL)
-            {
-                //En este caso completo un final de todos caballeros, en dificil
-                mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, FINAL_BUENO_MAXIMA_DIFICULTAD);
-            }
-            else
-            {
-                //En este caso completo un final de todos caballeros, en facil o medio
-               mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, FINAL_BUENO);
-            }
-        } else if(manager->jugador.TotalestadoDos==TAM_PARTIDAS)
-        {
-            //En este caso completo un final de todos demonios, en cualquier dificultad
-            mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, FINAL_MALO);
-        } else
-        {
-            //Completo otro final comun, es decir el tablero no es solo de Knights -> (neutral)
-            mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, FINAL_NEUTRAL);
-        }
+         chequearYMostrarFinalDelJuego(manager, renderer, font);
+        mostrarCreditosEnPantalla(renderer, font, NULL);
         return 0; //el jugador completo el juego
     }
     //barraDeCarga();
@@ -66,16 +42,25 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasil
     while(!estaEnMenu && finalJuego == 0)
     {
         mostrarMensajeDeInicioDeNivel(renderer, fontMensajeInicioNivel);
+
+
         gano = iniciarPartidaConSDL(admin, textKnight,textDemon,renderer,sonidoBotonCasilla);
-        if(gano != 0) //Por lo menos no perdió, entra dentro de este if
+
+
+
+
+        if(noPerdio(&gano)) //Por lo menos no perdió, entra dentro de este if
         {
-            if(gano == GANO_KNIGHTS){
+            if(gano == GANO_KNIGHTS)
+            {
+
                 admin->jugador.TotalestadoUno++;
                 admin->jugador.pikasRestantes+=PREMIO_PIKAS;
-                mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, fontMensajeInicioNivel, "¡Los caballeros están agradecidos!");
+                //mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, fontMensajeInicioNivel, "¡Los caballeros están agradecidos!");
                 char mensajePikas[50];
                 sprintf(mensajePikas, "Has obtenido %d pikas extras", PREMIO_PIKAS);
-                mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, fontMensajeInicioNivel, mensajePikas);
+                mostrarAgradecimientoCaballeros(renderer, fontMensajeInicioNivel, mensajePikas);
+                //mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, fontMensajeInicioNivel, mensajePikas);
                 cantPikas = admin->jugador.pikasRestantes; // Se recalcula su valor
             }
 
@@ -89,10 +74,7 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasil
             admin->niveles[admin->jugador.nivelActual].estadoCompletado = 1; // Actualizo el estado del nivel a ganó o no ganó (1 o 0)
             admin->jugador.nivelActual++;
 
-            /*printf("\n¿Desea guardar la partida?: ");
-            printf("\n1. Sí\n2. No\n");
-            scanf("%d", &respuesta);
-            */
+
            preguntarGuardarPartida(&respuesta, renderer, fontMensajeInicioNivel);
             if(respuesta == 1)
             {
@@ -107,7 +89,8 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasil
                 }
             }
 
-        } else
+        }
+        else
         {
             //Significa que perdió, por eso se muestra este mensaje de derrota
             mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, fontMensajeInicioNivel, MENSAJE_DERROTA);
@@ -484,20 +467,99 @@ void preguntarGuardarPartida(int* respuesta, SDL_Renderer* renderer, TTF_Font* f
 int postNivelUsandoSDL(Admin* admin, int resultado, SDL_Renderer* renderer, TTF_Font* font) // DEVUELVE SI SE VA O NO AL MENÚ (0 o 1)
 {
     int respuesta;
+    bool esperandoRespuesta;
+    SDL_Event e;
+    SDL_Color blanco = {255,255,255,255};
+    SDL_FRect aceptarRect;
+    SDL_FRect cancelarRect;
+
+    //parte sonido
+    tSonido sonidoBoton;
+    if(!cargarUnSonidoNuevo(RUTA_SONIDO_BOTON_MENU,&sonidoBoton))
+    {
+        SDL_Log("No se pudo cargar el sonido de boton en postNivelSDL: %s", SDL_GetError());
+    }
 
 
-    //ARREGLAR FUNCION
+    while(esperandoRespuesta)
+    {
+        if(SDL_PollEvent(&e))
+        {
+            if(e.type==SDL_EVENT_QUIT)
+            {
+                esperandoRespuesta = false;
+            }
+            if(e.type == SDL_EVENT_KEY_DOWN)
+            {
+                int tecla = e.key.key;
+                if(tecla == '1')
+                {
+                   respuesta = 1;
+                   esperandoRespuesta = false;
+                }
+                if(tecla == '2')
+                {
+                    respuesta = 2;
+                    esperandoRespuesta = false;
+                }
+            }
+            if(e.type == SDL_EVENT_MOUSE_BUTTON_DOWN)
+            {
+                int mouseX =  e.motion.x;
+                int mouseY  = e.motion.y;
+                //ahora cual boton
+                if(mouseX >= aceptarRect.x && mouseX <= (aceptarRect.x + aceptarRect.w) &&
+                   mouseY >= aceptarRect.y && mouseY <= (aceptarRect.y + aceptarRect.h))
+                {
+                        //aceptar
+                        reproducirSFX(&sonidoBoton);
+                        respuesta = 1;
+                    esperandoRespuesta = false;
+                }
+                else if(mouseX >= cancelarRect.x && mouseX <= (cancelarRect.x + cancelarRect.w) &&
+                        mouseY >= cancelarRect.y && mouseY <= (cancelarRect.y + cancelarRect.h))
+                {
+                    //cancelar
+                    reproducirSFX(&sonidoBoton);
+                    respuesta = 2;
+                    esperandoRespuesta = false;
+                }
+            }
+        }
+        SDL_RenderClear(renderer);
+        SDL_Surface* surf = TTF_RenderText_Solid(font,"¿Desea volver al menu?",0, blanco);
+        SDL_Surface* s2 = TTF_RenderText_Solid(font,"Continuar", 0,blanco);
+        SDL_Surface* s3 = TTF_RenderText_Solid(font,"Volver al menú", 0,blanco);
+        if(!surf || !s2 || !s3)
+        {
+            printf("[DEBUG]: Error creando superficies en postNivelSDL: %s\n", SDL_GetError());
+        }
+        SDL_Texture* text = SDL_CreateTextureFromSurface(renderer,surf);
+        SDL_Texture* t2 = SDL_CreateTextureFromSurface(renderer,s2);
+        SDL_Texture* t3 = SDL_CreateTextureFromSurface(renderer,s3);
+        if(!text || !t2 || !t3)
+        {
+            printf("[DEBUG]: Error creando texturas en postNivelSDL: %s\n", SDL_GetError());
+        }
+        int y = 100;
+        SDL_FRect rect = { (WIDTH - surf->w)/2, (HEIGHT - surf->h)/2, surf->w, surf->h };
+        SDL_FRect r2 = { WIDTH/2 - 100 , (HEIGHT - y), s2->w, s2->h };
+        SDL_FRect r3 = { WIDTH/2 + 50 , (HEIGHT - y), s3->w, s3->h };
+        aceptarRect = r2;
+        cancelarRect = r3;
+        SDL_RenderTexture(renderer,text,NULL,&rect);
+        SDL_RenderTexture(renderer,t2,NULL,&r2);
+        SDL_RenderTexture(renderer,t3,NULL,&r3);
 
-
-
-    /*SDL_Color blanco = {255,255,255,255};
-
-        printf("\n¿Desea volver al menu?");
-        printf("\n1. Continuar\n2. Volver al menu\n");
-        */
-       mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, "¿Desea volver al menu? 1. Continuar  2. Volver al menu");
-    respuesta = 1; //por defecto sigue jugando
-
+        SDL_DestroySurface(surf);
+        SDL_DestroySurface(s2);
+        SDL_DestroySurface(s3);
+        SDL_DestroyTexture(text);
+        SDL_DestroyTexture(t2);
+        SDL_DestroyTexture(t3);
+        SDL_RenderPresent(renderer);
+    }
+    liberarSonido(&sonidoBoton);
     return (respuesta-1); // El -1 es para que devuelva 1 o 0 en vez de 1 o 2
 }
 bool inicializarHUD(SDL_Renderer* renderer, tRecursosHUD* hud)
@@ -723,4 +785,144 @@ void renderizarPikasRestantes(SDL_Renderer* renderer,tVFX* vfx, const int cantPi
 bool seActivoEfectoAlpha(tVFX* vfx)
 {
     return (vfx->alpha > 0);
+}
+
+bool mostrarAgradecimientoCaballeros(SDL_Renderer* renderer, TTF_Font* font, const char* mensaje)
+{
+    mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, MENSAJE_AGRADECIMIENTO_CABALLEROS);
+    mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, (char*)mensaje);
+    return true;
+}
+void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer, TTF_Font* font)
+{
+    char lineaFinal[200]="";
+
+
+    tSonido bgmFinal;
+    if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_FINAL,&bgmFinal))
+    {
+        printf("[DEBUG]: Error creando bgm en final del juego: %s\n", SDL_GetError());
+    }
+    reproducirBGM(&bgmFinal);
+
+    sprintf(lineaFinal,"Felicidades %s, has completado el juego...", manager->jugador.nombre);
+        //printf("FINAL COMPLETADO:\n"); /// COMPLETAR CON MSJ PERSONALIZADO
+    mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, lineaFinal);
+        if(manager->jugador.TotalestadoUno==TAM_PARTIDAS)
+        {
+            if(manager->jugador.dificultadSeleccionada == DIFICIL)
+            {
+                detenerMusicaBGM();
+                    liberarBGM(&bgmFinal);
+                if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_FINAL_VERDADERO,&bgmFinal))
+                {
+                    printf("[DEBUG]: Error creando bgm en final de caballeros: %s\n", SDL_GetError());
+                }
+                reproducirBGM(&bgmFinal);
+                //En este caso completo un final de todos caballeros, en dificil
+                //printf("%s",FINAL_BUENO_MAXIMA_DIFICULTAD);
+                char finalKnightsDificil[13][300]=
+                {
+                                    "El reino estalló en vítores.",
+                                    "Los Demonios, cuya influencia había sido totalmente borrada de la faz del mundo conocido,",
+                                      "se retiraron a las profundidades del Averno",
+                                      "Bakelor, orgulloso y alegre te dice:",
+                                      "¡Valiente becario! ",
+                                      "No solo lograste la victoria donde yo temía la derrota,",
+                                      "sino que lo hiciste en las condiciones más duras que jamás se han impuesto a un comandante.",
+                                      "El Rey Bakelor tomó su espada ceremonial y, colocándola sobre tu hombro, continuó:",
+                                      "A partir de este día, ya no eres un becario. Eres mi mano derecha,",
+                                      "el Comandante Dorado de la Luz, el arquitecto de la paz en Garnick.",
+                                      "Tu nombre LAUTY BARRETO será recordado no solo por la victoria,",
+                                      "sino por la perfección con la que la lograste.",
+                                      "Que el sol brille eternamente sobre nuestro reino gracias a tu heroísmo."
+                };
+                for(int j=0; j<13; j++)
+                {
+                    mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, finalKnightsDificil[j]);
+                    if(terminoLaMusica())
+                    {
+                        recargarLaBGM(&bgmFinal);
+                    }
+                }
+            }
+            else
+            {
+                detenerMusicaBGM();
+                //En este caso completo un final de todos caballeros, en facil o medio
+                 liberarBGM(&bgmFinal);
+                if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_FINAL_KNIGHTS,&bgmFinal))
+                {
+                    printf("[DEBUG]: Error creando bgm en final de caballeros: %s\n", SDL_GetError());
+                }
+                reproducirBGM(&bgmFinal);
+                //Entonces completo el final de Knigths
+                char finalKnights[4][300]=
+                {
+                    "El reino estalló en vítores. ",
+                    "Los Demonios, cuya influencia había sido totalmente borrada de la faz del mundo conocido,",
+                    " se retiraron a las profundidades del Averno",
+                    "Bakelor está orgulloso"
+                };
+                for(int i=0; i<4; i++)
+                {
+                    mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, finalKnights[i]);
+                    if(terminoLaMusica())
+                    {
+                        recargarLaBGM(&bgmFinal);
+                    }
+                }
+                //printf("%s", FINAL_BUENO);
+            }
+        } else if(manager->jugador.TotalestadoDos==TAM_PARTIDAS)
+        {
+            liberarBGM(&bgmFinal);
+            //En este caso completo un final de todos demonios, en cualquier dificultad
+           // printf("%s", FINAL_MALO);
+            if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_FINAL_DEMONS,&bgmFinal))
+            {
+                printf("[DEBUG]: Error creando bgm en final de demonios: %s\n", SDL_GetError());
+            }
+            detenerMusicaBGM();
+            reproducirBGM(&bgmFinal);
+            char finalDemonios[7][200]=
+            {
+                "Desde su cama de convalecencia, el Rey Bakelor observó por la ventana",
+                "cómo el cielo de Garnick, una vez azul, se teñía de un perpetuo tono carmesí.",
+                "Las hordas demoníacas, al percibir la victoria táctica, ",
+                "irrumpieron en el castillo con una confianza renovada y brutal.",
+                "Has logrado completar el desafío; pero con un costo impensable.",
+                "Bakelor está horrorizado... Garnick está condenado",
+                "¡Qué has hecho becario!"
+            };
+            for(int k=0; k<7; k++)
+            {
+                mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, finalDemonios[k]);
+                if(terminoLaMusica())
+                {
+                    recargarLaBGM(&bgmFinal);
+                }
+            }
+        } else
+        {
+            char finalNeutral[4][200]=
+            {
+                "Becario, no lo has hecho mal, pero... ",
+                "¡DEBEMOS GANAR LA GUERRA, NO ES SUFICIENTE CON TENER ALGUNOS FRENTES!",
+                "Apresurate y no me hagas enojar.",
+                "-Bakelor, el señor de la guerra (en una situación doméstica algo delicada)"
+            };
+            for(int m=0; m<4; m++)
+            {
+                mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, finalNeutral[m]);
+                if(terminoLaMusica())
+                {
+                    recargarLaBGM(&bgmFinal);
+                }
+            }
+            //Completo otro final comun, es decir el tablero no es solo de Knights -> (neutral)
+            //printf("%s", FINAL_NEUTRAL);
+        }
+        detenerMusicaBGM();
+        liberarBGM(&bgmFinal);
 }

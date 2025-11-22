@@ -73,6 +73,7 @@ int main(int argc, char *argv[]) {
     mostrarMenuPrincipal(renderer,font,&opcionElegida, &sonidoBotonMenu,&bgm);
     while(opcionElegida!=SALIR)
     {
+        
             if(opcionElegida==CARGAR_PARTIDA)
             {
 
@@ -123,6 +124,10 @@ int main(int argc, char *argv[]) {
                     {
                         colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
                     }
+                    else
+                    {
+                        reproducirBGM(&bgm);
+                    }
                 }
             }
 
@@ -143,6 +148,10 @@ int main(int argc, char *argv[]) {
                 {
                     colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
                 }
+                else
+                    {
+                        reproducirBGM(&bgm);
+                    }
             }
             if(opcionElegida==CREDITOS)
             {

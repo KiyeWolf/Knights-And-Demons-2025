@@ -30,7 +30,7 @@
 #define T_TRANSCURRIDO 2
 #define T_REINICIO 3
 //
-
+#define MENSAJE_AGRADECIMIENTO_CABALLEROS "¡Los caballeros están agradecidos!"
 
 //Todos los finales posibles del juego
 #define MENSAJE_DERROTA "\nParece que no pudiste manejar bien tu recurso mas preciado, becario...\n"\
@@ -38,7 +38,7 @@
                     " no se van a matar solos y yo... digamos que tengo para rato aquí, je...\n"\
                     " ¡¡Ve y defiende nuestros otros frentes!!\n"
 
-#define FINAL_BUENO "El reino estalló en vítores. Los Demonios, cuya influencia había sido totalmente borrada de la faz del mundo conocido, \n"\
+/*#define FINAL_BUENO "El reino estalló en vítores. Los Demonios, cuya influencia había sido totalmente borrada de la faz del mundo conocido, \n"\
                     "se retiraron a las profundidades del Averno\n"\
                     "Bakelor está orgulloso\n"
 
@@ -62,7 +62,7 @@
                                       "A partir de este día, ya no eres un becario. Eres mi mano derecha, el Comandante Dorado de la Luz, el arquitecto de la paz en Garnick. \n"\
                                       "Tu nombre será recordado no solo por la victoria, sino por la perfección con la que la lograste. \n"\
                                       "Que el sol brille eternamente sobre nuestro reino gracias a tu heroísmo.\n"
-
+*/
 
 // (Todos los tamanios son en realidad el orden de la matriz)
 #define TAM_TABLERO_1 8 // 8x8
@@ -99,7 +99,8 @@ size_t obtenerTamTablero(const Admin*);
 bool tienePikas(const int* ahora);
 void actualizarPikas(const int* source,int* dest);
 void restarUnaPika(int* ahora);
-
+bool noPerdio(const int* resultado);
+bool seCompletoElJuego(const int* resultado);
 // Mixes de Guille
 //int jugar(Admin* manager);
 //void barraDeCarga();

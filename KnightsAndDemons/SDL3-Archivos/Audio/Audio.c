@@ -378,3 +378,7 @@ bool restaurarVolumenMusica()
 {
     return SDL_SetAudioStreamGain(streamBGM,1.0f);
 }
+void pausarMusicaBGM()
+{
+    SDL_PauseAudioDevice(dispositivoDeAudio.id);
+}
