@@ -180,6 +180,15 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
     //parte barra de estado:
     tRecursosHUD barraDeEstado;
     inicializarHUD(renderer,&barraDeEstado);
+    //parte VFX: fuego
+    tVFX VFXfuego;
+    inicializarVFX(renderer,&VFXfuego,1,RUTA_VFX_FUEGO,RUTA_FUENTE_PIKAS_RESTANTES,TAMANIO_FUENTE_PIKAS_RESTANTES);
+    tSonido sonidoBotonPika;
+    if(!cargarUnSonidoNuevo(RUTA_SONIDO_BOTON_PIKA,&sonidoBotonPika))
+    {
+        SDL_Log("No se pudo cargar el sonido de pikas al presionar casilla: %s", SDL_GetError());
+    }
+
     //parteSonido
     tSonido bgm;
     if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_NIVEL,&bgm))
@@ -220,17 +229,25 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
                     int posY = (mouseY - (HEIGHT - tamTablero*TAMANIO_CELDA)/2)/TAMANIO_CELDA;
                     //printf("[DEBUG]: posX: %d , posY: %d \n", posX, posY);
 
-                    //reproduce sonido
-                    reproducirSFX(sonidoBotonCasilla);
+
 
 
                     if(e.button.button == SDL_BUTTON_LEFT)
                     {
+                        //reproduce sonido
+                        reproducirSFX(sonidoBotonCasilla);
+
                         actualizarCursor(&(admin->cursor), posX, posY, false);
                         gano = ejecutarJugadaSDL(tamTablero, tablero, TAMANIO_CELDA, &(admin->cursor));
                     }
                     if(e.button.button == SDL_BUTTON_RIGHT)
                     {
+                        // ESTA PARTE ES PARA EL EFECTO VISUAL JUICE del fuego:
+                        activarEfectoFuego(&VFXfuego);
+
+                        //fin efecto
+                        //reproducir sonido pero distinto
+                        reproducirSFX(&sonidoBotonPika);
 
                         //printf("[DEBUG]: ME LLEGUE A METER EN EL EVENTO MOUSE BUTTON DOWN y entre al if del tablero");
                         if(tienePikas(&pikasDeInicio))
@@ -281,7 +298,9 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
             //CORREGIR BARRA DE TIEMOPOOOO
         renderizarBarraEstadoSDL(renderer,&barraDeEstado,admin->jugador.TotalestadoUno,admin->jugador.TotalestadoDos);
 
-            renderizarContadoresSDL(renderer, tiempoRestante, font);
+        renderizarContadoresSDL(renderer, tiempoRestante, font);
+
+        renderizarPikasRestantes(renderer,&VFXfuego,pikasDeInicio,HEIGHT);
 
         SDL_RenderPresent(renderer);
         //justo acá preguntar si termino la musica
@@ -306,6 +325,8 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
    liberarBGM(&bgm);
    //justo aca elimino la barra de estado:
    liberarHUD(&barraDeEstado);
+   //justo aca elimino el sound effect de pika
+   liberarSonido(&sonidoBotonPika);
 
     return gano;
 }
@@ -601,4 +622,105 @@ void liberarHUD(tRecursosHUD* hud)
         SDL_DestroyTexture(hud->texD);
     if(hud->fuente)
         TTF_CloseFont(hud->fuente);
+}
+bool inicializarVFX(SDL_Renderer* renderer, tVFX* vfx, const int id, const char* rutaIMG, const char* rutaFuente, const int tamFuente)
+{
+    vfx->id = id;
+    vfx->alpha = 0;
+
+    vfx->font = TTF_OpenFont(rutaFuente,tamFuente);
+    if(!vfx->font)
+    {
+        vfx->id = 0;
+        printf("[DEBUG]: No se encontro la ruta del font %d code: %s\n", id, SDL_GetError());
+        return false;
+    }
+    SDL_Surface* surf = SDL_LoadBMP(rutaIMG);
+    if(!surf)
+    {
+        vfx->id = 0;
+        printf("[DEBUG]: No se encontro la ruta del vfx %d code: %s\n", id, SDL_GetError());
+        return false;
+    }
+    vfx->text = SDL_CreateTextureFromSurface(renderer,surf);
+    if(!vfx->text)
+    {
+        SDL_DestroySurface(surf);
+        vfx->id = 0;
+        printf("[DEBUG]: No se pudo crear la text del vfx %d code: %s\n", id, SDL_GetError());
+        return false;
+    }
+    return true;
+}
+void activarEfecto(tVFX* vfx, const int efecto)
+{
+    switch(efecto)
+    {
+        case 1:
+        vfx->alpha = 140;
+        break;
+        case 2:
+        vfx->alpha = 255;
+        break;
+        default:
+        vfx->alpha = 0;
+        break;
+    }
+}
+void activarEfectoFuego(tVFX* fuego)
+{
+    //Debo encender el fuego:
+    activarEfecto(fuego,1);
+}
+
+void renderizarPikasRestantes(SDL_Renderer* renderer,tVFX* vfx, const int cantPikas,const int altoPantalla)
+{
+    SDL_Color colorTexto = {255, 255, 255, 255};
+    char buffer[32]="";
+    sprintf(buffer, "Pikas: %d", cantPikas);
+
+    SDL_Surface* surf = TTF_RenderText_Solid(vfx->font, buffer, 0, colorTexto);
+
+    if(!surf)
+    {
+        SDL_Log("Error creando surf para pikas restantes: %s", SDL_GetError());
+    }
+    SDL_Texture* textTexto = SDL_CreateTextureFromSurface(renderer, surf);
+    if(!textTexto)
+    {
+
+        SDL_Log("Error creando text para pikas restantes: %s", SDL_GetError());
+    }
+
+    int margenIzquierdo = 20;
+    int posY = (altoPantalla / 2) - (surf->h / 2); // Centro vertical exacto
+
+    SDL_FRect rectTexto = { (float)margenIzquierdo, (float)posY, (float)surf->w, (float)surf->h };
+
+    SDL_RenderTexture(renderer, textTexto, NULL, &rectTexto);
+
+    //ahora la parte del fuego:
+    if(seActivoEfectoAlpha(vfx))
+    {
+        //een este momento actualizo la textura con el valor del alpha
+        SDL_SetTextureAlphaMod(vfx->text,(Uint8)vfx->alpha);
+        //ahora coloco la textura sobre el numero
+        SDL_FRect rectFuego = {
+            rectTexto.x + 80,
+            rectTexto.y - 10,
+            rectTexto.w - 70,
+            rectTexto.h + 10
+        };
+        SDL_RenderTexture(renderer,vfx->text, NULL, &rectFuego);
+        //ahora lo más importante el decremento para que se vaya desvaneciendo:
+        vfx->alpha -= 5;
+        //pequeña comprobación de que nunca sobrepase 0
+        if(vfx->alpha < 0 ) vfx->alpha = 0;
+    }
+    SDL_DestroySurface(surf);
+    SDL_DestroyTexture(textTexto);
+}
+bool seActivoEfectoAlpha(tVFX* vfx)
+{
+    return (vfx->alpha > 0);
 }

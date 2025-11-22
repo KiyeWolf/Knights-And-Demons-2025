@@ -12,9 +12,14 @@
 
 #define RUTA_SONIDO_BOTON_MENU "./SDL3-Archivos/Audio/Menu/BotonPresionadoRecortado.wav"
 #define RUTA_SONIDO_BOTON_CASILLA "./SDL3-Archivos/Audio/Tablero/BotonPresionadoCasilla.wav"
+#define RUTA_SONIDO_BOTON_PIKA "./SDL3-Archivos/Audio/Tablero/BotonPresionadoPikaCasilla.wav"
+
+
 #define RUTA_BACKGROUND_MUSIC_HISTORIA_PRINCIPAL "./SDL3-Archivos/Audio/Historia/mainHistoryTheme.wav"
 #define RUTA_BACKGROUND_MUSIC_MENU "./SDL3-Archivos/Audio/Menu/mainMenuTheme.wav"
 #define RUTA_BACKGROUND_MUSIC_NIVEL "./SDL3-Archivos/Audio/Tablero/mainLevelTheme.wav"
+
+
 typedef struct {
 
     // tan solo un identificador del dispositivo

@@ -16,10 +16,16 @@
 #define RUTA_FUENTE_MENSAJE_INICIO_NIVEL "./SDL3-Archivos/Visual/freefont-20120503/FreeMonoOblique.ttf"
 #define RUTA_FUENTE_TIEMPO_RESTANTE  "./SDL3-Archivos/Visual/freefont-20120503/FreeMonoOblique.ttf"
 #define RUTA_FUENTE_BARRA_DE_ESTADO "./SDL3-Archivos/Visual/freefont-20120503/FreeMonoOblique.ttf"
+#define RUTA_FUENTE_PIKAS_RESTANTES "./SDL3-Archivos/Visual/freefont-20120503/FreeMonoOblique.ttf"
 
 #define TAMANIO_TEXTO_TIEMPO_RESTANTE 30
 #define TAMANIO_TEXTO_INICIO_NIVEL 30
 #define TAMANIO_FUENTE_BARRA_DE_ESTADO 24
+#define TAMANIO_FUENTE_PIKAS_RESTANTES 24
+
+
+#define RUTA_VFX_FUEGO "./SDL3-Archivos/Visual/VFX/VFX-Fuego.bmp"
+
 
 #define TAMANIO_CELDA 40
 
@@ -36,6 +42,16 @@ typedef struct {
     // Para los textos de abajo    
     TTF_Font* fuente;          
 } tRecursosHUD;
+typedef struct EfectoVisual
+{
+    unsigned int id;
+    SDL_Texture* text;
+    TTF_Font* font;
+    int alpha;
+    int alpha2;
+    int efectos[3];
+    /* data */
+}tVFX;
 
 
 int jugar(Admin* manager,  SDL_Renderer* renderer, TTF_Font* font,tSonido* sonidoBotonCasilla);
@@ -47,10 +63,21 @@ void renderizarMensajeDeQueNoHayPikas(SDL_Renderer* renderer, TTF_Font* font);
 void mostrarMensajeDeInicioDeNivel(SDL_Renderer* renderer, TTF_Font* font);
 void preguntarGuardarPartida(int* respuesta, SDL_Renderer* renderer, TTF_Font* font);
 
+void renderizarPikasRestantes(SDL_Renderer* renderer,tVFX* vfx, const int cantPikas,const int altoPantalla);
+
 //Barra de estado
 bool inicializarHUD(SDL_Renderer* renderer, tRecursosHUD* hud);
 void renderizarBarraEstadoSDL(SDL_Renderer* renderer, tRecursosHUD* hud, int scoreCaballeros, int scoreDemonios);
 void liberarHUD(tRecursosHUD* hud);
+
+
+//VFX
+bool inicializarVFX(SDL_Renderer* renderer, tVFX* vfx, const int id, const char* rutaIMG, const char* rutaFuente, const int tamFuente);
+void activarEfecto(tVFX* vfx, const int efecto);
+bool seActivoEfectoAlpha(tVFX* vfx);
+
+//VFX Particular
+void activarEfectoFuego(tVFX* fuego);
 
 
 int postNivelUsandoSDL(Admin* admin, int resultado, SDL_Renderer* renderer, TTF_Font* font);
