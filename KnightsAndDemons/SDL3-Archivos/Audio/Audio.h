@@ -19,9 +19,12 @@
 //#define RUTA_BACKGROUND_MUSIC_FINAL_NEUTRAL "./SDL3-Archivos/Audio/Historia/endingHistoryTheme0.wav"
 #define RUTA_BACKGROUND_MUSIC_FINAL "./SDL3-Archivos/Audio/Historia/endingMusicBackground.wav"
 
+
+
 #define RUTA_BACKGROUND_MUSIC_HISTORIA_PRINCIPAL "./SDL3-Archivos/Audio/Historia/mainHistoryTheme.wav"
 #define RUTA_BACKGROUND_MUSIC_MENU "./SDL3-Archivos/Audio/Menu/mainMenuTheme.wav"
 #define RUTA_BACKGROUND_MUSIC_NIVEL "./SDL3-Archivos/Audio/Tablero/mainLevelTheme.wav"
+#define RUTA_BACKGROUND_MUSIC_CREDITOS "./SDL3-Archivos/Audio/Menu/creditsMusic.wav"
 
 
 typedef struct {

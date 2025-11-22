@@ -7,6 +7,7 @@
 #define RUTA_CREDITOS "./Juego/textoDeLosCreditos.txt"
 
 #define TAM_LINEA 2001
+
 FILE* abrirArchivoTxt(char* arch);
 void mostrarStringPorPantalla(char* str);
 void leerStringDeArchivo(FILE* arch);

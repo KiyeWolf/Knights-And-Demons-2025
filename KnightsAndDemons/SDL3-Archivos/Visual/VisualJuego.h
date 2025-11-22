@@ -8,7 +8,9 @@
 #include "../../menu.h"
 #include "../../Juego/TDAJuego.h"
 #include "../../Juego/scores.h"
+#include "../../Juego/creditos.h"
 #include "../../SDL3-Archivos/Audio/Audio.h"
+
 
 #define WIDTH 800
 #define HIGHT 600
@@ -18,7 +20,17 @@
 #define MENSAJE_MENU_PRINCIPAL "Knights && Demons 2025"
 #define MENSAJE2 "Valiente Guerrero..."
 
+#define MAX_LINEAS_CREDITOS 200  
+#define ESPACIADO_ENTRE_LINEAS 40
+// Píxeles por frame (puedes usar decimales)
+#define VELOCIDAD_SCROLL 1.5f    
 
+
+//estructura auxiliar para los creditos
+typedef struct {
+    SDL_Texture* textura;
+    float w, h;
+} LineaCredito;
 
 void mostrarPantallaBienvenida(SDL_Renderer* renderer,TTF_Font* font);
 void mostrarMenuPrincipal(SDL_Renderer* renderer, TTF_Font* font, char* opcion, tSonido* sonidoBotonMenu, tSonido* bgm);

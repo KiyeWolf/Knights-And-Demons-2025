@@ -558,52 +558,129 @@ void mostrarMensajeEnVentanaYBorrarDespuesDeTecla(SDL_Renderer* renderer, TTF_Fo
 }
 void mostrarCreditosEnPantalla(SDL_Renderer* renderer, TTF_Font* font, size_t* retorno)
 {
-    /*
-    bool estaLeyendo = true;
-
-    int cantLineas;
-    char  vectorLineas[TAM_LINEA_SCORES+1][CANT_LINEAS_MAX];
-    if(cargarTablaDePuntajes((char*)vectorLineas, &cantLineas)!=TODO_OK)
-    {
-        exit(4);
+    //aqui abro el archivo.
+    FILE* archivo = fopen(RUTA_CREDITOS, "r");
+    if (!archivo) {
+        printf("[ERROR] No se pudo abrir el archivo de creditos: %s\n", RUTA_CREDITOS);
+        return;
     }
-    SDL_Color blanco = {255,255,255,255};
-    SDL_Event e;
-    printf("[DEBUG] Se llegó a cargar la tabla de puntajes");
-    char* direccionDeLaLinea = (char*)vectorLineas;
-    while(estaLeyendo)
+
+    LineaCredito lineas[200]; // Asumimos un maximo de 200 lineas de creditos
+    int totalLineas = 0;
+    char bufferLectura[256];
+    SDL_Color colorBlanco = {255, 255, 255, 255};
+
+
+    //parte musica
+    tSonido bgm;
+    if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_CREDITOS,&bgm))
     {
-        while(SDL_PollEvent(&e))
-        {
-            if(e.type == SDL_EVENT_QUIT)
-            {
-                //CORREGIR ESETO, NO PUEDE SALIR ASI NO MAS DLE PROGRAMA
-                exit(3);
+        printf("[DEBUG]: No se encontro la musica de los creditos: %s", SDL_GetError());
+    }
+    else
+    {
+        reproducirBGM(&bgm);
+        bajarElVolumenDeLaMusica(0.4f);
+    }
+
+    // Leemos el archivo y creamos las texturas
+    while (fgets(bufferLectura, sizeof(bufferLectura), archivo))
+    {
+        bufferLectura[strcspn(bufferLectura, "\r\n")] = '\0';
+
+
+        //chequear lineas corruptas (copiado y pegado de otro lado)
+        if (strlen(bufferLectura) > 0) {
+            SDL_Surface* surf = TTF_RenderText_Blended(font, bufferLectura, 0, colorBlanco);
+            if (surf) {
+                lineas[totalLineas].textura = SDL_CreateTextureFromSurface(renderer, surf);
+                lineas[totalLineas].w = (float)surf->w;
+                lineas[totalLineas].h = (float)surf->h;
+                SDL_DestroySurface(surf);
             }
-            if(e.type == SDL_EVENT_KEY_DOWN)
-            {
-                estaLeyendo = false;
+        } else {
+            // Linea vacía (espaciador)
+            lineas[totalLineas].textura = NULL;
+            lineas[totalLineas].h = 20; // Altura del espacio vacío
+        }
+        totalLineas++;
+    }
+    fclose(archivo);
+
+
+    float scrollY = (float)HEIGHT; // Comenzar desde abajo de la pantalla
+
+    bool enCreditos = true;
+    SDL_Event e;
+
+    while (enCreditos)
+    {
+        // Procesar salida anticipada
+        while (SDL_PollEvent(&e)) {
+            if (e.type == SDL_EVENT_QUIT) {
+                exit(0);
+            }
+            if (e.type == SDL_EVENT_KEY_DOWN || e.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
+                enCreditos = false; // Salir si tocan algo
             }
         }
-        SDL_SetRenderDrawColor(renderer,0,0,0,255);
+
+        // Actualizar posición (Mover hacia arriba)
+        //esta es la clave
+        scrollY -= VELOCIDAD_SCROLL;
+
+        // Limpiar pantalla
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-        int y = 20;
-        direccionDeLaLinea = (char*)vectorLineas;
-        for(int i = 0; i < cantLineas; i++)
+        // Dibujar líneas
+        float yActual = scrollY;
+        float alturaTotalBloque = 0; // Para saber cuándo termina todo
+
+        for (int i = 0; i < totalLineas; i++)
         {
-            SDL_Surface* surf = TTF_RenderText_Solid(font,direccionDeLaLinea,0,blanco);
-            SDL_Texture* text = SDL_CreateTextureFromSurface(renderer,surf);
-            SDL_FRect rect = { 20, y , surf->w, surf->h };
-            SDL_RenderTexture(renderer,text,NULL,&rect);
-            SDL_DestroySurface(surf);
-            SDL_DestroyTexture(text);
-            y+=40;
-            direccionDeLaLinea+=TAM_LINEA_SCORES+1;
+            // Solo dibujar si está visible en pantalla (Optimization Culling)
+            // Si yActual + altura > 0  Y  yActual < AltoPantalla
+            if (yActual + lineas[i].h > 0 && yActual < HEIGHT)
+            {
+                if (lineas[i].textura) {
+                    // Centrar horizontalmente
+                    float x = (WIDTH - lineas[i].w) / 2;
+                    SDL_FRect rect = { x, yActual, lineas[i].w, lineas[i].h };
+                    SDL_RenderTexture(renderer, lineas[i].textura, NULL, &rect);
+                }
+            }
+
+            // Avanzamos la Y para la siguiente línea
+            float altoLinea = (lineas[i].textura) ? lineas[i].h : 20; // Altura texto o espacio
+            yActual += altoLinea + ESPACIADO_ENTRE_LINEAS;
+
+            // Calculamos dónde termina realmente el último texto
+            if (i == totalLineas - 1) {
+                alturaTotalBloque = yActual;
+            }
         }
+
+        // Chequear si la última línea ya salió por arriba de la pantalla
+        // (alturaTotalBloque es la posición Y donde termina el último texto)
+        if (alturaTotalBloque < 0) {
+            enCreditos = false;
+        }
+
         SDL_RenderPresent(renderer);
+        SDL_Delay(16); // Aprox 60 FPS
     }
-    */
+    //ahora para limpiar todo
+    for (int i = 0; i < totalLineas; i++) {
+        if (lineas[i].textura) {
+            SDL_DestroyTexture(lineas[i].textura);
+        }
+    }
+    *retorno = TODO_OK;
+    restaurarVolumenMusica();
+    detenerMusicaBGM();
+    liberarBGM(&bgm);
+    printf("[DEBUG] Creditos finalizados.\n");
 }
 void mostrarTablaDePuntajesDeArchivo(SDL_Renderer* renderer,TTF_Font* font)
 {

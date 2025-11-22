@@ -8,7 +8,8 @@ int jugar(Admin* manager,  SDL_Renderer* renderer, TTF_Font* font,tSonido* sonid
     if(seCompletoElJuego(&finalJuego)) //Este if pregunta si el jugador gano todos los niveles
     {
          chequearYMostrarFinalDelJuego(manager, renderer);
-        mostrarCreditosEnPantalla(renderer, font, NULL);
+         size_t retorno;
+        mostrarCreditosEnPantalla(renderer, font, &retorno);
         return 0; //el jugador completo el juego
     }
     //barraDeCarga();

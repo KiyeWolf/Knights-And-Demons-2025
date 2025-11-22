@@ -168,7 +168,18 @@ int main(int argc, char *argv[]) {
             }
             if(opcionElegida==CREDITOS)
             {
+                detenerMusicaBGM();
+               liberarBGM(&bgm);
+
+
                 mostrarCreditosEnPantalla(renderer,font,&retornos);
+
+                //volver al bgm del menu
+                if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_MENU,&bgm))
+                {
+                    printf("[ERROR] No pude musica del main menu\n");
+                }
+                reproducirBGM(&bgm);
             }
             if(opcionElegida==TABLA_DE_PUNTAJES)
             {
