@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
 
 
     //SIEMPRE QUE HAYAN PROBLEMAS, QUITAR LA PANTALLA COMPLETA PARA DEBUG
-    SDL_SetWindowFullscreen(window, true);
+    //SDL_SetWindowFullscreen(window, true);
 
 
     //PRUEBA DE SONIDOSSSS
@@ -172,7 +172,7 @@ int main(int argc, char *argv[]) {
                liberarBGM(&bgm);
 
 
-                mostrarCreditosEnPantalla(renderer,font,&retornos);
+                mostrarCreditosEnPantalla(renderer,&retornos);
 
                 //volver al bgm del menu
                 if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_MENU,&bgm))

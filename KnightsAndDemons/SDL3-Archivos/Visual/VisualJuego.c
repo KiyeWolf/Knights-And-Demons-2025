@@ -556,7 +556,7 @@ void mostrarMensajeEnVentanaYBorrarDespuesDeTecla(SDL_Renderer* renderer, TTF_Fo
         SDL_RenderPresent(renderer);
     }
 }
-void mostrarCreditosEnPantalla(SDL_Renderer* renderer, TTF_Font* font, size_t* retorno)
+void mostrarCreditosEnPantalla(SDL_Renderer* renderer, size_t* retorno)
 {
     //aqui abro el archivo.
     FILE* archivo = fopen(RUTA_CREDITOS, "r");
@@ -564,7 +564,12 @@ void mostrarCreditosEnPantalla(SDL_Renderer* renderer, TTF_Font* font, size_t* r
         printf("[ERROR] No se pudo abrir el archivo de creditos: %s\n", RUTA_CREDITOS);
         return;
     }
-
+    TTF_Font* font = TTF_OpenFont(RUTA_FONT_CREDITOS, TAMANO_FONT_CREDITOS);
+    if (!font) {
+        printf("[ERROR] No se pudo cargar la fuente de creditos: %s\n", SDL_GetError());
+        fclose(archivo);
+        return;
+    }
     LineaCredito lineas[200]; // Asumimos un maximo de 200 lineas de creditos
     int totalLineas = 0;
     char bufferLectura[256];
@@ -679,6 +684,7 @@ void mostrarCreditosEnPantalla(SDL_Renderer* renderer, TTF_Font* font, size_t* r
     *retorno = TODO_OK;
     restaurarVolumenMusica();
     detenerMusicaBGM();
+    TTF_CloseFont(font);
     liberarBGM(&bgm);
     printf("[DEBUG] Creditos finalizados.\n");
 }
@@ -708,6 +714,10 @@ void mostrarTablaDePuntajesDeArchivo(SDL_Renderer* renderer,TTF_Font* font)
                 return;
             }
             if(e.type == SDL_EVENT_KEY_DOWN)
+            {
+                estaLeyendo = false;
+            }
+            if(e.type == SDL_EVENT_MOUSE_BUTTON_DOWN)
             {
                 estaLeyendo = false;
             }

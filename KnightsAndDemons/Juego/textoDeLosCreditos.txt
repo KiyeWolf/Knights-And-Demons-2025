@@ -1,35 +1,71 @@
-----------CRÉDITOS----------
+---------- CRÉDITOS ----------
+
 [SOFTWARE DEVELOPMENT]
 Agustina Losada Martínez
-Guillermo Damian Miranda
+Guillermo Damián Miranda
 Jean Pierre Larán
+
 [TESTING]
 Agustina Losada Martínez
-Guillermo Damian Miranda
+Guillermo Damián Miranda
 Jean Pierre Larán
+Lautaro Barreto
+
 [QUALITY ASSURANCE]
 Agustina Losada Martínez
-Guillermo Damian Miranda
+Guillermo Damián Miranda
 Jean Pierre Larán
-[MUSICA]
-Dark Souls III OST 2 - Prologue
-Firelink Shrine - Dark Souls Soundtrack 03
-Track 03: Firelink Shrine
+
+[PROJECT MANAGEMENT]
+Guillermo Damián Miranda
+
+[DOCUMENTATION]
+Agustina Losada Martínez
+Jean Pierre Larán
+
+[UI/UX DESIGN]
+Agustina Losada Martínez
+
+[CODE REVIEW]
+Guillermo Damián Miranda
+Jean Pierre Larán
+
+DOCENTES A CARGO
+
+[PROFESORES]
+Pablo Soligo — Docente 
+Darío Hirshfeldt — Tutor responsable del TP
+
+MÚSICA
+
+Dark Souls III OST 2 – Prologue
+Firelink Shrine – Dark Souls Soundtrack 03
 Composer: Motoi Sakuraba
-All Gone (No Escape) (from The Last of Us Part I)
-Compose: Gustavo Santaolalla
-Plants vs Zombies Soundtrack. [Night Stage]
-PopCap Studios
-Genichiro Ashina - Sekiro Shadows Die Twice (Original Soundtrack)
-Composer: Yuka Kitamura
-Vanishing Grace, from "The Last of Us Part I" Soundtrack
+
+All Gone (No Escape) — The Last of Us Part I
 Composer: Gustavo Santaolalla
-Hotline Miami 2: Wrong Number Soundtrack - Untitled
+
+Plants vs Zombies Soundtrack — Night Stage
+PopCap Studios
+
+Genichiro Ashina — Sekiro: Shadows Die Twice (Original Soundtrack)
+Composer: Yuka Kitamura
+
+Vanishing Grace — The Last of Us Part I
+Composer: Gustavo Santaolalla
+
+Hotline Miami 2: Wrong Number Soundtrack — Untitled
 Composer: The Green Kingdom
-Tape Deck  Saw (Original Motion Picture Score)
-Composer: Charlie Clouser.
-Hotline Miami 2: Wrong Number Soundtrack - Blizzard
+
+Tape Deck — Saw (Original Motion Picture Score)
+Composer: Charlie Clouser
+
+Hotline Miami 2: Wrong Number Soundtrack — Blizzard
 Composer: Light Club
-Hotline Miami 2: Wrong Number Soundtrack - Simma Hem
+
+Hotline Miami 2: Wrong Number Soundtrack — Simma Hem
 Composer: Riddarna
-----------GRACIAS----------
+
+---------- GRACIAS ----------
+
+A nuestras familias, compañeros y docentes, por el acompañamiento durante todo el desarrollo del proyecto.

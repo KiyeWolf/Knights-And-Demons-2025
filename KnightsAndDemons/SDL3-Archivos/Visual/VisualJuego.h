@@ -20,6 +20,10 @@
 #define MENSAJE_MENU_PRINCIPAL "Knights && Demons 2025"
 #define MENSAJE2 "Valiente Guerrero..."
 
+#define TAMANO_FONT_CREDITOS 24
+#define RUTA_FONT_CREDITOS "./SDL3-Archivos/Visual/freefont-20120503/FreeMono.ttf"
+
+
 #define MAX_LINEAS_CREDITOS 200  
 #define ESPACIADO_ENTRE_LINEAS 40
 // Píxeles por frame (puedes usar decimales)
@@ -44,7 +48,7 @@ void mostrarMensajeEnVentanaYBorrarDespuesDeTecla(SDL_Renderer* renderer, TTF_Fo
 //void mostrarPantallaSolicitudDeNombreParaCargarPartida(SDL_Renderer* renderer, TTF_Font* font);
 //void mostrarMensajeDePartidaNoEncontrada(SDL_Renderer* renderer, TTF_Font* font);
 
-void mostrarCreditosEnPantalla(SDL_Renderer* renderer, TTF_Font* font, size_t* retorno);
+void mostrarCreditosEnPantalla(SDL_Renderer* renderer, size_t* retorno);
 
 void mostrarTablaDePuntajesDeArchivo(SDL_Renderer* renderer,TTF_Font* font);
 

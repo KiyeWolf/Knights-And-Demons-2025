@@ -9,7 +9,7 @@ int jugar(Admin* manager,  SDL_Renderer* renderer, TTF_Font* font,tSonido* sonid
     {
          chequearYMostrarFinalDelJuego(manager, renderer);
          size_t retorno;
-        mostrarCreditosEnPantalla(renderer, font, &retorno);
+        mostrarCreditosEnPantalla(renderer, &retorno);
         return 0; //el jugador completo el juego
     }
     //barraDeCarga();
@@ -935,5 +935,6 @@ void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer)
             //printf("%s", FINAL_NEUTRAL);
         }
         detenerMusicaBGM();
+        TTF_CloseFont(font);
         liberarBGM(&bgmFinal);
 }
