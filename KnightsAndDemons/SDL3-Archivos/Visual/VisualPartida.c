@@ -177,11 +177,19 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
 
     tablero = crearTablero(tamTablero);
     inicializarTablero(tamTablero, tablero, &admin->cursor);
-
+    //parte barra de estado:
+    tRecursosHUD barraDeEstado;
+    inicializarHUD(renderer,&barraDeEstado);
     //parteSonido
+    tSonido bgm;
+    if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_NIVEL,&bgm))
+    {
+        printf("[DEBUG]: Error creando bgm en nivel: %s\n", SDL_GetError());
+    }
 
 
-
+    reproducirBGM(&bgm);
+    bajarElVolumenDeLaMusica(0.2);
     while(estaJugando)
     {
         //printf("[DEBUG]: ME LLEGUE A METER EN EL WHILE DE INICIAR PARTIDA");
@@ -271,12 +279,16 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
                           hoverEnFila,
                           hoverEnColumna);
             //CORREGIR BARRA DE TIEMOPOOOO
-            //renderizarBarraDeTiempoSDL()
+        renderizarBarraEstadoSDL(renderer,&barraDeEstado,admin->jugador.TotalestadoUno,admin->jugador.TotalestadoDos);
 
             renderizarContadoresSDL(renderer, tiempoRestante, font);
 
         SDL_RenderPresent(renderer);
-
+        //justo acá preguntar si termino la musica
+        if(terminoLaMusica())
+        {
+            recargarLaBGM(&bgm);
+        }
         //limitar fps, copiado y pegado de stackoverflow
         SDL_Delay(16);
     }
@@ -288,7 +300,12 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
         actualizarPikas(&pikasDeInicio, &(admin->jugador.pikasRestantes));
         admin->niveles[admin->jugador.nivelActual].tiempo = tiempoRestante; // Establezco el tiempo del jugador en el nivel
    }
-
+   //justo aca corto la musica:
+   restaurarVolumenMusica();
+   detenerMusicaBGM();
+   liberarBGM(&bgm);
+   //justo aca elimino la barra de estado:
+   liberarHUD(&barraDeEstado);
 
     return gano;
 }
@@ -327,7 +344,7 @@ void actualizarHoverCelda(int* hoverEnFila,int* hoverEnColumna,int mouseX,int mo
 
 void renderizarContadoresSDL(SDL_Renderer* renderer, const int tiempo, TTF_Font* font)
 {
-    printf("[DEBUG]: tiempo restante: %d \n", tiempo);
+    //printf("[DEBUG]: tiempo restante: %d \n", tiempo);
     char texto[70]="";
     SDL_Color blanco = {255,255,255,255};
     sprintf(texto,"Tiempo Restante: %d", tiempo);
@@ -461,4 +478,127 @@ int postNivelUsandoSDL(Admin* admin, int resultado, SDL_Renderer* renderer, TTF_
     respuesta = 1; //por defecto sigue jugando
 
     return (respuesta-1); // El -1 es para que devuelva 1 o 0 en vez de 1 o 2
+}
+bool inicializarHUD(SDL_Renderer* renderer, tRecursosHUD* hud)
+{
+    // Cargar texturas desde una surface
+    SDL_Surface* surf2 = SDL_LoadBMP(RUTA_IMAGEN_BARRA_DE_ESTADO_DEMONS);
+    SDL_Surface* surf1 = SDL_LoadBMP(RUTA_IMAGEN_BARRA_DE_ESTADO_KNIGHTS);
+    if(!surf2 || !surf1)
+    {
+        printf("[DEBUG]: No se encontraron las imagenes de la barra de estado: %s\n", SDL_GetError());
+        return false;
+    }
+    hud->texK = SDL_CreateTextureFromSurface(renderer,surf1);
+    hud->texD = SDL_CreateTextureFromSurface(renderer,surf2);
+
+    if(!(hud->texK) || !(hud->texD))
+    {
+        printf("[DEBUG]: No se encontraron las texturas de la barra de estado: %s\n", SDL_GetError());
+        return false;
+    }
+
+    // Cargar fuente (Ajusta la ruta y tamaño)
+    hud->fuente = TTF_OpenFont(RUTA_FUENTE_BARRA_DE_ESTADO, TAMANIO_FUENTE_BARRA_DE_ESTADO);
+
+    if (!hud->fuente) {
+        printf("Error cargando HUD: %s", SDL_GetError());
+        return false;
+    }
+    return true;
+}
+void renderizarBarraEstadoSDL(SDL_Renderer* renderer, tRecursosHUD* hud, int scoreCaballeros, int scoreDemonios)
+{
+    // --- 1. CÁLCULO MATEMÁTICO (Tu lógica original) ---
+
+    // El punto medio en PIXELES
+    float mitadAncho = ANCHO_BARRA / 2.0f;
+
+    int diferencia = scoreCaballeros - scoreDemonios;
+
+    // Cuántos píxeles ganan por cada victoria
+    float pixelesPorVictoria = mitadAncho / TAM_PARTIDAS;
+
+    // Calculamos el ancho de la barra de caballeros
+    float anchoCaballeros = mitadAncho + (diferencia * pixelesPorVictoria);
+
+    // Clamping (Límites para que no se salga de dibujo)
+    if (anchoCaballeros < 0) anchoCaballeros = 0;
+    if (anchoCaballeros > ANCHO_BARRA) anchoCaballeros = ANCHO_BARRA;
+
+    // El resto es para los demonios
+    float anchoDemonios = ANCHO_BARRA - anchoCaballeros;
+
+
+    // --- 2. RENDERIZADO DE BARRAS ---
+
+    // Dibujar parte Caballeros (Izquierda) -> Espada
+    if (anchoCaballeros > 0)
+    {
+        //una forma rectangular obvio
+        SDL_FRect rectEspada =
+        {
+            POS_X_BARRA,
+            POS_Y_BARRA,
+            anchoCaballeros,
+            ALTO_BARRA
+        };
+        SDL_RenderTexture(renderer, hud->texK, NULL, &rectEspada);
+    }
+
+    // parte Demonios (Derecha)
+    if (anchoDemonios > 0) {
+        SDL_FRect rectGarra = {
+            // Empieza donde termina la parte de los caballeros
+            POS_X_BARRA + anchoCaballeros,
+            POS_Y_BARRA,
+            anchoDemonios,
+            ALTO_BARRA
+        };
+        SDL_RenderTexture(renderer, hud->texD, NULL, &rectGarra);
+    }
+
+    //una linea para separar los dos
+    /*SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderLine(renderer, POS_X_BARRA + (ANCHO_BARRA/2), POS_Y_BARRA - 5, POS_X_BARRA + (ANCHO_BARRA/2), POS_Y_BARRA + ALTO_BARRA + 5);
+    */
+
+    // --- 3. RENDERIZADO DE TEXTO (Frentes) ---
+
+    SDL_Color colorTexto = {255, 255, 255, 255};
+    char bufferTexto[64];
+
+    // Texto Caballeros (Izquierda abajo)
+    sprintf(bufferTexto, "%d Frentes", scoreCaballeros);
+    SDL_Surface* surfK = TTF_RenderText_Solid(hud->fuente, bufferTexto, 0, colorTexto);
+    if(!surfK)
+    {
+        SDL_Log("Error creating surface for Knights: %s", SDL_GetError());
+    }
+        SDL_Texture* texK = SDL_CreateTextureFromSurface(renderer, surfK);
+        SDL_FRect rectK = { POS_X_BARRA, POS_Y_BARRA + ALTO_BARRA + 5, (float)surfK->w, (float)surfK->h };
+        SDL_RenderTexture(renderer, texK, NULL, &rectK);
+        SDL_DestroySurface(surfK);
+        SDL_DestroyTexture(texK);
+
+    // Texto Demonios (Derecha abajo)
+    sprintf(bufferTexto, "%d Frentes", scoreDemonios);
+    SDL_Surface* surfD = TTF_RenderText_Solid(hud->fuente, bufferTexto, 0, colorTexto);
+    if (surfD) {
+        SDL_Texture* texD = SDL_CreateTextureFromSurface(renderer, surfD);
+        // Alineado a la derecha: X = (FinBarra) - AnchoTexto
+        SDL_FRect rectD = { (POS_X_BARRA + ANCHO_BARRA) - surfD->w, POS_Y_BARRA + ALTO_BARRA + 5, (float)surfD->w, (float)surfD->h };
+        SDL_RenderTexture(renderer, texD, NULL, &rectD);
+        SDL_DestroySurface(surfD);
+        SDL_DestroyTexture(texD);
+    }
+}
+void liberarHUD(tRecursosHUD* hud)
+{
+    if(hud->texK)
+        SDL_DestroyTexture(hud->texK);
+    if(hud->texD)
+        SDL_DestroyTexture(hud->texD);
+    if(hud->fuente)
+        TTF_CloseFont(hud->fuente);
 }

@@ -308,7 +308,7 @@ void mostrarNivelPikasActual(int nivelActual, int pikasActuales) // MUESTRA PIKA
     // El "°|" y "*|" son un agregado estetico
 }
 
-void mostrarBarraEstado(Admin* admin, int resultado) // MUESTRA LA BARRA DE ESTADO GLOBAL DE LA PARTIDA
+/*void mostrarBarraEstado(Admin* admin, int resultado) // MUESTRA LA BARRA DE ESTADO GLOBAL DE LA PARTIDA
 {
     const int largoBarra = 50;
     int mitad = largoBarra / 2;
@@ -347,7 +347,7 @@ void mostrarBarraEstado(Admin* admin, int resultado) // MUESTRA LA BARRA DE ESTA
            admin->jugador.TotalestadoUno,
            admin->jugador.TotalestadoDos);
 }
-
+*/
 /*int jugar(Admin* manager)
 {
     int finalJuego;

@@ -8,14 +8,35 @@
 #include "VisualJuego.h"
 #include "../Audio/Audio.h"
 #define RUTA_IMAGEN_CABALLERO "./SDL3-Archivos/Visual/Imagenes/caballero.bmp"
-#define RUTA_FUENTE_MENSAJE_INICIO_NIVEL "./SDL3-Archivos/Visual/freefont-20120503/FreeMonoOblique.ttf"
+#define RUTA_IMAGEN_BARRA_DE_ESTADO_KNIGHTS "./SDL3-Archivos/Visual/Imagenes/barraDeEstadoKnights.bmp"
+#define RUTA_IMAGEN_BARRA_DE_ESTADO_DEMONS "./SDL3-Archivos/Visual/Imagenes/barraDeEstado-Demons.bmp"
 #define RUTA_IMAGEN_DEMONIO  "./SDL3-Archivos/Visual/Imagenes/demonio.bmp"
+
+
+#define RUTA_FUENTE_MENSAJE_INICIO_NIVEL "./SDL3-Archivos/Visual/freefont-20120503/FreeMonoOblique.ttf"
 #define RUTA_FUENTE_TIEMPO_RESTANTE  "./SDL3-Archivos/Visual/freefont-20120503/FreeMonoOblique.ttf"
+#define RUTA_FUENTE_BARRA_DE_ESTADO "./SDL3-Archivos/Visual/freefont-20120503/FreeMonoOblique.ttf"
+
 #define TAMANIO_TEXTO_TIEMPO_RESTANTE 30
 #define TAMANIO_TEXTO_INICIO_NIVEL 30
-
+#define TAMANIO_FUENTE_BARRA_DE_ESTADO 24
 
 #define TAMANIO_CELDA 40
+
+// Barra de estado:
+#define ANCHO_BARRA 600 
+#define ALTO_BARRA 50
+#define POS_X_BARRA 100 // Margen izquierdo
+#define POS_Y_BARRA 20  // Margen superior
+typedef struct {
+    // Imagen para Caballeros
+    SDL_Texture* texK;    
+    // Imagen para Demonios
+    SDL_Texture* texD; 
+    // Para los textos de abajo    
+    TTF_Font* fuente;          
+} tRecursosHUD;
+
 
 int jugar(Admin* manager,  SDL_Renderer* renderer, TTF_Font* font,tSonido* sonidoBotonCasilla);
 int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasilla);
@@ -25,6 +46,12 @@ void renderizarContadoresSDL(SDL_Renderer* renderer, const int tiempo, TTF_Font*
 void renderizarMensajeDeQueNoHayPikas(SDL_Renderer* renderer, TTF_Font* font);
 void mostrarMensajeDeInicioDeNivel(SDL_Renderer* renderer, TTF_Font* font);
 void preguntarGuardarPartida(int* respuesta, SDL_Renderer* renderer, TTF_Font* font);
+
+//Barra de estado
+bool inicializarHUD(SDL_Renderer* renderer, tRecursosHUD* hud);
+void renderizarBarraEstadoSDL(SDL_Renderer* renderer, tRecursosHUD* hud, int scoreCaballeros, int scoreDemonios);
+void liberarHUD(tRecursosHUD* hud);
+
 
 int postNivelUsandoSDL(Admin* admin, int resultado, SDL_Renderer* renderer, TTF_Font* font);
 #endif

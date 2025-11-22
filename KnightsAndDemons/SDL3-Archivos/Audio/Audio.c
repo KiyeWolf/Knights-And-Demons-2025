@@ -370,3 +370,11 @@ void recargarLaBGM(tSonido* bgm)
         SDL_PutAudioStreamData(streamBGM, bgm->buffer, bgm->longitud);
         SDL_FlushAudioStream(streamBGM);
 }
+bool bajarElVolumenDeLaMusica(float factorDecremento)
+{
+    return SDL_SetAudioStreamGain(streamBGM,factorDecremento);
+}
+bool restaurarVolumenMusica()
+{
+    return SDL_SetAudioStreamGain(streamBGM,1.0f);
+}

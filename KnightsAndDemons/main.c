@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
 
 
     //SIEMPRE QUE HAYAN PROBLEMAS, QUITAR LA PANTALLA COMPLETA PARA DEBUG
-    //SDL_SetWindowFullscreen(window, true);
+    SDL_SetWindowFullscreen(window, true);
 
 
     //PRUEBA DE SONIDOSSSS
