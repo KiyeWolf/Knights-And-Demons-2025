@@ -17,12 +17,14 @@
 #define RUTA_FUENTE_TIEMPO_RESTANTE  "./SDL3-Archivos/Visual/freefont-20120503/FreeMonoOblique.ttf"
 #define RUTA_FUENTE_BARRA_DE_ESTADO "./SDL3-Archivos/Visual/freefont-20120503/FreeMonoOblique.ttf"
 #define RUTA_FUENTE_PIKAS_RESTANTES "./SDL3-Archivos/Visual/freefont-20120503/FreeMonoOblique.ttf"
+#define RUTA_FUENTE_FINAL_JUEGO "./SDL3-Archivos/Visual/freefont-20120503/FreeMonoOblique.ttf"
+
 
 #define TAMANIO_TEXTO_TIEMPO_RESTANTE 30
 #define TAMANIO_TEXTO_INICIO_NIVEL 30
 #define TAMANIO_FUENTE_BARRA_DE_ESTADO 24
 #define TAMANIO_FUENTE_PIKAS_RESTANTES 24
-
+#define TAMANIO_FUENTE_FINAL_JUEGO 22
 
 #define RUTA_VFX_FUEGO "./SDL3-Archivos/Visual/VFX/VFX-Fuego.bmp"
 
@@ -82,5 +84,5 @@ void activarEfectoFuego(tVFX* fuego);
 //Funcionees del post nivel
 int postNivelUsandoSDL(Admin* admin, int resultado, SDL_Renderer* renderer, TTF_Font* font);
 bool mostrarAgradecimientoCaballeros(SDL_Renderer* renderer, TTF_Font* font, const char* mensaje);
-void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer, TTF_Font* font);
+void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer);
 #endif

@@ -84,13 +84,13 @@
 //int ciclarPartida(Admin*);
 
 
-int postNivel(Admin*, int);
+//int postNivel(Admin*, int);
 
 // Secundarias
 int guardarPartida(Admin*);
 //void pedirJugada(Admin*, char**, size_t);
-void mostrarNivelPikasActual(int, int);
-void mostrarBarraEstado(Admin*, int);
+//void mostrarNivelPikasActual(int, int);
+//void mostrarBarraEstado(Admin*, int);
 
 // Auxiliares
 int tiempo(const Admin*, int);

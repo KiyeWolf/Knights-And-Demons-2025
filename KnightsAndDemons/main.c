@@ -119,15 +119,22 @@ int main(int argc, char *argv[]) {
                 }
                 else
                 {
-                    detenerMusicaBGM();
+                     detenerMusicaBGM();
+                    liberarBGM(&bgm);
                     if(jugar(&elAdmin, renderer, font,&sonidoBotonCasilla)==JUEGO_COMPLETADO)
                     {
                         colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
                     }
                     else
                     {
-                        reproducirBGM(&bgm);
+                        //por ahora nada.
                     }
+                    
+                    if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_MENU,&bgm))
+                    {
+                        printf("[ERROR] No pude musica del main menu\n");
+                    }
+                    reproducirBGM(&bgm);
                 }
             }
 
@@ -144,14 +151,20 @@ int main(int argc, char *argv[]) {
                 mostrarPantallaHistoriaInicial(renderer,font,&retornos);
                // printf("[DEBUG TIME]: si logre salir de la pantalla principal");
                detenerMusicaBGM();
+               liberarBGM(&bgm);
                 if(jugar(&elAdmin, renderer, font,&sonidoBotonCasilla)==JUEGO_COMPLETADO)
                 {
                     colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
                 }
                 else
                     {
-                        reproducirBGM(&bgm);
+                        //por ahora nada.
                     }
+                if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_MENU,&bgm))
+                {
+                    printf("[ERROR] No pude musica del main menu\n");
+                }
+                reproducirBGM(&bgm);
             }
             if(opcionElegida==CREDITOS)
             {

@@ -301,13 +301,13 @@ int iniciarPartida(Admin* admin) // DEVUELVE SI GANÓ O NO (1,2 o 0 si perdio el
     return (respuesta-1); // El -1 es para que devuelva 1 o 0 en vez de 1 o 2
 }*/
 
-void mostrarNivelPikasActual(int nivelActual, int pikasActuales) // MUESTRA PIKAS Y NIVEL ACTUALES + LIMPIA LA CONSOLA
+/*void mostrarNivelPikasActual(int nivelActual, int pikasActuales) // MUESTRA PIKAS Y NIVEL ACTUALES + LIMPIA LA CONSOLA
 {
     printf("\n°|Nivel actual: \t%d", (nivelActual + 1)); // Este nivelActual + 1, es porque el primer nivel en el codigo es el nivel 0, entonces acá se imprime como nivel 1
     printf("\n*|Pikas actuales: \t%d", pikasActuales);
     // El "°|" y "*|" son un agregado estetico
 }
-
+*/
 /*void mostrarBarraEstado(Admin* admin, int resultado) // MUESTRA LA BARRA DE ESTADO GLOBAL DE LA PARTIDA
 {
     const int largoBarra = 50;

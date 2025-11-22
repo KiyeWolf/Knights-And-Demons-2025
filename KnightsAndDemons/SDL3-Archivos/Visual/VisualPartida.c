@@ -7,7 +7,7 @@ int jugar(Admin* manager,  SDL_Renderer* renderer, TTF_Font* font,tSonido* sonid
     finalJuego = ciclarPartida(manager, renderer,sonidoBotonCasilla);
     if(seCompletoElJuego(&finalJuego)) //Este if pregunta si el jugador gano todos los niveles
     {
-         chequearYMostrarFinalDelJuego(manager, renderer, font);
+         chequearYMostrarFinalDelJuego(manager, renderer);
         mostrarCreditosEnPantalla(renderer, font, NULL);
         return 0; //el jugador completo el juego
     }
@@ -793,11 +793,15 @@ bool mostrarAgradecimientoCaballeros(SDL_Renderer* renderer, TTF_Font* font, con
     mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, (char*)mensaje);
     return true;
 }
-void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer, TTF_Font* font)
+void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer)
 {
     char lineaFinal[200]="";
 
-
+    TTF_Font* font = TTF_OpenFont(RUTA_FUENTE_FINAL_JUEGO, TAMANIO_FUENTE_FINAL_JUEGO);
+    if(!font)
+    {
+        printf("[DEBUG]: Error cargando fuente para final del juego: %s\n", SDL_GetError());
+    }
     tSonido bgmFinal;
     if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_FINAL,&bgmFinal))
     {
@@ -808,6 +812,7 @@ void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer, TTF_F
     sprintf(lineaFinal,"Felicidades %s, has completado el juego...", manager->jugador.nombre);
         //printf("FINAL COMPLETADO:\n"); /// COMPLETAR CON MSJ PERSONALIZADO
     mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, lineaFinal);
+    mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, "FINAL COMPLETADO:");
         if(manager->jugador.TotalestadoUno==TAM_PARTIDAS)
         {
             if(manager->jugador.dificultadSeleccionada == DIFICIL)
@@ -855,7 +860,9 @@ void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer, TTF_F
                 {
                     printf("[DEBUG]: Error creando bgm en final de caballeros: %s\n", SDL_GetError());
                 }
+                bajarElVolumenDeLaMusica(0.7);
                 reproducirBGM(&bgmFinal);
+
                 //Entonces completo el final de Knigths
                 char finalKnights[4][300]=
                 {
@@ -873,9 +880,11 @@ void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer, TTF_F
                     }
                 }
                 //printf("%s", FINAL_BUENO);
+                restaurarVolumenMusica();
             }
         } else if(manager->jugador.TotalestadoDos==TAM_PARTIDAS)
         {
+            detenerMusicaBGM();
             liberarBGM(&bgmFinal);
             //En este caso completo un final de todos demonios, en cualquier dificultad
            // printf("%s", FINAL_MALO);
@@ -883,8 +892,8 @@ void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer, TTF_F
             {
                 printf("[DEBUG]: Error creando bgm en final de demonios: %s\n", SDL_GetError());
             }
-            detenerMusicaBGM();
             reproducirBGM(&bgmFinal);
+            bajarElVolumenDeLaMusica(0.7);
             char finalDemonios[7][200]=
             {
                 "Desde su cama de convalecencia, el Rey Bakelor observó por la ventana",
@@ -903,6 +912,7 @@ void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer, TTF_F
                     recargarLaBGM(&bgmFinal);
                 }
             }
+            restaurarVolumenMusica();
         } else
         {
             char finalNeutral[4][200]=
