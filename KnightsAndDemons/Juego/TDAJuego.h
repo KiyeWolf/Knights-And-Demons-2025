@@ -18,7 +18,7 @@
 #define TAM_NOMBRE 3 //Recuerda que se le suma uno por el caracter nulo dentro del código
 #define TAM_LINEA_JUEGO 2001
 
-#define TAM_PARTIDAS 2
+#define TAM_PARTIDAS 8
 
 
 #define ARCHIVO_CORRUPTO 1

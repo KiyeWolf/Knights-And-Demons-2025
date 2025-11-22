@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
 
 
     //SIEMPRE QUE HAYAN PROBLEMAS, QUITAR LA PANTALLA COMPLETA PARA DEBUG
-    //SDL_SetWindowFullscreen(window, true);
+    SDL_SetWindowFullscreen(window, true);
 
 
     //PRUEBA DE SONIDOSSSS
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
     mostrarMenuPrincipal(renderer,font,&opcionElegida, &sonidoBotonMenu,&bgm);
     while(opcionElegida!=SALIR)
     {
-        
+
             if(opcionElegida==CARGAR_PARTIDA)
             {
 
@@ -129,7 +129,7 @@ int main(int argc, char *argv[]) {
                     {
                         //por ahora nada.
                     }
-                    
+
                     if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_MENU,&bgm))
                     {
                         printf("[ERROR] No pude musica del main menu\n");
