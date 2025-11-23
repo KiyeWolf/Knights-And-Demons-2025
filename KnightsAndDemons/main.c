@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
     }
 
     reproducirBGM(&bgm);
-
+    bajarElVolumenDeLaMusica(&bgm,0.7f);
     mostrarPantallaBienvenida(renderer,font);
     char opcionElegida;
     mostrarMenuPrincipal(renderer,font,&opcionElegida, &sonidoBotonMenu,&bgm);
@@ -90,6 +90,7 @@ int main(int argc, char *argv[]) {
                 }
                 else
                 {
+                    restaurarVolumenMusica();
                      detenerMusicaBGM();
                     liberarBGM(&bgm);
                     if(jugar(&elAdmin, renderer, font,&sonidoBotonCasilla)==JUEGO_COMPLETADO)
@@ -106,6 +107,7 @@ int main(int argc, char *argv[]) {
                         printf("[ERROR] No pude musica del main menu\n");
                     }
                     reproducirBGM(&bgm);
+                    bajarElVolumenDeLaMusica(&bgm,0.7f);
                     mostrarPantallaBienvenida(renderer,font);
                 }
             }
@@ -122,6 +124,7 @@ int main(int argc, char *argv[]) {
                 iniciarJuegoNuevo(&elAdmin, &d, nombre);
                 mostrarPantallaHistoriaInicial(renderer,font,&retornos);
                // printf("[DEBUG TIME]: si logre salir de la pantalla principal");
+               restaurarVolumenMusica();
                detenerMusicaBGM();
                liberarBGM(&bgm);
                 if(jugar(&elAdmin, renderer, font,&sonidoBotonCasilla)==JUEGO_COMPLETADO)
@@ -137,10 +140,12 @@ int main(int argc, char *argv[]) {
                     printf("[ERROR] No pude musica del main menu\n");
                 }
                 reproducirBGM(&bgm);
+                bajarElVolumenDeLaMusica(&bgm,0.7f);
                 mostrarPantallaBienvenida(renderer,font);
             }
             if(opcionElegida==CREDITOS)
             {
+                restaurarVolumenMusica();
                 detenerMusicaBGM();
                liberarBGM(&bgm);
 
@@ -153,7 +158,7 @@ int main(int argc, char *argv[]) {
                     printf("[ERROR] No pude musica del main menu\n");
                 }
                 reproducirBGM(&bgm);
-                
+                bajarElVolumenDeLaMusica(&bgm,0.7f);
             }
             if(opcionElegida==TABLA_DE_PUNTAJES)
             {
