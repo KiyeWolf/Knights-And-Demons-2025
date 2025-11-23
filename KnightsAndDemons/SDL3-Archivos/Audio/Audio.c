@@ -18,7 +18,7 @@ bool inicializarAudioSDL()
     dispositivoDeAudio.id =  SDL_OpenAudioDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK,&audio);
     if(!dispositivoDeAudio.id)
     {
-        printf("[DEBUG] Error al inicializar el dispositivo de audio: %s", SDL_GetError());
+        SDL_Log("[DEBUG] Error al inicializar el dispositivo de audio: %s", SDL_GetError());
         return false;
     }
     dispositivoDeAudio.spec = audio;
@@ -36,7 +36,7 @@ bool cargarUnSonidoNuevo(const char* rutaArch, tSonido* salida)
     //antes de cargarlo a la salida
     if(!SDL_LoadWAV(rutaArch,&audio,&(sound.buffer), &(sound.longitud)))
     {
-        printf("[DEBUG] Error cargando WAV: %s", SDL_GetError());
+        SDL_Log("[DEBUG] Error cargando WAV: %s", SDL_GetError());
         return false;
     }
     //en esta parte hay que chequear si el formato del audio es compatible con el dispositivo
@@ -44,13 +44,13 @@ bool cargarUnSonidoNuevo(const char* rutaArch, tSonido* salida)
         SDL_AudioStream* stream = SDL_CreateAudioStream(&audio,&(dispositivoDeAudio.spec));
         if(!stream)
         {
-            printf("[DEBUG] Error convirtiendo WAV, erro creando stream: %s", SDL_GetError());
+            SDL_Log("[DEBUG] Error convirtiendo WAV, erro creando stream: %s", SDL_GetError());
             SDL_free(sound.buffer);
             return false;
         }
         if(!SDL_PutAudioStreamData(stream,sound.buffer, sound.longitud))
         {
-            printf("[DEBUG] Error cargando WAV: error colocando stream: %s", SDL_GetError());
+            SDL_Log("[DEBUG] Error cargando WAV: error colocando stream: %s", SDL_GetError());
             SDL_DestroyAudioStream(stream);
             SDL_free(sound.buffer);
             return false;
@@ -66,7 +66,7 @@ bool cargarUnSonidoNuevo(const char* rutaArch, tSonido* salida)
         Uint8* nuevoBufferConvertido = SDL_malloc(tamBytesListos);
         if(!nuevoBufferConvertido)
         {
-            printf("[DEBUG]: Error de memoria de malloc");
+            SDL_Log("[DEBUG]: Error de memoria de malloc");
             SDL_DestroyAudioStream(stream);
             SDL_free(sound.buffer);
             return false;
@@ -79,7 +79,7 @@ bool cargarUnSonidoNuevo(const char* rutaArch, tSonido* salida)
         salida->longitud = bytesLeidos;
         salida->sonidoSpec = dispositivoDeAudio.spec;
         SDL_DestroyAudioStream(stream);
-        printf("[DEBUG]La conversion se logró\n");
+        //SDL_Log("[DEBUG]La conversion se logró\n");
         SDL_free(sound.buffer);
         return true;
 }
@@ -92,24 +92,24 @@ bool cargarUnaBGMNueva(const char* rutaArch, tSonido* salida)
     //antes de cargarlo a la salida
     if(!SDL_LoadWAV(rutaArch,&audio,&(sound.buffer), &(sound.longitud)))
     {
-        printf("[DEBUG] Error cargando WAV: %s", SDL_GetError());
+        SDL_Log("[DEBUG] Error cargando WAV: %s", SDL_GetError());
         return false;
     }
     //en esta parte hay que chequear si el formato del audio es compatible con el dispositivo
     if(necesitaConversionDeAudio(&audio))
     {
-        printf("[DEBUG]Al parecer el sonido necesita conversion\n");
+        //SDL_Log("[DEBUG]Al parecer el sonido necesita conversion\n");
         //entonces hago la conversión
         SDL_AudioStream* stream = SDL_CreateAudioStream(&audio,&(dispositivoDeAudio.spec));
         if(!stream)
         {
-            printf("[DEBUG] Error convirtiendo WAV, erro creando stream: %s", SDL_GetError());
+            SDL_Log("[DEBUG] Error convirtiendo WAV, erro creando stream: %s", SDL_GetError());
             SDL_free(sound.buffer);
             return false;
         }
         if(!SDL_PutAudioStreamData(stream,sound.buffer, sound.longitud))
         {
-            printf("[DEBUG] Error cargando WAV: error colocando stream: %s", SDL_GetError());
+            SDL_Log("[DEBUG] Error cargando WAV: error colocando stream: %s", SDL_GetError());
             SDL_DestroyAudioStream(stream);
             SDL_free(sound.buffer);
             return false;
@@ -125,7 +125,7 @@ bool cargarUnaBGMNueva(const char* rutaArch, tSonido* salida)
         Uint8* nuevoBufferConvertido = SDL_malloc(tamBytesListos);
         if(!nuevoBufferConvertido)
         {
-            printf("[DEBUG]: Error de memoria de malloc");
+            SDL_Log("[DEBUG]: Error de memoria de malloc");
             SDL_DestroyAudioStream(stream);
             SDL_free(sound.buffer);
             return false;
@@ -138,9 +138,9 @@ bool cargarUnaBGMNueva(const char* rutaArch, tSonido* salida)
         salida->longitud = bytesLeidos;
         salida->sonidoSpec = dispositivoDeAudio.spec;
         SDL_DestroyAudioStream(stream);
-        printf("[DEBUG]La conversion se logró\n");
+        SDL_Log("[DEBUG]La conversion se logró\n");
         //SDL_free(sound.buffer);
-        /*printf("[DEBUG] Spec BGM -> freq:%d  channels:%d  format:%d\n",
+        /*SDL_Log("[DEBUG] Spec BGM -> freq:%d  channels:%d  format:%d\n",
         salida->sonidoSpec.freq,
         salida->sonidoSpec.channels,
          salida->sonidoSpec.format);
@@ -153,7 +153,7 @@ bool cargarUnaBGMNueva(const char* rutaArch, tSonido* salida)
     SDL_AudioStream* stream = SDL_CreateAudioStream(&audio, &dispositivoDeAudio.spec);
     if (!stream)
     {
-        printf("[DEBUG] Error creando stream WAV->Device: %s\n", SDL_GetError());
+        SDL_Log("[DEBUG] Error creando stream WAV->Device: %s\n", SDL_GetError());
         SDL_free(sound.buffer);
         return false;
     }
@@ -196,14 +196,14 @@ bool reproducirSFX(const tSonido* sonido)
     if(!sonido || !sonido->buffer|| sonido->longitud <= 0)
     {
         //pues nada
-        printf("[DEBUG]: Error sonido sin longitud o sonido sin buffer: %s", SDL_GetError());
+        SDL_Log("[DEBUG]: Error sonido sin longitud o sonido sin buffer: %s", SDL_GetError());
         return false;
     }
     //SDL_ClearAudioStream(streamActivo);
     //no queda de otra opcion qeu destrozar el stream anterior y crear uno nuevo
     SDL_AudioStream* stream = SDL_CreateAudioStream(&sonido->sonidoSpec, &dispositivoDeAudio.spec);
     if (!stream) {
-        printf("[DEBUG] Error creando stream de salida: %s\n", SDL_GetError());
+        SDL_Log("[DEBUG] Error creando stream de salida: %s\n", SDL_GetError());
         return false;
     }
 
@@ -213,17 +213,17 @@ bool reproducirSFX(const tSonido* sonido)
     //aca es el mismo proceso, obtener los bytes, crear un espacio temporal, leerlos y luego encolarlos
     if (!SDL_PutAudioStreamData(stream, sonido->buffer, sonido->longitud))
     {
-        printf("[DEBUG] Error SDL_PutAudioStreamData: %s\n", SDL_GetError());
+        SDL_Log("[DEBUG] Error SDL_PutAudioStreamData: %s\n", SDL_GetError());
         SDL_DestroyAudioStream(stream);
         return false;
     }
-    printf("[DEBUG] Sonido cargado en el stream correctamente\n");
+    SDL_Log("[DEBUG] Sonido cargado en el stream correctamente\n");
     SDL_FlushAudioStream(stream);
     // Dejamos que SDL consuma el stream automáticamente.
     // Esto funciona porque SDL3 "pulls" datos del stream.
     if(!SDL_BindAudioStream(dispositivoDeAudio.id, stream))
     {
-        printf("[DEBUG] Error SDL_BindAudioStream: %s\n", SDL_GetError());
+        SDL_Log("[DEBUG] Error SDL_BindAudioStream: %s\n", SDL_GetError());
         SDL_DestroyAudioStream(stream);
         return false;
     }
@@ -232,10 +232,10 @@ bool reproducirSFX(const tSonido* sonido)
    // SDL_PauseAudioDevice(dispositivoDeAudio.id);
     if (!SDL_ResumeAudioDevice(dispositivoDeAudio.id))
     {
-         printf("[DEBUG] Error al resumir dispositivo: %s\n", SDL_GetError());
+         SDL_Log("[DEBUG] Error al resumir dispositivo: %s\n", SDL_GetError());
     }
    streamActivo = stream;
-    printf("[DEBUG] Sonido reproducido\n");
+    //SDL_Log("[DEBUG] Sonido reproducido\n");
     return true;
 }
 bool liberarSonido(tSonido* sonido)
@@ -244,10 +244,10 @@ bool liberarSonido(tSonido* sonido)
 
     if (sonido->buffer)
     {
-        //printf("yes llegue hasta liberarSonido");
+        //SDL_Log("yes llegue hasta liberarSonido");
         // libera buffer (sea WAV directo o convertido)
 
-       // printf("[DEBUG liberarSonido] buffer=%p, longitud=%d\n",
+       // SDL_Log("[DEBUG liberarSonido] buffer=%p, longitud=%d\n",
            //sonido->buffer, sonido->longitud);
         SDL_free(sonido->buffer);
         sonido->buffer = NULL;
@@ -259,12 +259,12 @@ bool liberarBGM(tSonido* sonido)
 {
     if (!sonido) return false;
 
-     //printf("[DEBUG liberarSonido] buffer=%p, longitud=%d\n",
+     //SDL_Log("[DEBUG liberarSonido] buffer=%p, longitud=%d\n",
            //sonido->buffer, sonido->longitud);
 
     if (sonido->buffer)
     {
-        //printf("yes llegue hasta liberarBGM");
+        //SDL_Log("yes llegue hasta liberarBGM");
         // libera buffer (sea WAV directo o convertido)
         SDL_free(sonido->buffer);
         sonido->buffer = NULL;
@@ -293,7 +293,7 @@ bool reproducirBGM(const tSonido* musica)
 {
      if (!musica || !musica->buffer || musica->longitud <= 0)
     {
-        printf("[DEBUG] BGM inválida: %s\n", SDL_GetError());
+        SDL_Log("[DEBUG] BGM inválida: %s\n", SDL_GetError());
         return false;
     }
 
@@ -304,11 +304,11 @@ bool reproducirBGM(const tSonido* musica)
         SDL_DestroyAudioStream(streamBGM);
         streamBGM = NULL;
     }
-    /*printf("[DEBUG] Spec BGM -> freq:%d  channels:%d  format:%d\n",
+    /*SDL_Log("[DEBUG] Spec BGM -> freq:%d  channels:%d  format:%d\n",
        musica->sonidoSpec.freq,
        musica->sonidoSpec.channels,
        musica->sonidoSpec.format);
-    printf("[DEBUG] Spec DEVICE -> freq:%d  channels:%d  format:%d\n",
+    SDL_Log("[DEBUG] Spec DEVICE -> freq:%d  channels:%d  format:%d\n",
        dispositivoDeAudio.spec.freq,
        dispositivoDeAudio.spec.channels,
        dispositivoDeAudio.spec.format);
@@ -317,14 +317,14 @@ bool reproducirBGM(const tSonido* musica)
     streamBGM = SDL_CreateAudioStream(&(musica->sonidoSpec), &dispositivoDeAudio.spec);
     if (!streamBGM)
     {
-        printf("[DEBUG] Error creando stream BGM   : %s\n", SDL_GetError());
+        SDL_Log("[DEBUG] Error creando stream BGM   : %s\n", SDL_GetError());
         return false;
     }
 
     // Cargar el audio completo al stream
     if (!SDL_PutAudioStreamData(streamBGM, musica->buffer, musica->longitud))
     {
-        printf("[DEBUG] Error cargando datos BGM: %s\n", SDL_GetError());
+        SDL_Log("[DEBUG] Error cargando datos BGM: %s\n", SDL_GetError());
         SDL_DestroyAudioStream(streamBGM);
         streamBGM = NULL;
         return false;
@@ -335,7 +335,7 @@ bool reproducirBGM(const tSonido* musica)
     // Vincular stream BGM al dispositivo de salida
     if (!SDL_BindAudioStream(dispositivoDeAudio.id, streamBGM))
     {
-        printf("[DEBUG] Error al bindear BGM: %s\n", SDL_GetError());
+        SDL_Log("[DEBUG] Error al bindear BGM: %s\n", SDL_GetError());
         SDL_DestroyAudioStream(streamBGM);
         streamBGM = NULL;
         return false;
@@ -343,7 +343,7 @@ bool reproducirBGM(const tSonido* musica)
 
     // Asegurar que el audio esté reproduciéndose
     SDL_ResumeAudioDevice(dispositivoDeAudio.id);
-    printf("[DEBUG] BGM reproduciéndose correctamente.\n");
+    SDL_Log("[DEBUG] BGM reproduciéndose correctamente.\n");
     return true;
 }
 void detenerMusicaBGM()
@@ -353,11 +353,11 @@ void detenerMusicaBGM()
         SDL_UnbindAudioStream(streamBGM);
         SDL_DestroyAudioStream(streamBGM);
         streamBGM = NULL;
-        printf("[DEBUG] BGM detenida y stream destruido correctamente.\n");
+        SDL_Log("[DEBUG] BGM detenida y stream destruido correctamente.\n");
     }
     else
     {
-        printf("[DEBUG] Intente detener BGM pero el puntero era NULL (¿Ya estaba detenida?)\n");
+        SDL_Log("[DEBUG] Intente detener BGM pero el puntero era NULL (¿Ya estaba detenida?)\n");
     }
 }
 bool terminoLaMusica()

@@ -1,3 +1,4 @@
 TABLA DE PUNTAJES o()xxxx[{::::::::::::::::::>
 | NOMBRE  | TABLEROS KNIGHTS TOTALES | TABLEROS DEMONS TOTALES | PIKAS RESTANTES | NIVELES COMPLETADOS |
 | ..PRI.. | ..... 8  KNIGHTS ....... | ..... 0  DEMONS ....... | ......19....... | ..... 8......... |
+| ..kio.. | ..... 8  KNIGHTS ....... | ..... 0  DEMONS ....... | ......34....... | ..... 8......... |

@@ -27,13 +27,13 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasil
     TTF_Font* fontMensajeInicioNivel = TTF_OpenFont(RUTA_FUENTE_MENSAJE_INICIO_NIVEL, TAMANIO_TEXTO_INICIO_NIVEL);
     if(!fontMensajeInicioNivel)
     {
-        printf("[DEBUG] Error al cargar la fuente de mensaje de inicio de nivel: %s", SDL_GetError());
+        SDL_Log("[DEBUG] Error al cargar la fuente de mensaje de inicio de nivel: %s", SDL_GetError());
     }
     SDL_Surface* sKnight = SDL_LoadBMP(RUTA_IMAGEN_CABALLERO);
     SDL_Surface* sDemon = SDL_LoadBMP(RUTA_IMAGEN_DEMONIO);
     if(!sKnight || !sDemon)
     {
-        printf("[DEBUG] Error al cargar las imagenes: %s", SDL_GetError());
+        SDL_Log("[DEBUG] Error al cargar las imagenes: %s", SDL_GetError());
     }
     SDL_Texture* textKnight = SDL_CreateTextureFromSurface(renderer,sKnight);
     SDL_DestroySurface(sKnight);
@@ -55,7 +55,7 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasil
         {
             if(!cargarUnaBGMNueva(RUTA_BACKGROUND_MUSIC_NIVEL_VICTORIA,&bgm))
             {
-                printf("[DEBUG]: No se encontro la musica del post nivel: %s", SDL_GetError());
+                SDL_Log("[DEBUG]: No se encontro la musica del post nivel: %s", SDL_GetError());
             }
             else
             {
@@ -106,7 +106,7 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasil
             //Significa que perdió, por eso se muestra este mensaje de derrota
             if(!cargarUnaBGMNueva(RUTA_BACKGROUND_MUSIC_NIVEL_DERROTA,&bgm))
             {
-                printf("[DEBUG]: No se encontro la musica del post nivel: %s", SDL_GetError());
+                SDL_Log("[DEBUG]: No se encontro la musica del post nivel: %s", SDL_GetError());
             }
             else
             {
@@ -139,14 +139,14 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasil
         }
         if(admin->jugador.nivelActual < TAM_PARTIDAS) //Se evalúa si quedan niveles por jugar o no.
         {
-            printf("[DEBUG]: A punto de PostNivel");
+            SDL_Log("[DEBUG]: A punto de PostNivel");
             //estaEnMenu = postNivel(admin, gano);
             if(postNivelUsandoSDL(admin, gano, renderer, fontMensajeInicioNivel) == 1)
                 {
-                    printf("[DEBUG]: El jugador decidió volver al menu");
+                    SDL_Log("[DEBUG]: El jugador decidió volver al menu");
                     finalJuego = 1; // SE VA A MENU
                 }
-            printf("[DEBUG]: Salí de PostNivel");
+            SDL_Log("[DEBUG]: Salí de PostNivel");
         }
         else
         {
@@ -176,7 +176,7 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
 
     size_t tamTablero = obtenerTamTablero(admin);
     char** tablero = NULL;
-    printf("[DEBUG]: ME LLEGUE A METER EN INICIAR PARTIDA");
+    SDL_Log("[DEBUG]: ME LLEGUE A METER EN INICIAR PARTIDA");
 
     int mouseX;
     int mouseY;
@@ -206,7 +206,7 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
     tSonido bgm;
     if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_NIVEL,&bgm))
     {
-        printf("[DEBUG]: Error creando bgm en nivel: %s\n", SDL_GetError());
+        SDL_Log("[DEBUG]: Error creando bgm en nivel: %s\n", SDL_GetError());
     }
 
 
@@ -214,7 +214,7 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
     bajarElVolumenDeLaMusica(0.2);
     while(estaJugando)
     {
-        //printf("[DEBUG]: ME LLEGUE A METER EN EL WHILE DE INICIAR PARTIDA");
+        //SDL_Log("[DEBUG]: ME LLEGUE A METER EN EL WHILE DE INICIAR PARTIDA");
         while(SDL_PollEvent(&e))
         {
             if(e.type == SDL_EVENT_QUIT)
@@ -223,7 +223,7 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
             }
             if(e.type == SDL_EVENT_MOUSE_MOTION)
             {
-                //printf("[DEBUG]: ME LLEGUE A METER EN EL EVENTO MOUSE MOTION");
+                //SDL_Log("[DEBUG]: ME LLEGUE A METER EN EL EVENTO MOUSE MOTION");
                 mouseX =  e.motion.x;
                 mouseY  = e.motion.y;
                 actualizarHoverCelda(&hoverEnFila,&hoverEnColumna,mouseX,mouseY,tamTablero,TAMANIO_CELDA);
@@ -233,14 +233,14 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
                 mouseX =  e.motion.x;
                 mouseY  = e.motion.y;
                 //primero chequear que celda fue.
-                //printf("[DEBUG]: mousex: %d , mouseY: %d \n", mouseX, mouseY);
+                //SDL_Log("[DEBUG]: mousex: %d , mouseY: %d \n", mouseX, mouseY);
                 if(hizoClickEnTablero(mouseX,mouseY,tablero,tamTablero, TAMANIO_CELDA))
                 {
-                    //printf("[DEBUG]: TABLERO");
+                    //SDL_Log("[DEBUG]: TABLERO");
                     //deben ir al reves por eso los invierto
                     int posX = (mouseX - (WIDTH - tamTablero*TAMANIO_CELDA)/2)/TAMANIO_CELDA;
                     int posY = (mouseY - (HEIGHT - tamTablero*TAMANIO_CELDA)/2)/TAMANIO_CELDA;
-                    //printf("[DEBUG]: posX: %d , posY: %d \n", posX, posY);
+                    //SDL_Log("[DEBUG]: posX: %d , posY: %d \n", posX, posY);
 
 
 
@@ -262,7 +262,7 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
                         //reproducir sonido pero distinto
 
 
-                        //printf("[DEBUG]: ME LLEGUE A METER EN EL EVENTO MOUSE BUTTON DOWN y entre al if del tablero");
+                        //SDL_Log("[DEBUG]: ME LLEGUE A METER EN EL EVENTO MOUSE BUTTON DOWN y entre al if del tablero");
                         if(tienePikas(&pikasDeInicio))
                         {
                             reproducirSFX(&sonidoBotonPika);
@@ -349,14 +349,14 @@ void actualizarHoverCelda(int* hoverEnFila,int* hoverEnColumna,int mouseX,int mo
 {
     float offsetEnX = (WIDTH - (tamTablero*tamCelda))/2;//240;
     float offsetEnY = (HEIGHT - (tamTablero*tamCelda))/2;//140;
-    //printf("El tam x: %.2f el tam y: %.2f\n", offsetEnX,offsetEnY);
+    //SDL_Log("El tam x: %.2f el tam y: %.2f\n", offsetEnX,offsetEnY);
     //este if basicamente pregunta si estoy dentro de la grilla, por muy raro que parezca.
     //el offset es donde empieza la grilla
     //si le sumo tamTablero*tamCelda, sumo toda la linea o toda la columna, miden lo mismo
      if (mouseX < offsetEnX || mouseX > offsetEnX + (tamTablero*tamCelda) ||
         mouseY < offsetEnY || mouseY > offsetEnY + (tamTablero*tamCelda))
     {
-        //printf("[DEBUG]: mouseX: %d, mouseY: %d\n", mouseX, mouseY);
+        //SDL_Log("[DEBUG]: mouseX: %d, mouseY: %d\n", mouseX, mouseY);
         *hoverEnFila = -1;
         *hoverEnColumna  = -1;
     }
@@ -374,13 +374,13 @@ void actualizarHoverCelda(int* hoverEnFila,int* hoverEnColumna,int mouseX,int mo
         *hoverEnFila = (*hoverEnFila)/tamCelda;
         *hoverEnColumna = mouseX - offsetEnX;
         *hoverEnColumna = (*hoverEnColumna)/tamCelda;
-       // printf("[DEBUG]: hoverEnFila: %d , hoverEnColumna: %d \n", *hoverEnFila, *hoverEnColumna);
+       // SDL_Log("[DEBUG]: hoverEnFila: %d , hoverEnColumna: %d \n", *hoverEnFila, *hoverEnColumna);
     }
 }
 
 void renderizarContadoresSDL(SDL_Renderer* renderer, const int tiempo, TTF_Font* font)
 {
-    //printf("[DEBUG]: tiempo restante: %d \n", tiempo);
+    //SDL_Log("[DEBUG]: tiempo restante: %d \n", tiempo);
     char texto[70]="";
     SDL_Color blanco = {255,255,255,255};
     sprintf(texto,"Tiempo Restante: %d", tiempo);
@@ -743,7 +743,7 @@ bool inicializarHUD(SDL_Renderer* renderer, tRecursosHUD* hud)
     SDL_Surface* surf1 = SDL_LoadBMP(RUTA_IMAGEN_BARRA_DE_ESTADO_KNIGHTS);
     if(!surf2 || !surf1)
     {
-        printf("[DEBUG]: No se encontraron las imagenes de la barra de estado: %s\n", SDL_GetError());
+        SDL_Log("[DEBUG]: No se encontraron las imagenes de la barra de estado: %s\n", SDL_GetError());
         return false;
     }
     hud->texK = SDL_CreateTextureFromSurface(renderer,surf1);
@@ -751,7 +751,7 @@ bool inicializarHUD(SDL_Renderer* renderer, tRecursosHUD* hud)
 
     if(!(hud->texK) || !(hud->texD))
     {
-        printf("[DEBUG]: No se encontraron las texturas de la barra de estado: %s\n", SDL_GetError());
+        SDL_Log("[DEBUG]: No se encontraron las texturas de la barra de estado: %s\n", SDL_GetError());
         return false;
     }
 
@@ -759,7 +759,7 @@ bool inicializarHUD(SDL_Renderer* renderer, tRecursosHUD* hud)
     hud->fuente = TTF_OpenFont(RUTA_FUENTE_BARRA_DE_ESTADO, TAMANIO_FUENTE_BARRA_DE_ESTADO);
 
     if (!hud->fuente) {
-        printf("Error cargando HUD: %s", SDL_GetError());
+        SDL_Log("Error cargando HUD: %s", SDL_GetError());
         return false;
     }
     return true;
@@ -868,14 +868,14 @@ bool inicializarVFX(SDL_Renderer* renderer, tVFX* vfx, const int id, const char*
     if(!vfx->font)
     {
         vfx->id = 0;
-        printf("[DEBUG]: No se encontro la ruta del font %d code: %s\n", id, SDL_GetError());
+        SDL_Log("[DEBUG]: No se encontro la ruta del font %d code: %s\n", id, SDL_GetError());
         return false;
     }
     SDL_Surface* surf = SDL_LoadBMP(rutaIMG);
     if(!surf)
     {
         vfx->id = 0;
-        printf("[DEBUG]: No se encontro la ruta del vfx %d code: %s\n", id, SDL_GetError());
+        SDL_Log("[DEBUG]: No se encontro la ruta del vfx %d code: %s\n", id, SDL_GetError());
         return false;
     }
     vfx->text = SDL_CreateTextureFromSurface(renderer,surf);
@@ -883,7 +883,7 @@ bool inicializarVFX(SDL_Renderer* renderer, tVFX* vfx, const int id, const char*
     {
         SDL_DestroySurface(surf);
         vfx->id = 0;
-        printf("[DEBUG]: No se pudo crear la text del vfx %d code: %s\n", id, SDL_GetError());
+        SDL_Log("[DEBUG]: No se pudo crear la text del vfx %d code: %s\n", id, SDL_GetError());
         return false;
     }
     return true;
@@ -956,7 +956,7 @@ void renderizarPikasRestantes(SDL_Renderer* renderer,tVFX* vfx, const int cantPi
     if(seActivoEfectoSecundario(vfx))
     {
         int alphaVisual = vfx->alpha2;
-        if(alphaVisual > 255) 
+        if(alphaVisual > 255)
         {
             alphaVisual = 255;
         }
@@ -964,19 +964,19 @@ void renderizarPikasRestantes(SDL_Renderer* renderer,tVFX* vfx, const int cantPi
             SDL_Texture* textTextoNoHayPikas = SDL_CreateTextureFromSurface(renderer, surfTextoNoHayPikas);
              SDL_SetTextureAlphaMod(textTextoNoHayPikas,(Uint8)alphaVisual);
             //ahora coloco la textura sobre el numero
-            SDL_FRect rectTextoNoHayPikas = 
+            SDL_FRect rectTextoNoHayPikas =
             {
                 rectTexto.x,
                 rectTexto.y + 80,
                 surfTextoNoHayPikas->w,
-                surfTextoNoHayPikas->h  
+                surfTextoNoHayPikas->h
             };
         SDL_RenderTexture(renderer,textTextoNoHayPikas, NULL, &rectTextoNoHayPikas);
         vfx->alpha2 -= 5;
         //pequeña comprobación de que nunca sobrepase 0
         if(vfx->alpha2 < 0 ) vfx->alpha2 = 0;
 
-            
+
 
         SDL_DestroySurface(surfTextoNoHayPikas);
         SDL_DestroyTexture(textTextoNoHayPikas);
@@ -1005,17 +1005,17 @@ void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer)
     TTF_Font* font = TTF_OpenFont(RUTA_FUENTE_FINAL_JUEGO, TAMANIO_FUENTE_FINAL_JUEGO);
     if(!font)
     {
-        printf("[DEBUG]: Error cargando fuente para final del juego: %s\n", SDL_GetError());
+        SDL_Log("[DEBUG]: Error cargando fuente para final del juego: %s\n", SDL_GetError());
     }
     tSonido bgmFinal;
     if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_FINAL,&bgmFinal))
     {
-        printf("[DEBUG]: Error creando bgm en final del juego: %s\n", SDL_GetError());
+        SDL_Log("[DEBUG]: Error creando bgm en final del juego: %s\n", SDL_GetError());
     }
     reproducirBGM(&bgmFinal);
 
     sprintf(lineaFinal,"Felicidades %s, has completado el juego...", manager->jugador.nombre);
-        //printf("FINAL COMPLETADO:\n"); /// COMPLETAR CON MSJ PERSONALIZADO
+        //SDL_Log("FINAL COMPLETADO:\n"); /// COMPLETAR CON MSJ PERSONALIZADO
     mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, lineaFinal);
     mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, "FINAL COMPLETADO:");
         if(manager->jugador.TotalestadoUno==TAM_PARTIDAS)
@@ -1026,11 +1026,11 @@ void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer)
                     liberarBGM(&bgmFinal);
                 if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_FINAL_VERDADERO,&bgmFinal))
                 {
-                    printf("[DEBUG]: Error creando bgm en final de caballeros: %s\n", SDL_GetError());
+                    SDL_Log("[DEBUG]: Error creando bgm en final de caballeros: %s\n", SDL_GetError());
                 }
                 reproducirBGM(&bgmFinal);
                 //En este caso completo un final de todos caballeros, en dificil
-                //printf("%s",FINAL_BUENO_MAXIMA_DIFICULTAD);
+                //SDL_Log("%s",FINAL_BUENO_MAXIMA_DIFICULTAD);
                 char finalKnightsDificil[13][300]=
                 {
                                     "El reino estalló en vítores.",
@@ -1063,7 +1063,7 @@ void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer)
                  liberarBGM(&bgmFinal);
                 if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_FINAL_KNIGHTS,&bgmFinal))
                 {
-                    printf("[DEBUG]: Error creando bgm en final de caballeros: %s\n", SDL_GetError());
+                    SDL_Log("[DEBUG]: Error creando bgm en final de caballeros: %s\n", SDL_GetError());
                 }
                 bajarElVolumenDeLaMusica(0.7);
                 reproducirBGM(&bgmFinal);
@@ -1084,7 +1084,7 @@ void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer)
                         recargarLaBGM(&bgmFinal);
                     }
                 }
-                //printf("%s", FINAL_BUENO);
+                //SDL_Log("%s", FINAL_BUENO);
                 restaurarVolumenMusica();
             }
         } else if(manager->jugador.TotalestadoDos==TAM_PARTIDAS)
@@ -1092,10 +1092,10 @@ void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer)
             detenerMusicaBGM();
             liberarBGM(&bgmFinal);
             //En este caso completo un final de todos demonios, en cualquier dificultad
-           // printf("%s", FINAL_MALO);
+           // SDL_Log("%s", FINAL_MALO);
             if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_FINAL_DEMONS,&bgmFinal))
             {
-                printf("[DEBUG]: Error creando bgm en final de demonios: %s\n", SDL_GetError());
+                SDL_Log("[DEBUG]: Error creando bgm en final de demonios: %s\n", SDL_GetError());
             }
             reproducirBGM(&bgmFinal);
             bajarElVolumenDeLaMusica(0.7);
@@ -1136,7 +1136,7 @@ void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer)
                 }
             }
             //Completo otro final comun, es decir el tablero no es solo de Knights -> (neutral)
-            //printf("%s", FINAL_NEUTRAL);
+            //SDL_Log("%s", FINAL_NEUTRAL);
         }
         detenerMusicaBGM();
         TTF_CloseFont(font);

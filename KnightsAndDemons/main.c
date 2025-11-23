@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
     if(!inicializarAudioSDL())
     {
-        printf("[DEBUG]: Error inciando el audio SDL3: %s", SDL_GetError());
+        SDL_Log("[DEBUG]: Error inciando el audio SDL3: %s", SDL_GetError());
     }
 
     tSonido sonidoBotonMenu;
@@ -54,22 +54,22 @@ int main(int argc, char *argv[]) {
     if (!cargarUnSonidoNuevo(RUTA_SONIDO_BOTON_MENU,
                             &sonidoBotonMenu))
     {
-        printf("[ERROR] No pude cargar sonido del botón\n");
+        SDL_Log("[ERROR] No pude cargar sonido del botón\n");
     }
     tSonido sonidoBotonCasilla;
     if (!cargarUnSonidoNuevo(RUTA_SONIDO_BOTON_CASILLA,
                             &sonidoBotonCasilla))
     {
-        printf("[ERROR] No pude cargar sonido del botón\n");
+        SDL_Log("[ERROR] No pude cargar sonido del botón\n");
     }
     tSonido bgm;
     if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_MENU,&bgm))
     {
-        printf("[ERROR] No pude musica del main menu\n");
+        SDL_Log("[ERROR] No pude musica del main menu\n");
     }
 
     reproducirBGM(&bgm);
-    bajarElVolumenDeLaMusica(&bgm,0.7f);
+    bajarElVolumenDeLaMusica(0.7f);
     mostrarPantallaBienvenida(renderer,font);
     char opcionElegida;
     mostrarMenuPrincipal(renderer,font,&opcionElegida, &sonidoBotonMenu,&bgm);
@@ -104,10 +104,10 @@ int main(int argc, char *argv[]) {
 
                     if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_MENU,&bgm))
                     {
-                        printf("[ERROR] No pude musica del main menu\n");
+                        SDL_Log("[ERROR] No pude musica del main menu\n");
                     }
                     reproducirBGM(&bgm);
-                    bajarElVolumenDeLaMusica(&bgm,0.7f);
+                    bajarElVolumenDeLaMusica(0.7f);
                     mostrarPantallaBienvenida(renderer,font);
                 }
             }
@@ -123,7 +123,7 @@ int main(int argc, char *argv[]) {
                 mostrarPantallaDificultad(renderer,font,&d, &sonidoBotonMenu);
                 iniciarJuegoNuevo(&elAdmin, &d, nombre);
                 mostrarPantallaHistoriaInicial(renderer,font,&retornos);
-               // printf("[DEBUG TIME]: si logre salir de la pantalla principal");
+               // SDL_Log("[DEBUG TIME]: si logre salir de la pantalla principal");
                restaurarVolumenMusica();
                detenerMusicaBGM();
                liberarBGM(&bgm);
@@ -137,10 +137,10 @@ int main(int argc, char *argv[]) {
                     }
                 if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_MENU,&bgm))
                 {
-                    printf("[ERROR] No pude musica del main menu\n");
+                    SDL_Log("[ERROR] No pude musica del main menu\n");
                 }
                 reproducirBGM(&bgm);
-                bajarElVolumenDeLaMusica(&bgm,0.7f);
+                bajarElVolumenDeLaMusica(0.7f);
                 mostrarPantallaBienvenida(renderer,font);
             }
             if(opcionElegida==CREDITOS)
@@ -155,10 +155,10 @@ int main(int argc, char *argv[]) {
                 //volver al bgm del menu
                 if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_MENU,&bgm))
                 {
-                    printf("[ERROR] No pude musica del main menu\n");
+                    SDL_Log("[ERROR] No pude musica del main menu\n");
                 }
                 reproducirBGM(&bgm);
-                bajarElVolumenDeLaMusica(&bgm,0.7f);
+                bajarElVolumenDeLaMusica(0.7f);
             }
             if(opcionElegida==TABLA_DE_PUNTAJES)
             {
@@ -176,9 +176,9 @@ int main(int argc, char *argv[]) {
         //destrozar los usos de sdl3
         liberarBGM(&bgm);
         liberarSonido(&sonidoBotonMenu);
-        printf("Se libero correctamente la bgm");
+        SDL_Log("Se libero correctamente la bgm");
         liberarSonido(&sonidoBotonCasilla);
-        printf("se libero correctamente: sonido Boton casilla");
+        SDL_Log("se libero correctamente: sonido Boton casilla");
         cerrarAudio();
         SDL_QuitSubSystem(SDL_INIT_AUDIO);
         SDL_QuitSubSystem(SDL_INIT_VIDEO);

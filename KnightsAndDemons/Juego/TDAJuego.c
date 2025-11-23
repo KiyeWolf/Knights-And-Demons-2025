@@ -83,13 +83,13 @@ int mostrarHistoriaInicial()
     FILE* archivo = fopen(RUTA_HISTORIA_INICIAL, "r");
     system("cls");
     if (archivo == NULL) {
-        printf("No se pudo abrir el archivo de historia inicial.\n");
+        SDL_Log("No se pudo abrir el archivo de historia inicial.\n");
         return ARCHIVO_CORRUPTO;
     }
 
     char linea[TAM_LINEA_JUEGO];
     while (fgets(linea, sizeof(linea), archivo) != NULL) {
-        printf("%s", linea);
+        SDL_Log("%s", linea);
     }
     puts("\n");
     system("pause");// Pausa para que el jugador pueda leer la historia

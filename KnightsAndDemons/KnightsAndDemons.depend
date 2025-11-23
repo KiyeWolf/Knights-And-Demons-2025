@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1760902867 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\creditos.c
+1763925618 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\creditos.c
 	"creditos.h"
 
 1763841681 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\creditos.h
@@ -7,7 +7,7 @@
 	<stdlib.h>
 	<ctype.h>
 
-1762609344 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\scores.c
+1763925619 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\scores.c
 	"scores.h"
 
 1762609185 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\scores.h
@@ -15,7 +15,7 @@
 	<stdlib.h>
 	<string.h>
 
-1762565934 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\tdajuego.c
+1763925620 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\tdajuego.c
 	"TDAJuego.h"
 
 1763902521 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\juego\tdajuego.h
@@ -24,7 +24,7 @@
 	<string.h>
 	<stdlib.h>
 
-1763905603 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\main.c
+1763925514 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\main.c
 	"menu.h"
 	"./Juego/TDAJuego.h"
 	"./Juego/scores.h"
@@ -41,7 +41,7 @@
 	<stdlib.h>
 	<stdbool.h>
 
-1763901713 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\partida\tdapartida.h
+1763925366 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\partida\tdapartida.h
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
@@ -562,7 +562,7 @@
 	<SDL3/SDL_begin_code.h>
 	<SDL3/SDL_close_code.h>
 
-1763903999 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\visual\visualjuego.c
+1763925588 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\visual\visualjuego.c
 	"VisualJuego.h"
 
 1763903699 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\visual\visualjuego.h
@@ -596,7 +596,7 @@
 	"VisualJuego.h"
 	"../Audio/Audio.h"
 
-1763908391 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\visual\visualpartida.c
+1763925674 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\visual\visualpartida.c
 	"VisualPartida.h"
 
 1763899599 f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\audio\audio.h
@@ -605,6 +605,6 @@
 	<stdlib.h>
 	<stdio.h>
 
-1763839582 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\audio\audio.c
+1763926115 source:f:\facultad\segundo anio\topicos_de_la_programacion\segundacursada\tp_knights&demons\repositorio\knights-and-demons-2025\knightsanddemons\sdl3-archivos\audio\audio.c
 	"Audio.h"
 

@@ -205,8 +205,8 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
     //cuando hay que escribir se usa startTextInput
     SDL_StartTextInput(window);
 
-    //if (!renderer) { printf("[ERROR] renderer es NULL\n");}
-    //if (!font) { printf("[ERROR] font es NULL\n");  }
+    //if (!renderer) { SDL_Log("[ERROR] renderer es NULL\n");}
+    //if (!font) { SDL_Log("[ERROR] font es NULL\n");  }
 
 
     while (escribiendo) {
@@ -218,7 +218,7 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
             }
             if (e.type == SDL_EVENT_TEXT_INPUT)
             {
-               // printf("[DEBUG] evento TEXT_INPUT: \"%s\"\n", e.text.text); fflush(stdout);
+               // SDL_Log("[DEBUG] evento TEXT_INPUT: \"%s\"\n", e.text.text); fflush(stdout);
                 /* evitar overflow: concatenar solo lo que cabe en buffer */
                 size_t avail = sizeof(buffer) - 1 - strlen(buffer);
                 if (avail > 0) {
@@ -256,7 +256,7 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
 
         if (!s1)
         {
-            printf("[ERROR] TTF_RenderText_Solid fallo: %s\n", SDL_GetError());
+            SDL_Log("[ERROR] TTF_RenderText_Solid fallo: %s\n", SDL_GetError());
             SDL_Delay(3000);
             return;
         }
@@ -265,7 +265,7 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
 
         if(!t1)
         {
-            printf("[ERROR] SDL_CreateTextureFromSurface fallo: %s\n", SDL_GetError());
+            SDL_Log("[ERROR] SDL_CreateTextureFromSurface fallo: %s\n", SDL_GetError());
             SDL_Delay(3000);
             SDL_DestroySurface(s1);
             return;
@@ -283,12 +283,12 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
         SDL_Surface* s2 = TTF_RenderText_Solid(font, textoMostrar, len2,blanco);
         if(!s2)
         {
-            //printf("[ERROR] No se pudo renderizar el texto del jugador: %s\n", SDL_GetError());
+            //SDL_Log("[ERROR] No se pudo renderizar el texto del jugador: %s\n", SDL_GetError());
         }
         SDL_Texture* t2 = SDL_CreateTextureFromSurface(renderer, s2);
         if(!t2)
         {
-            printf("[ERROR] SDL_CreateTextureFromSurface fallo: %s\n", SDL_GetError());
+            SDL_Log("[ERROR] SDL_CreateTextureFromSurface fallo: %s\n", SDL_GetError());
             SDL_Delay(3000);
             SDL_DestroySurface(s1);
             return;
@@ -307,7 +307,7 @@ void mostrarPantallaNombre(SDL_Renderer* renderer, TTF_Font* font, char* nombreP
         SDL_Texture* t3 = SDL_CreateTextureFromSurface(renderer,s3);
         if(!t3)
         {
-            printf("[ERROR] SDL_CreateTextureFromSurface fallo: %s\n", SDL_GetError());
+            SDL_Log("[ERROR] SDL_CreateTextureFromSurface fallo: %s\n", SDL_GetError());
             SDL_Delay(3000);
             SDL_DestroySurface(s1);
         }
@@ -516,7 +516,7 @@ void mostrarPantallaHistoriaInicial(SDL_Renderer* renderer,TTF_Font* font, size_
     tSonido bgm;
     if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_HISTORIA_PRINCIPAL,&bgm))
     {
-        printf("[DEBUG]: No se encontro la musica de la historia principal: %s", SDL_GetError());
+        SDL_Log("[DEBUG]: No se encontro la musica de la historia principal: %s", SDL_GetError());
     }
     reproducirBGM(&bgm);
 
@@ -577,7 +577,7 @@ void mostrarPantallaHistoriaInicial(SDL_Renderer* renderer,TTF_Font* font, size_
     detenerMusicaBGM();
    if(!liberarBGM(&bgm))
    {
-    printf("[DEBUG]: no pude liberar bgm: %s", SDL_GetError());
+    SDL_Log("[DEBUG]: no pude liberar bgm: %s", SDL_GetError());
    }
 }
 /*void mostrarPantallaSolicitudDeNombreParaCargarPartida(SDL_Renderer* renderer, TTF_Font* font)
@@ -691,12 +691,12 @@ void mostrarCreditosEnPantalla(SDL_Renderer* renderer, size_t* retorno)
     //aqui abro el archivo.
     FILE* archivo = fopen(RUTA_CREDITOS, "r");
     if (!archivo) {
-        printf("[ERROR] No se pudo abrir el archivo de creditos: %s\n", RUTA_CREDITOS);
+        SDL_Log("[ERROR] No se pudo abrir el archivo de creditos: %s\n", RUTA_CREDITOS);
         return;
     }
     TTF_Font* font = TTF_OpenFont(RUTA_FONT_CREDITOS, TAMANO_FONT_CREDITOS);
     if (!font) {
-        printf("[ERROR] No se pudo cargar la fuente de creditos: %s\n", SDL_GetError());
+        SDL_Log("[ERROR] No se pudo cargar la fuente de creditos: %s\n", SDL_GetError());
         fclose(archivo);
         return;
     }
@@ -710,7 +710,7 @@ void mostrarCreditosEnPantalla(SDL_Renderer* renderer, size_t* retorno)
     tSonido bgm;
     if(!crearBackgroundMusic(RUTA_BACKGROUND_MUSIC_CREDITOS,&bgm))
     {
-        printf("[DEBUG]: No se encontro la musica de los creditos: %s", SDL_GetError());
+        SDL_Log("[DEBUG]: No se encontro la musica de los creditos: %s", SDL_GetError());
     }
     else
     {
@@ -816,11 +816,11 @@ void mostrarCreditosEnPantalla(SDL_Renderer* renderer, size_t* retorno)
     detenerMusicaBGM();
     TTF_CloseFont(font);
     liberarBGM(&bgm);
-    printf("[DEBUG] Creditos finalizados.\n");
+    SDL_Log("[DEBUG] Creditos finalizados.\n");
 }
 void mostrarTablaDePuntajesDeArchivo(SDL_Renderer* renderer,TTF_Font* font)
 {
-   // printf("[DEBUG] Se llegó a abrir la funcióin");
+   // SDL_Log("[DEBUG] Se llegó a abrir la funcióin");
     bool estaLeyendo = true;
 
     int cantLineas;
@@ -831,7 +831,7 @@ void mostrarTablaDePuntajesDeArchivo(SDL_Renderer* renderer,TTF_Font* font)
     }
     SDL_Color blanco = {255,255,255,255};
     SDL_Event e;
-    printf("[DEBUG] Se llegó a cargar la tabla de puntajes");
+    SDL_Log("[DEBUG] Se llegó a cargar la tabla de puntajes");
     char* direccionDeLaLinea = (char*)vectorLineas;
 
     while(estaLeyendo)

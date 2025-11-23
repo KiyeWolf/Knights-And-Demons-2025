@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "scores.h": "c",
-        "tdapartida.h": "c",
-        "sdl_ttf.h": "c",
-        "visualjuego.h": "c",
-        "tdatablero.h": "c"
-    }
-}

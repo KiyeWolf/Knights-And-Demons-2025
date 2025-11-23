@@ -8,7 +8,7 @@ void leerLineasDeArchivoTxt(FILE* arch)
     char linea[TAM_LINEA_SCORES];
     while(fgets(linea, TAM_LINEA_SCORES,arch)!=NULL)
     {
-       printf("%s\n",linea);
+       SDL_Log("%s\n",linea);
     }
 }
 */
@@ -44,24 +44,24 @@ int cargarTablaDePuntajes(char* vector, int* cantidadCargada)
         salto = strrchr(linea,'\n');
         if(salto)
         {
-            //printf("[DEBUG] Se llegó encontrar el salto de linea");
+            //SDL_Log("[DEBUG] Se llegó encontrar el salto de linea");
             *salto = '\0';
         }
         
         strcpy(direccionDeLaLinea, linea);
-        // printf("[DEBUG] Se llego a copiar la linea al vector: %s\n", direccionDeLaLinea);
+        // SDL_Log("[DEBUG] Se llego a copiar la linea al vector: %s\n", direccionDeLaLinea);
         direccionDeLaLinea+=TAM_LINEA_SCORES+1;
         i++;
     }
     *(cantidadCargada) = i;
-    //printf("[DEBUG] Se llegó a completar las lineas: %d\n", *cantidadCargada);
+    //SDL_Log("[DEBUG] Se llegó a completar las lineas: %d\n", *cantidadCargada);
     fclose(arch);
     return TODO_OK;
 }
 /*Solo es una función que imprime un string recibido por parámetro*/
 void mostrarStringPorPantallaSinSalto(char* str)
 {
-    printf("%s",str);
+    SDL_Log("%s",str);
 }
 
 /*Se encarga de recibir multiples datos de la estructura de Jugador y abrir un archivo txt en la ruta

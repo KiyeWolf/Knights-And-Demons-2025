@@ -29,7 +29,7 @@ FILE* abrirArchivoTxt(char* arch)
 Está creado únicamente para mejorar la legibilidad del código*/
 void mostrarStringPorPantalla(char* str)
 {
-    printf("%s\n",str);
+    SDL_Log("%s\n",str);
 }
 
 /*Se encarga de realizar la ardua tarea, de leer por linea un archivo txt y mostrarlo, luego esperar una entrada por teclado, hasta que el archivo termine*/
