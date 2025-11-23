@@ -39,7 +39,8 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasil
     SDL_DestroySurface(sKnight);
     SDL_Texture* textDemon = SDL_CreateTextureFromSurface(renderer, sDemon);
     SDL_DestroySurface(sDemon);
-
+    detenerMusicaBGM();
+    tSonido bgm;
     while(!estaEnMenu && finalJuego == 0)
     {
         mostrarMensajeDeInicioDeNivel(renderer, fontMensajeInicioNivel);
@@ -52,6 +53,15 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasil
 
         if(noPerdio(&gano)) //Por lo menos no perdió, entra dentro de este if
         {
+            if(!cargarUnaBGMNueva(RUTA_BACKGROUND_MUSIC_NIVEL_VICTORIA,&bgm))
+            {
+                printf("[DEBUG]: No se encontro la musica del post nivel: %s", SDL_GetError());
+            }
+            else
+            {
+                reproducirBGM(&bgm);
+                bajarElVolumenDeLaMusica(0.6f);
+            }
             if(gano == GANO_KNIGHTS)
             {
 
@@ -94,8 +104,17 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasil
         else
         {
             //Significa que perdió, por eso se muestra este mensaje de derrota
-            mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, fontMensajeInicioNivel, MENSAJE_DERROTA);
-
+            if(!cargarUnaBGMNueva(RUTA_BACKGROUND_MUSIC_NIVEL_DERROTA,&bgm))
+            {
+                printf("[DEBUG]: No se encontro la musica del post nivel: %s", SDL_GetError());
+            }
+            else
+            {
+                reproducirBGM(&bgm);
+                bajarElVolumenDeLaMusica(0.6f);
+            }
+            mostrarMensajeDeDerrota(renderer, fontMensajeInicioNivel);
+            //
             // Se reinician las pikas a las que tenía al iniciar el nivel
             if(admin->jugador.nivelActual > 1)
                 admin->jugador.pikasRestantes = cantPikas;
@@ -112,18 +131,22 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasil
                         break;
 
                     case DIFICIL:
-                        admin->jugador.pikasRestantes = PIKAS_INICIALES_MEDIO;
+                        admin->jugador.pikasRestantes = PIKAS_INICIALES_DIFICIL;
                         break;
                 }
             }
 
         }
-
         if(admin->jugador.nivelActual < TAM_PARTIDAS) //Se evalúa si quedan niveles por jugar o no.
         {
+            printf("[DEBUG]: A punto de PostNivel");
             //estaEnMenu = postNivel(admin, gano);
             if(postNivelUsandoSDL(admin, gano, renderer, fontMensajeInicioNivel) == 1)
-                finalJuego = 1; // SE VA A MENU
+                {
+                    printf("[DEBUG]: El jugador decidió volver al menu");
+                    finalJuego = 1; // SE VA A MENU
+                }
+            printf("[DEBUG]: Salí de PostNivel");
         }
         else
         {
@@ -131,6 +154,11 @@ int ciclarPartida(Admin* admin, SDL_Renderer* renderer,tSonido* sonidoBotonCasil
             finalJuego = 2; // GANO
         }
     }
+    restaurarVolumenMusica();
+    detenerMusicaBGM();
+    liberarBGM(&bgm);
+    SDL_DestroyTexture(textKnight);
+    SDL_DestroyTexture(textDemon);
 
     return finalJuego;
 }
@@ -172,6 +200,7 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
     {
         SDL_Log("No se pudo cargar el sonido de pikas al presionar casilla: %s", SDL_GetError());
     }
+
 
     //parteSonido
     tSonido bgm;
@@ -227,15 +256,17 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
                     if(e.button.button == SDL_BUTTON_RIGHT)
                     {
                         // ESTA PARTE ES PARA EL EFECTO VISUAL JUICE del fuego:
-                        activarEfectoFuego(&VFXfuego);
+
 
                         //fin efecto
                         //reproducir sonido pero distinto
-                        reproducirSFX(&sonidoBotonPika);
+
 
                         //printf("[DEBUG]: ME LLEGUE A METER EN EL EVENTO MOUSE BUTTON DOWN y entre al if del tablero");
                         if(tienePikas(&pikasDeInicio))
                         {
+                            reproducirSFX(&sonidoBotonPika);
+                            activarEfectoFuego(&VFXfuego);
                             restarUnaPika(&pikasDeInicio);
                             actualizarCursor(&(admin->cursor), posX, posY, true);
                             gano = ejecutarJugadaSDL(tamTablero, tablero, TAMANIO_CELDA, &(admin->cursor));
@@ -243,7 +274,7 @@ int iniciarPartidaConSDL(Admin* admin, SDL_Texture* textKnight, SDL_Texture* tex
                         else
                         {
                             //no tiene pikas habría que avisarle.
-                            renderizarMensajeDeQueNoHayPikas(renderer,font);
+                            activarEfectoNotificacion(&VFXfuego);
                         }
                         admin->cursor.seUsoPika = false;
                     }
@@ -376,8 +407,9 @@ void renderizarMensajeDeQueNoHayPikas(SDL_Renderer* renderer, TTF_Font* font)
 }
 void  mostrarMensajeDeInicioDeNivel(SDL_Renderer* renderer, TTF_Font*   fontMensajeInicioNivel)
 {
-    char texto[70]="<< Una nueva Batalla Comienza... >>";
+    SDL_SetRenderDrawColor(renderer,0,0,0,255);
     SDL_RenderClear(renderer);
+    char texto[70]="<< Una nueva Batalla Comienza... >>";
     SDL_Color blanco = {255,255,255,255};
     SDL_Surface* surf = TTF_RenderText_Solid(fontMensajeInicioNivel,texto,0,blanco);
     SDL_Texture* text = SDL_CreateTextureFromSurface(renderer,surf);
@@ -393,10 +425,30 @@ void preguntarGuardarPartida(int* respuesta, SDL_Renderer* renderer, TTF_Font* f
     bool estaLeyendo = true;
     SDL_Color blanco = {255,255,255,255};
     SDL_Event e;
+
+    SDL_SetRenderDrawColor(renderer,0,0,0,255);
+    SDL_RenderClear(renderer);
+
+    // CONSTANTES DE ESTILO
+    const float ANCHO_BOTON = 400.0f;
+    const float ALTO_BOTON = 50.0f;
+    const float ESPACIO_ENTRE_BOTONES = 20.0f;
+    const float PADDING = 30.0f;
+    tSonido sonidoBotonMenu;
+    if(!cargarUnSonidoNuevo(RUTA_SONIDO_BOTON_MENU,&sonidoBotonMenu))
+    {
+        SDL_Log("No se pudo cargar el sonido de boton en preguntarGuardarPartida: %s", SDL_GetError());
+    }
+    //SDL_Color colorBorde1;
+    SDL_Color colorTexto1;
+    SDL_Color colorTexto2;
+    //SDL_Color colorBorde2;
     SDL_FRect aceptarRect;
     SDL_FRect cancelarRect;
     while(estaLeyendo)
     {
+        float mx, my;
+        SDL_GetMouseState(&mx, &my);
         while(SDL_PollEvent(&e))
         {
             if(e.type == SDL_EVENT_QUIT)
@@ -428,6 +480,7 @@ void preguntarGuardarPartida(int* respuesta, SDL_Renderer* renderer, TTF_Font* f
                        mouseY >= aceptarRect.y && mouseY <= (aceptarRect.y + aceptarRect.h))
                     {
                         //aceptar
+                        reproducirSFX(&sonidoBotonMenu);
                         *respuesta = 1;
                         estaLeyendo = false;
                     }
@@ -435,6 +488,7 @@ void preguntarGuardarPartida(int* respuesta, SDL_Renderer* renderer, TTF_Font* f
                             mouseY >= cancelarRect.y && mouseY <= (cancelarRect.y + cancelarRect.h))
                     {
                         //cancelar
+                        reproducirSFX(&sonidoBotonMenu);
                         *respuesta = 2;
                         estaLeyendo = false;
                     }
@@ -443,18 +497,68 @@ void preguntarGuardarPartida(int* respuesta, SDL_Renderer* renderer, TTF_Font* f
         }
             SDL_SetRenderDrawColor(renderer,0,0,0,255);
             SDL_RenderClear(renderer);
-            SDL_Surface* s2 = TTF_RenderText_Solid(font,"Aceptar", 0,blanco);
-            SDL_Surface* s3 = TTF_RenderText_Solid(font,"Cancelar", 0,blanco);
+
+
+            SDL_FRect cajaBotonAceptar = { (WIDTH - ANCHO_BOTON*2 - ESPACIO_ENTRE_BOTONES) / 2.0f, (HEIGHT/2)+ PADDING + ALTO_BOTON, ANCHO_BOTON, ALTO_BOTON };
+            SDL_FRect cajaBotonCancelar = { (WIDTH - ANCHO_BOTON*2 - ESPACIO_ENTRE_BOTONES) / 2.0f + ANCHO_BOTON + ESPACIO_ENTRE_BOTONES, (HEIGHT/2)+ PADDING + ALTO_BOTON, ANCHO_BOTON, ALTO_BOTON };
+
+
+            bool isHoverAceptar = (mx >= cajaBotonAceptar.x && mx <= cajaBotonAceptar.x + cajaBotonAceptar.w &&
+                                 my >= cajaBotonAceptar.y && my <= cajaBotonAceptar.y + cajaBotonAceptar.h);
+
+            bool isHoverCancelar = (mx >= cajaBotonCancelar.x && mx <= cajaBotonCancelar.x + cajaBotonCancelar.w &&
+                                   my >= cajaBotonCancelar.y && my <= cajaBotonCancelar.y + cajaBotonCancelar.h);
+
+
+            if (isHoverAceptar) {
+                // ESTILO HOVER: Borde Dorado, Relleno gris oscuro, Texto Dorado
+                SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Relleno gris
+                SDL_RenderFillRect(renderer, &cajaBotonAceptar);
+
+                SDL_SetRenderDrawColor(renderer, 255, 215, 0, 255); // Borde Dorado
+                //colorBorde1 = (SDL_Color){255, 215, 0, 255};
+                colorTexto1 = (SDL_Color){255, 215, 0, 255};
+            } else {
+                // ESTILO NORMAL: Sin relleno (o negro), Borde Blanco, Texto Blanco
+                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Relleno negro
+                SDL_RenderFillRect(renderer, &cajaBotonAceptar);
+
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Borde Blanco
+               // colorBorde1 = (SDL_Color){255, 255, 255, 255};
+                colorTexto1 = (SDL_Color){255, 255, 255, 255};
+            }
+            if (isHoverCancelar) {
+                // ESTILO HOVER: Borde Dorado, Relleno gris oscuro, Texto Dorado
+                SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Relleno gris
+                SDL_RenderFillRect(renderer, &cajaBotonCancelar);
+
+                SDL_SetRenderDrawColor(renderer, 255, 215, 0, 255); // Borde Dorado
+                //colorBorde2 = (SDL_Color){255, 215, 0, 255};
+                colorTexto2 = (SDL_Color){255, 215, 0, 255};
+            } else {
+                // ESTILO NORMAL: Sin relleno (o negro), Borde Blanco, Texto Blanco
+                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Relleno negro
+                SDL_RenderFillRect(renderer, &cajaBotonCancelar);
+
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Borde Blanco
+               // colorBorde2 = (SDL_Color){255, 255, 255, 255};
+                colorTexto2 = (SDL_Color){255, 255, 255, 255};
+            }
+
+            SDL_RenderRect(renderer, &cajaBotonAceptar);
+            SDL_RenderRect(renderer, &cajaBotonCancelar);
+
+            SDL_Surface* s2 = TTF_RenderText_Solid(font,"Aceptar", 0,colorTexto1);
+            SDL_Surface* s3 = TTF_RenderText_Solid(font,"Cancelar", 0,colorTexto2);
             SDL_Texture* t2 = SDL_CreateTextureFromSurface(renderer,s2);
             SDL_Texture* t3 = SDL_CreateTextureFromSurface(renderer,s3);
-            int y = 100;
-            SDL_FRect r2 = { WIDTH/2 - 100 , (HEIGHT - y), s2->w, s2->h };
-            SDL_FRect r3 = { WIDTH/2 + 50 , (HEIGHT - y), s3->w, s3->h };
-            SDL_RenderTexture(renderer,t2,NULL,&r2);
-            SDL_RenderTexture(renderer,t3,NULL,&r3);
-            aceptarRect = r2;
-            cancelarRect = r3;
 
+            SDL_FRect r2Text = { cajaBotonAceptar.x + (cajaBotonAceptar.w - s2->w) / 2, cajaBotonAceptar.y + (cajaBotonAceptar.h - s2->h) / 2, s2->w, s2->h };
+            SDL_FRect r3Text = { cajaBotonCancelar.x + (cajaBotonCancelar.w - s3->w) / 2, cajaBotonCancelar.y + (cajaBotonCancelar.h - s3->h) / 2, s3->w, s3->h };
+            SDL_RenderTexture(renderer,t2,NULL,&r2Text);
+            SDL_RenderTexture(renderer,t3,NULL,&r3Text);
+            aceptarRect = cajaBotonAceptar;
+            cancelarRect = cajaBotonCancelar;
             SDL_Surface* surf = TTF_RenderText_Solid(font,"¿Desea guardar la partida?",0, blanco);
             SDL_Texture* text = SDL_CreateTextureFromSurface(renderer,surf);
             SDL_FRect rect = { 80,(HEIGHT - surf->h)/2, surf->w, surf->h };
@@ -463,17 +567,36 @@ void preguntarGuardarPartida(int* respuesta, SDL_Renderer* renderer, TTF_Font* f
             SDL_DestroySurface(surf);
             SDL_RenderPresent(renderer);
 
+
+
     }
+    liberarSonido(&sonidoBotonMenu);
+    SDL_Log("[DEBUG]: RESPUESTA GUARDAR PARTIDA: %d\n", *respuesta);
 }
 int postNivelUsandoSDL(Admin* admin, int resultado, SDL_Renderer* renderer, TTF_Font* font) // DEVUELVE SI SE VA O NO AL MENÚ (0 o 1)
 {
     int respuesta;
-    bool esperandoRespuesta;
+    bool esperandoRespuesta = true;
     SDL_Event e;
     SDL_Color blanco = {255,255,255,255};
+
+    SDL_SetRenderDrawColor(renderer,0,0,0,255);
+    SDL_RenderClear(renderer);
+
+
+    // CONSTANTES DE ESTILO
+    const float ANCHO_BOTON = 400.0f;
+    const float ALTO_BOTON = 50.0f;
+    const float ESPACIO_ENTRE_BOTONES = 20.0f;
+    const float PADDING = 30.0f;
+
     SDL_FRect aceptarRect;
     SDL_FRect cancelarRect;
+    SDL_Color colorTexto1;
+    SDL_Color colorTexto2;
 
+    SDL_SetRenderDrawColor(renderer,0,0,0,255);
+    SDL_RenderClear(renderer);
     //parte sonido
     tSonido sonidoBoton;
     if(!cargarUnSonidoNuevo(RUTA_SONIDO_BOTON_MENU,&sonidoBoton))
@@ -481,9 +604,10 @@ int postNivelUsandoSDL(Admin* admin, int resultado, SDL_Renderer* renderer, TTF_
         SDL_Log("No se pudo cargar el sonido de boton en postNivelSDL: %s", SDL_GetError());
     }
 
-
     while(esperandoRespuesta)
     {
+        float mx, my;
+        SDL_GetMouseState(&mx, &my);
         if(SDL_PollEvent(&e))
         {
             if(e.type==SDL_EVENT_QUIT)
@@ -527,30 +651,79 @@ int postNivelUsandoSDL(Admin* admin, int resultado, SDL_Renderer* renderer, TTF_
                 }
             }
         }
+        SDL_SetRenderDrawColor(renderer,0,0,0,255);
         SDL_RenderClear(renderer);
+
+
+            SDL_FRect cajaBotonAceptar = { (WIDTH - ANCHO_BOTON*2 - ESPACIO_ENTRE_BOTONES) / 2.0f, (HEIGHT/2)+ PADDING + ALTO_BOTON, ANCHO_BOTON, ALTO_BOTON };
+            SDL_FRect cajaBotonCancelar = { (WIDTH - ANCHO_BOTON*2 - ESPACIO_ENTRE_BOTONES) / 2.0f + ANCHO_BOTON + ESPACIO_ENTRE_BOTONES, (HEIGHT/2)+ PADDING + ALTO_BOTON, ANCHO_BOTON, ALTO_BOTON };
+
+        bool isHoverAceptar = (mx >= cajaBotonAceptar.x && mx <= cajaBotonAceptar.x + cajaBotonAceptar.w &&
+                                 my >= cajaBotonAceptar.y && my <= cajaBotonAceptar.y + cajaBotonAceptar.h);
+
+        bool isHoverCancelar = (mx >= cajaBotonCancelar.x && mx <= cajaBotonCancelar.x + cajaBotonCancelar.w &&
+                                   my >= cajaBotonCancelar.y && my <= cajaBotonCancelar.y + cajaBotonCancelar.h);
+
+        if (isHoverAceptar) {
+                // ESTILO HOVER: Borde Dorado, Relleno gris oscuro, Texto Dorado
+                SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Relleno gris
+                SDL_RenderFillRect(renderer, &cajaBotonAceptar);
+
+                SDL_SetRenderDrawColor(renderer, 255, 215, 0, 255); // Borde Dorado
+                //colorBorde1 = (SDL_Color){255, 215, 0, 255};
+                colorTexto1 = (SDL_Color){255, 215, 0, 255};
+            } else {
+                // ESTILO NORMAL: Sin relleno (o negro), Borde Blanco, Texto Blanco
+                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Relleno negro
+                SDL_RenderFillRect(renderer, &cajaBotonAceptar);
+
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Borde Blanco
+               // colorBorde1 = (SDL_Color){255, 255, 255, 255};
+                colorTexto1 = (SDL_Color){255, 255, 255, 255};
+            }
+            if (isHoverCancelar) {
+                // ESTILO HOVER: Borde Dorado, Relleno gris oscuro, Texto Dorado
+                SDL_SetRenderDrawColor(renderer, 50, 50, 50, 255); // Relleno gris
+                SDL_RenderFillRect(renderer, &cajaBotonCancelar);
+
+                SDL_SetRenderDrawColor(renderer, 255, 215, 0, 255); // Borde Dorado
+                //colorBorde2 = (SDL_Color){255, 215, 0, 255};
+                colorTexto2 = (SDL_Color){255, 215, 0, 255};
+            } else {
+                // ESTILO NORMAL: Sin relleno (o negro), Borde Blanco, Texto Blanco
+                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Relleno negro
+                SDL_RenderFillRect(renderer, &cajaBotonCancelar);
+
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Borde Blanco
+               // colorBorde2 = (SDL_Color){255, 255, 255, 255};
+                colorTexto2 = (SDL_Color){255, 255, 255, 255};
+            }
+
+         SDL_RenderRect(renderer, &cajaBotonAceptar);
+            SDL_RenderRect(renderer, &cajaBotonCancelar);
+
         SDL_Surface* surf = TTF_RenderText_Solid(font,"¿Desea volver al menu?",0, blanco);
-        SDL_Surface* s2 = TTF_RenderText_Solid(font,"Continuar", 0,blanco);
-        SDL_Surface* s3 = TTF_RenderText_Solid(font,"Volver al menú", 0,blanco);
+        SDL_Surface* s2 = TTF_RenderText_Solid(font,"Continuar", 0,colorTexto1);
+        SDL_Surface* s3 = TTF_RenderText_Solid(font,"Volver al menú", 0,colorTexto2);
         if(!surf || !s2 || !s3)
         {
-            printf("[DEBUG]: Error creando superficies en postNivelSDL: %s\n", SDL_GetError());
+           SDL_Log("[DEBUG]: Error creando superficies en postNivelSDL: %s\n", SDL_GetError());
         }
         SDL_Texture* text = SDL_CreateTextureFromSurface(renderer,surf);
         SDL_Texture* t2 = SDL_CreateTextureFromSurface(renderer,s2);
         SDL_Texture* t3 = SDL_CreateTextureFromSurface(renderer,s3);
         if(!text || !t2 || !t3)
         {
-            printf("[DEBUG]: Error creando texturas en postNivelSDL: %s\n", SDL_GetError());
+           SDL_Log("[DEBUG]: Error creando texturas en postNivelSDL: %s\n", SDL_GetError());
         }
-        int y = 100;
         SDL_FRect rect = { (WIDTH - surf->w)/2, (HEIGHT - surf->h)/2, surf->w, surf->h };
-        SDL_FRect r2 = { WIDTH/2 - 100 , (HEIGHT - y), s2->w, s2->h };
-        SDL_FRect r3 = { WIDTH/2 + 50 , (HEIGHT - y), s3->w, s3->h };
-        aceptarRect = r2;
-        cancelarRect = r3;
+        SDL_FRect r2 = { cajaBotonAceptar.x + (cajaBotonAceptar.w - s2->w) / 2, cajaBotonAceptar.y + (cajaBotonAceptar.h - s2->h) / 2, s2->w, s2->h };
+        SDL_FRect r3 = { cajaBotonCancelar.x + (cajaBotonCancelar.w - s3->w) / 2, cajaBotonCancelar.y + (cajaBotonCancelar.h - s3->h) / 2, s3->w, s3->h };
         SDL_RenderTexture(renderer,text,NULL,&rect);
         SDL_RenderTexture(renderer,t2,NULL,&r2);
         SDL_RenderTexture(renderer,t3,NULL,&r3);
+        aceptarRect = cajaBotonAceptar;
+        cancelarRect = cajaBotonCancelar;
 
         SDL_DestroySurface(surf);
         SDL_DestroySurface(s2);
@@ -690,7 +863,7 @@ bool inicializarVFX(SDL_Renderer* renderer, tVFX* vfx, const int id, const char*
 {
     vfx->id = id;
     vfx->alpha = 0;
-
+    vfx->alpha2 = 0;
     vfx->font = TTF_OpenFont(rutaFuente,tamFuente);
     if(!vfx->font)
     {
@@ -780,6 +953,34 @@ void renderizarPikasRestantes(SDL_Renderer* renderer,tVFX* vfx, const int cantPi
         //pequeña comprobación de que nunca sobrepase 0
         if(vfx->alpha < 0 ) vfx->alpha = 0;
     }
+    if(seActivoEfectoSecundario(vfx))
+    {
+        int alphaVisual = vfx->alpha2;
+        if(alphaVisual > 255) 
+        {
+            alphaVisual = 255;
+        }
+            SDL_Surface* surfTextoNoHayPikas = TTF_RenderText_Solid(vfx->font, "¡No hay más Pikas!", 0, colorTexto);
+            SDL_Texture* textTextoNoHayPikas = SDL_CreateTextureFromSurface(renderer, surfTextoNoHayPikas);
+             SDL_SetTextureAlphaMod(textTextoNoHayPikas,(Uint8)alphaVisual);
+            //ahora coloco la textura sobre el numero
+            SDL_FRect rectTextoNoHayPikas = 
+            {
+                rectTexto.x,
+                rectTexto.y + 80,
+                surfTextoNoHayPikas->w,
+                surfTextoNoHayPikas->h  
+            };
+        SDL_RenderTexture(renderer,textTextoNoHayPikas, NULL, &rectTextoNoHayPikas);
+        vfx->alpha2 -= 5;
+        //pequeña comprobación de que nunca sobrepase 0
+        if(vfx->alpha2 < 0 ) vfx->alpha2 = 0;
+
+            
+
+        SDL_DestroySurface(surfTextoNoHayPikas);
+        SDL_DestroyTexture(textTextoNoHayPikas);
+    }
     SDL_DestroySurface(surf);
     SDL_DestroyTexture(textTexto);
 }
@@ -787,7 +988,10 @@ bool seActivoEfectoAlpha(tVFX* vfx)
 {
     return (vfx->alpha > 0);
 }
-
+bool seActivoEfectoSecundario(tVFX* vfx)
+{
+    return (vfx->alpha2 >= 255);
+}
 bool mostrarAgradecimientoCaballeros(SDL_Renderer* renderer, TTF_Font* font, const char* mensaje)
 {
     mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer, font, MENSAJE_AGRADECIMIENTO_CABALLEROS);
@@ -937,4 +1141,20 @@ void chequearYMostrarFinalDelJuego(Admin* manager, SDL_Renderer* renderer)
         detenerMusicaBGM();
         TTF_CloseFont(font);
         liberarBGM(&bgmFinal);
+}
+void activarEfectoNotificacion(tVFX* notificacion)
+{
+    activarEfectoSecundario(notificacion,1);
+}
+void activarEfectoSecundario(tVFX* vfx, const int efecto)
+{
+    switch(efecto)
+    {
+        case 1:
+        vfx->alpha2 = 1000;
+        break;
+        default:
+        vfx->alpha2 = 0;
+        break;
+    }
 }

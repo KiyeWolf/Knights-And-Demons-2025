@@ -33,11 +33,11 @@
 #define MENSAJE_AGRADECIMIENTO_CABALLEROS "¡Los caballeros están agradecidos!"
 
 //Todos los finales posibles del juego
-#define MENSAJE_DERROTA "\nParece que no pudiste manejar bien tu recurso mas preciado, becario...\n"\
+/*#define MENSAJE_DERROTA "\nParece que no pudiste manejar bien tu recurso mas preciado, becario...\n"\
                     " aunque siempre vas a poder volver a intentarlo, al fin y al cabo esos demonios\n"\
                     " no se van a matar solos y yo... digamos que tengo para rato aquí, je...\n"\
                     " ¡¡Ve y defiende nuestros otros frentes!!\n"
-
+*/
 /*#define FINAL_BUENO "El reino estalló en vítores. Los Demonios, cuya influencia había sido totalmente borrada de la faz del mundo conocido, \n"\
                     "se retiraron a las profundidades del Averno\n"\
                     "Bakelor está orgulloso\n"

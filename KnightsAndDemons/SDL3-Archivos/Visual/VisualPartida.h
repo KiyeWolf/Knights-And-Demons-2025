@@ -64,9 +64,9 @@ void renderizarContadoresSDL(SDL_Renderer* renderer, const int tiempo, TTF_Font*
 void renderizarMensajeDeQueNoHayPikas(SDL_Renderer* renderer, TTF_Font* font);
 void mostrarMensajeDeInicioDeNivel(SDL_Renderer* renderer, TTF_Font* font);
 void preguntarGuardarPartida(int* respuesta, SDL_Renderer* renderer, TTF_Font* font);
-
+void mostrarMensajeDeDerrota(SDL_Renderer* renderer, TTF_Font* font);
 void renderizarPikasRestantes(SDL_Renderer* renderer,tVFX* vfx, const int cantPikas,const int altoPantalla);
-
+void establecerIconoDelJuego(SDL_Window* ventana);
 //Barra de estado
 bool inicializarHUD(SDL_Renderer* renderer, tRecursosHUD* hud);
 void renderizarBarraEstadoSDL(SDL_Renderer* renderer, tRecursosHUD* hud, int scoreCaballeros, int scoreDemonios);
@@ -76,10 +76,12 @@ void liberarHUD(tRecursosHUD* hud);
 //VFX
 bool inicializarVFX(SDL_Renderer* renderer, tVFX* vfx, const int id, const char* rutaIMG, const char* rutaFuente, const int tamFuente);
 void activarEfecto(tVFX* vfx, const int efecto);
+void activarEfectoSecundario(tVFX* vfx, const int efecto);
 bool seActivoEfectoAlpha(tVFX* vfx);
-
+bool seActivoEfectoSecundario(tVFX* vfx);
 //VFX Particular
 void activarEfectoFuego(tVFX* fuego);
+void activarEfectoNotificacion(tVFX* notificacion);
 
 //Funcionees del post nivel
 int postNivelUsandoSDL(Admin* admin, int resultado, SDL_Renderer* renderer, TTF_Font* font);

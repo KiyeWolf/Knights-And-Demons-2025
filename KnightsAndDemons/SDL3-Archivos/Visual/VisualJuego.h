@@ -24,6 +24,9 @@
 #define RUTA_FONT_CREDITOS "./SDL3-Archivos/Visual/freefont-20120503/FreeMono.ttf"
 
 
+#define RUTA_LOGO_JUEGO "./SDL3-Archivos/Visual/Imagenes/logoVentana.bmp"
+#define RUTA_IMAGEN_TITULO_PRINCIPAL "./SDL3-Archivos/Visual/Imagenes/titulo.bmp"
+
 #define MAX_LINEAS_CREDITOS 200  
 #define ESPACIADO_ENTRE_LINEAS 40
 // Píxeles por frame (puedes usar decimales)

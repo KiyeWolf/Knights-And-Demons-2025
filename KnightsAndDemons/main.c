@@ -35,6 +35,8 @@ int main(int argc, char *argv[]) {
     TTF_Font* font = TTF_OpenFont(RUTA_ARCHIVO_FUENTES_DE_TEXTO_1, 28);
 
 
+    establecerIconoDelJuego(window);
+
     //SIEMPRE QUE HAYAN PROBLEMAS, QUITAR LA PANTALLA COMPLETA PARA DEBUG
     SDL_SetWindowFullscreen(window, true);
 
@@ -77,41 +79,10 @@ int main(int argc, char *argv[]) {
             if(opcionElegida==CARGAR_PARTIDA)
             {
 
-                /*system("cls");
-                puts("CARGAR PARTIDA");
-                printf("Ingresa el nombre con el que se guardo la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE);
-                fflush(stdin);
-                gets(guardado);
-                if(strlen(guardado)>TAM_NOMBRE || strlen(guardado)<TAM_NOMBRE)
-                {
-                    while(strlen(guardado)>TAM_NOMBRE || strlen(guardado)<TAM_NOMBRE)
-                    {
-                        puts("Error, el nombre es inválido, respeta la longitud.\n");
-                        system("pause");
-                        system("cls");
-                        printf("Ingresa el nombre con el que se guardo la partida(%d caracteres alfanumericos):\n", TAM_NOMBRE);
-                        fflush(stdin);
-                        gets(guardado);
-                    }
-                }
-                guardado[strcspn(guardado, "\n")] = '\0'; //saco el \n y lo cambio por el nulo
-                //VALIDAR QUE NO ENCUENTRA PARTIDA
-                if(cargarPartida(&elAdmin, guardado)!=TODO_OK)
-                {
-                    puts("Lo siento, no se encontró la partida Cargada");
-                    system("pause");
-                }
-                else
-                {
-                    if(jugar(&elAdmin)==JUEGO_COMPLETADO)
-                    {
-                        colocarJugadorEnTablaDePuntajes(elAdmin.jugador.nombre,elAdmin.jugador.TotalestadoUno,elAdmin.jugador.TotalestadoDos,elAdmin.jugador.pikasRestantes,elAdmin.jugador.nivelesCompletados);
-                    }
-                }*/
 
                 //NUEVO SDL3
                 char nombre[TAM_NOMBRE+1]={0};
-                mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer,font,"[ Debes ingresar el nombre con el que se  guardo la partida]");
+                mostrarMensajeEnVentanaYBorrarDespuesDeTecla(renderer,font,"[Ingresa el nombre con el que se  guardo la partida]");
                 mostrarPantallaNombre(renderer,font,nombre, window, &sonidoBotonMenu);
                 if(cargarPartida(&elAdmin, nombre)!=TODO_OK)
                 {
@@ -135,6 +106,7 @@ int main(int argc, char *argv[]) {
                         printf("[ERROR] No pude musica del main menu\n");
                     }
                     reproducirBGM(&bgm);
+                    mostrarPantallaBienvenida(renderer,font);
                 }
             }
 
@@ -165,6 +137,7 @@ int main(int argc, char *argv[]) {
                     printf("[ERROR] No pude musica del main menu\n");
                 }
                 reproducirBGM(&bgm);
+                mostrarPantallaBienvenida(renderer,font);
             }
             if(opcionElegida==CREDITOS)
             {
@@ -180,6 +153,7 @@ int main(int argc, char *argv[]) {
                     printf("[ERROR] No pude musica del main menu\n");
                 }
                 reproducirBGM(&bgm);
+                
             }
             if(opcionElegida==TABLA_DE_PUNTAJES)
             {

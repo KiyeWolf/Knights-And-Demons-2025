@@ -18,7 +18,8 @@
 #define RUTA_BACKGROUND_MUSIC_FINAL_VERDADERO "./SDL3-Archivos/Audio/Historia/endingHistoryTheme3.wav"
 //#define RUTA_BACKGROUND_MUSIC_FINAL_NEUTRAL "./SDL3-Archivos/Audio/Historia/endingHistoryTheme0.wav"
 #define RUTA_BACKGROUND_MUSIC_FINAL "./SDL3-Archivos/Audio/Historia/endingMusicBackground.wav"
-
+#define RUTA_BACKGROUND_MUSIC_NIVEL_DERROTA "./SDL3-Archivos/Audio/Tablero/defeatLevelTheme.wav"
+#define RUTA_BACKGROUND_MUSIC_NIVEL_VICTORIA "./SDL3-Archivos/Audio/Tablero/victoryLevelTheme.wav"
 
 
 #define RUTA_BACKGROUND_MUSIC_HISTORIA_PRINCIPAL "./SDL3-Archivos/Audio/Historia/mainHistoryTheme.wav"
