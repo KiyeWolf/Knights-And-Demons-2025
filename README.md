@@ -25,7 +25,7 @@ El juego busca replicar la funcionalidad central del original, rindiendo homenaj
     * **Visual Studio Code:** Utilizado por el equipo para edición colaborativa y herramientas de desarrollo.
 
 ## Gameplay
-https://youtu.be/QoQPxZlQ4c8
+[https://youtu.be/QoQPxZlQ4c8](https://youtu.be/Wk8ZTQbTovw)
 
 ---
 
